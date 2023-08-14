@@ -58,10 +58,6 @@ class Condition(Dep_Node):
             self.a.operation.set(operation)
 
     # -------------------------------------------------------------------------
-    # PROPERTIES
-    
-
-    # -------------------------------------------------------------------------
     # METHODS
 
     def setFirstTerm(self, firstTerm):

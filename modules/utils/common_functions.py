@@ -1,6 +1,6 @@
 '''
 /*****************************************************************************/
-                            Common v 1.0
+                            Common functions v 1.0
                      ________________________________________
                     |                                        |
                     |  Author: Luis Felipe Carranza          |
@@ -16,6 +16,7 @@
 >> CONTENTS >> 
     + matchMove [Func]
     + createOffset [Func]
+    + getKeyFromValue [Func]
 
 >> NOTES >> 
 	Update 04/08/2023 : Start working on the script
@@ -139,3 +140,28 @@ def createOffset(selection, grpName="_OFF_GRP"):
             print(">>> Could not create offset group for: {}".format(item))
 
         return newlyCreatedGroups
+
+
+def getKeyFromValue(dictionary, target_value):
+    """
+    getKeyFromValue [Function]
+
+    Get a dictionary key from it's value
+    key:value
+
+    Args:
+        dictionary (dict): The dictionary to use
+        target_value (any): the value to get key from
+
+    Returns:
+        key: The key value
+
+    Example:
+        my_dic = {"one":1, "two":2}
+        getKeyFromValue(my_dic, 1)
+        Output: "one"
+    """
+    for key, value in dictionary.items():
+        if value == target_value:
+            return key
+    return None # >>> No key was found for the value
