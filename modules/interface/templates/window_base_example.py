@@ -7,13 +7,10 @@
                     |________________________________________|
 
 >> DESCRIPTION >>
-    Small description of what does this script or module does.
+    Just an example of a working maya window using a sub-class
 
 >> HOW TO USE >>
-	Input instructions on how to use
-
->> CONTENTS >> 
-    + file
+	Just run on Maya
 
 >> NOTES >> 
 	Update 14/08/2023 : The script was created.
