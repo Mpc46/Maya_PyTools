@@ -47,7 +47,7 @@ class Window_Base(object):
     - BASIC UI FUNCTIONALITY:
         + open (opens the window) [Method]
         + close (closes the window) [Method]
-        + _build (Hree you set up the layout and buttons)
+        + _build (Here you set up the layout and buttons)
     - BASIC UI PROPERTIES:
         + exitLayout [Returns m.setParent('..')] {Property}
         + initialLayout [Returns m.columnLayout(adj=1)] {Property}
