@@ -51,10 +51,10 @@ class Window_Base(object):
     - BASIC UI FUNCTIONALITY:
         + open (opens the window) [Method]
         + close (closes the window) [Method]
-        + _build (Here you set up the layout and buttons)
+
     - BASIC UI PROPERTIES:
-        + exitLayout [Returns m.setParent('..')] {Property}
-        + initialLayout [Returns m.columnLayout(adj=1)] {Property}
+        + _exitLayout [Returns m.setParent('..')] {Property}
+        + _initialLayout [Returns m.columnLayout(adj=1)] {Property}
     """
 
     # -------------------------------------------------------------------------
@@ -80,11 +80,11 @@ class Window_Base(object):
     # LAYOUT PROPERTIES
 
     @property
-    def exitLayout(self):
+    def _exitLayout(self):
         return m.setParent('..')
 
     @property
-    def initialLayout(self):
+    def _initialLayout(self):
         return m.columnLayout(adj=1)
 
     # -------------------------------------------------------------------------
@@ -114,4 +114,4 @@ class Window_Base(object):
     # WINDOW UI BUILD
 
     def _build(self):
-        self.initialLayout
+        self._initialLayout

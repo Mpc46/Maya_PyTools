@@ -43,7 +43,7 @@ class win(Window):
         super().__init__(self.title, self.name)
 
     def _build(self):
-        self.initialLayout
+        self._initialLayout
         self.layout1()
         m.separator(h=20)
         self.layout2()
@@ -77,12 +77,12 @@ class win(Window):
         m.button()
         m.button()
 
-        self.exitLayout
+        self._exitLayout
 
     def layout2(self):
         m.button()
         m.button()
-        self.exitLayout
+        self._exitLayout
 
 # -----------------------------------------------------------------------------
 # SCRIPT FUNCTIONS
