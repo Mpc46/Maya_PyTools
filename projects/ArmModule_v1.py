@@ -25,9 +25,7 @@ import maya.mel as mel
 import imp
 import sys
 
-path = r'D:\Projects\VS Code\Maya\modules'
-if path not in sys.path:
-    sys.path.append(path)
+
 import modules.misc.Mpc46Module as mpc
 imp.reload(mpc) # Python 2.x > python 3.3 forces module reload
 
