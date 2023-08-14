@@ -9,9 +9,5 @@
 >> DESCRIPTION >>
     My python tools and projects for rigging in Autodesk Maya
 
->> CONTENTS >> 
-    + modules
-    + projects
-
 /*****************************************************************************
 '''
