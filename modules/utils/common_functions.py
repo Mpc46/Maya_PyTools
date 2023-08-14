@@ -165,3 +165,23 @@ def getKeyFromValue(dictionary, target_value):
         if value == target_value:
             return key
     return None # >>> No key was found for the value
+
+def ToCamelCase(string, splitBy=""):
+    """
+    ToCamelCase [Function]
+
+    Takes a string and returns a camel case version of it.
+
+    Args:
+        string (str): A string to camel case.
+        splitBy (str/optional): the parameter to split with.
+
+
+    Returns:
+        str: AStringToCamelCase.
+    """
+    string_Title = string.title() # Makes every word upperCase
+    string_List = string_Title.split(splitBy) # Creates list
+    camelCase = "".join(string_List) # Merge list into string
+
+    return camelCase
