@@ -31,16 +31,16 @@ from modules.interface import Window_Base as Window
 # SETTING UI
 # -----------------------------------------------------------------------------
 
+
 class win(Window):
 
-    def __init__(self, window_name, WinTittle="win2"):
-        self.name = window_name
+    def __init__(self, WinTittle, window_name=None):
         self.title = WinTittle
+        self.name = window_name
         self.size = (280, 280)
 
-        super().__init__(window_name, WinTittle)
+        super().__init__(self.title, self.name)
 
-    
     def _build(self):
         m.columnLayout(adj=1)
         self.layout1()
@@ -57,7 +57,7 @@ class win(Window):
 
         # Two ways that will work regardless of scope.
         m.button(l='Button B',
-                    c='import testUI; reload(testUI); testUI.func2()')
+                 c='import testUI; reload(testUI); testUI.func2()')
         m.button(l='Button C', c=lambda x: func2())
 
         # Some common UI element create commands to use.
@@ -81,11 +81,12 @@ class win(Window):
     def layout2(self):
         m.button()
         m.button()
-        self.exitLayout        
+        self.exitLayout
 
 # -----------------------------------------------------------------------------
 # SCRIPT FUNCTIONS
 # -----------------------------------------------------------------------------
+
 
 def func2():
     print("yes")
@@ -93,6 +94,7 @@ def func2():
 # -----------------------------------------------------------------------------
 # EXECUTE SCRIPT
 # ----------------------------------------------------------------------------
+
 
 window = win("Window Tittle")
 window.open()
