@@ -52,7 +52,7 @@ def generateReprString(cls, name):
             self.fullPath
         )
         
-        # Output: Dep_Node("sphere_Grp)
+        # Output: Dep_Node("sphere_Grp")
     """
     
     return "{cls}('{node}')".format(cls=cls, node=rootName(name))
