@@ -57,7 +57,7 @@ class win(Window):
 
         # Two ways that will work regardless of scope.
         m.button(l='Button B',
-                 c='import testUI; reload(testUI); testUI.func2()')
+                 c='import Test; Test.PythonTest.pythonTest()')
         m.button(l='Button C', c=lambda x: func2())
 
         # Some common UI element create commands to use.
