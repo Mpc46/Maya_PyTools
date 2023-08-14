@@ -16,8 +16,8 @@
 	Update 14/08/2023 : The script was created.
 
 >> CONTACT >>
-    luisf.carranza@outlook.com ←or→ https://mpc46.carrd.co
-    Copyright (C) 2023 Luis Carranza. All rights reserved.
+    luisf.carranza@outlook.com
+    Copyright (C) 2023. All rights reserved.
     
 /*****************************************************************************/
 '''
@@ -43,7 +43,7 @@ class win(Window):
         super().__init__(self.title, self.name)
 
     def _build(self):
-        self._initialLayout
+        self.initialLayout
         self.layout1()
         m.separator(h=20)
         self.layout2()
@@ -77,12 +77,12 @@ class win(Window):
         m.button()
         m.button()
 
-        self._exitLayout
+        self.exitLayout
 
     def layout2(self):
         m.button()
         m.button()
-        self._exitLayout
+        self.exitLayout
 
 # -----------------------------------------------------------------------------
 # SCRIPT FUNCTIONS

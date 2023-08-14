@@ -17,8 +17,8 @@
     + test_path [Test Class]
 
 >> CONTACT >>
-    luisf.carranza@outlook.com ←or→ https://mpc46.carrd.co
-    Copyright (C) 2023 Luis Carranza. All rights reserved.
+    luisf.carranza@outlook.com
+    Copyright (C) 2023. All rights reserved.
  
 /*****************************************************************************/
 '''

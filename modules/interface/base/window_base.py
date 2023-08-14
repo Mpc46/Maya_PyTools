@@ -20,8 +20,8 @@
 	Update 14/08/2023 : Start working on the script
 
 >> CONTACT >>
-    luisf.carranza@outlook.com ←or→ https://mpc46.carrd.co
-    Copyright (C) 2023 Luis Carranza. All rights reserved.
+    luisf.carranza@outlook.com
+    Copyright (C) 2023. All rights reserved.
  
 /*****************************************************************************/
 '''
@@ -76,12 +76,12 @@ class Window_Base(object):
     # LAYOUT PROPERTIES
 
     @property
-    def _exitLayout(self):
-        """ Return to parent Layout """
+    def exitLayout(self):
+        """ Return to parent Layout"""
         return m.setParent('..')
 
     @property
-    def _initialLayout(self):
+    def initialLayout(self):
         """ Simple column Layout. """
         return m.columnLayout(adj=1)
 
@@ -112,4 +112,4 @@ class Window_Base(object):
     # WINDOW UI BUILD
 
     def _build(self):
-        self._initialLayout
+        self.initialLayout
