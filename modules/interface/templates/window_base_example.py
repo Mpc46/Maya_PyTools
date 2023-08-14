@@ -42,7 +42,7 @@ class win(Window):
         super().__init__(self.title, self.name)
 
     def _build(self):
-        m.columnLayout(adj=1)
+        self.initialLayout
         self.layout1()
         m.separator(h=20)
         self.layout2()
