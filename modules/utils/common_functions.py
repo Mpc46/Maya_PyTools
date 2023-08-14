@@ -17,6 +17,7 @@
     + matchMove [Func]
     + createOffset [Func]
     + getKeyFromValue [Func]
+    + ToCamelCase [Func]
 
 >> NOTES >> 
 	Update 04/08/2023 : Start working on the script
