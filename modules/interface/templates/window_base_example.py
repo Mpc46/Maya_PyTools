@@ -48,17 +48,19 @@ class win(Window):
         self.layout2()
 
     def layout1(self):
-        m.rowColumnLayout(nc=2)
-        m.button(l="I AM")
-        m.button(l="SO FUCKING")
-        self.exitLayout
         m.columnLayout(adj=1)
-        m.button(l="TIRED")
-        m.button(l="HAHAHA")
-        self.exitLayout
 
-    def layout2(self):
-        m.columnLayout(adj=1)
+        # Fill the UI with stuff.
+
+        # This was of writing button commands only work if this script is ran in global scope.
+        m.button(l='Button A', c='func2()')
+
+        # Two ways that will work regardless of scope.
+        m.button(l='Button B',
+                    c='import testUI; reload(testUI); testUI.func2()')
+        m.button(l='Button C', c=lambda x: func2())
+
+        # Some common UI element create commands to use.
         m.button()
         m.button()
         m.textField()
@@ -66,7 +68,31 @@ class win(Window):
         m.floatSlider()
         m.text(l='Blahhhhh')
         m.textScrollList()
+
+        # Nest a layout with multiple columns
+        m.rowColumnLayout(nc=2)
+        m.button()
+        m.button()
+        m.button()
+        m.button()
+
+        self.exitLayout
+
+    def layout2(self):
+        m.button()
+        m.button()
         self.exitLayout        
+
+# -----------------------------------------------------------------------------
+# SCRIPT FUNCTIONS
+# -----------------------------------------------------------------------------
+
+def func2():
+    print("yes")
+
+# -----------------------------------------------------------------------------
+# EXECUTE SCRIPT
+# ----------------------------------------------------------------------------
 
 window = win("Window Tittle")
 window.open()
