@@ -14,7 +14,8 @@
     inheritance to another class.
 
 >> CONTENTS >> 
-    + Dag_Node [Class]
+    + getDistanceBetween [Function]
+    + getDistanceBetweenCalculation [Function]
 
 >> NOTES >> 
 	Update 08/08/2023 : Start working on the script
@@ -29,15 +30,10 @@
 # -----------------------------------------------------------------------------
 # LIBRARIES AND MODULES
 # -----------------------------------------------------------------------------
+
 from maya import cmds as m
 import math
 import six
-
-
-# -----------------------------------------------------------------------------
-# CLASSES
-# -----------------------------------------------------------------------------
-
 
 # -----------------------------------------------------------------------------
 # SCRIPT FUNCTIONS
