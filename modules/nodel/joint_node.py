@@ -20,6 +20,10 @@
 	Update 11/08/2023 : Started to work on the script.
     Update 12/08/2023 : Added joint label functionality.
 
+>> CONTACT >>
+    luisf.carranza@outlook.com
+    Copyright (C) 2023. All rights reserved.
+
 /*****************************************************************************/
 '''
 

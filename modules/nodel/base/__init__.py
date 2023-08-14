@@ -15,6 +15,10 @@
 >> CONTENTS >> 
     + dep_node [Super Class]
     + dag_node [Class - Inherits (Dep_Node)]
+
+>> CONTACT >>
+    luisf.carranza@outlook.com
+    Copyright (C) 2023. All rights reserved.
  
 /*****************************************************************************/
 '''

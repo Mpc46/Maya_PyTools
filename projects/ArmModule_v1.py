@@ -16,6 +16,10 @@ Update 20/06/2023: Mirror guides working!
 >> THANKS >> 
 Michael Clavan (Twitter @MichaelClavan) for his contribution in helping me connecting the slider control [17/06/2023]
 
+>> CONTACT >>
+    luisf.carranza@outlook.com
+    Copyright (C) 2023. All rights reserved.
+
 **************************************************************************************************************************************/
 '''
 
@@ -25,9 +29,7 @@ import maya.mel as mel
 import imp
 import sys
 
-path = r'D:\Projects\VS Code\Maya\modules'
-if path not in sys.path:
-    sys.path.append(path)
+
 import modules.misc.Mpc46Module as mpc
 imp.reload(mpc) # Python 2.x > python 3.3 forces module reload
 

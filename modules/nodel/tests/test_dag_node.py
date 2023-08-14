@@ -16,8 +16,12 @@
 	Update 04/08/2023 : Start working on the script
 
 >> THANKS >> 
-Nick Hughes [04/08/2023]:
-    For his awesome course that led me to create this file. 
+    Nick Hughes [04/08/2023]:
+        For his awesome course that led me to create this file. 
+        
+>> CONTACT >>
+    luisf.carranza@outlook.com
+    Copyright (C) 2023. All rights reserved.
 
 /*****************************************************************************/
 '''

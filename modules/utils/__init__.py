@@ -20,5 +20,9 @@
     + color [Functions]
     + common_names [Dictionary]
 
+>> CONTACT >>
+    luisf.carranza@outlook.com
+    Copyright (C) 2023. All rights reserved.
+    
 /*****************************************************************************/
 '''

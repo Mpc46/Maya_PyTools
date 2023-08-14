@@ -11,6 +11,10 @@
 Update 07/10/2022 : Se añadio una ventana para que el usuario ponga el nombre del prop
 Update 11/10/2022 : El script ahora busca el centro de los meshes, pone los controles ahi, hace el skin y crea las layers.
 
+>> CONTACT >>
+    luisf.carranza@outlook.com
+    Copyright (C) 2023. All rights reserved.
+
 **************************************************************************************************************************************/
 '''
 

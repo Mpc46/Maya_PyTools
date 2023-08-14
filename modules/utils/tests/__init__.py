@@ -15,6 +15,10 @@
 >> CONTENTS >> 
     + test_open_maya [Test Class]
     + test_path [Test Class]
+
+>> CONTACT >>
+    luisf.carranza@outlook.com
+    Copyright (C) 2023. All rights reserved.
  
 /*****************************************************************************/
 '''

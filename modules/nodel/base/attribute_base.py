@@ -23,8 +23,12 @@
     Update 06/08/2023 : Created Arithmetic methods for nodes
  
 >> THANKS >> 
-Nick Hughes [5/08/2023]:
-    For his awesome course that led me to create this file. 
+    Nick Hughes [5/08/2023]:
+        For his awesome course that led me to create this file. 
+
+>> CONTACT >>
+    luisf.carranza@outlook.com
+    Copyright (C) 2023. All rights reserved.
  
 /*****************************************************************************/
 '''

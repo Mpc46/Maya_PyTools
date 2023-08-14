@@ -14,6 +14,10 @@
  
 >> NOTES >> 
 	Update 13/08/2023 : Start working on the script
+    
+>> CONTACT >>
+    luisf.carranza@outlook.com
+    Copyright (C) 2023. All rights reserved.
 
 /*****************************************************************************/
 '''

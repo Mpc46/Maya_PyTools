@@ -15,6 +15,10 @@
 >> CONTENTS >> 
     + test_dep_node [Test Class]
     + test_dag_node [Test Class]
+
+>> CONTACT >>
+    luisf.carranza@outlook.com
+    Copyright (C) 2023. All rights reserved.
  
 /*****************************************************************************/
 '''

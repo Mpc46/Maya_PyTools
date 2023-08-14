@@ -17,6 +17,7 @@
     + matchMove [Func]
     + createOffset [Func]
     + getKeyFromValue [Func]
+    + ToCamelCase [Func]
 
 >> NOTES >> 
 	Update 04/08/2023 : Start working on the script
@@ -24,6 +25,10 @@
 >> THANKS >> 
     Nick Hughes [04/08/2023]:
         For his awesome course that led me to create this file. 
+
+>> CONTACT >>
+    luisf.carranza@outlook.com
+    Copyright (C) 2023. All rights reserved.
  
 /*****************************************************************************/
 '''
@@ -165,3 +170,31 @@ def getKeyFromValue(dictionary, target_value):
         if value == target_value:
             return key
     return None # >>> No key was found for the value
+
+def ToCamelCase(string, splitBy=None):
+    """
+    ToCamelCase [Function]
+
+    Takes a string and returns a camel case version of it.
+
+    Args:
+        string (str): A string to camel case.
+        splitBy (str/optional): the parameter to split with.
+
+
+    Returns:
+        str: AStringToCamelCase.
+    """
+    string_Title = string.title() # Makes every word upperCase
+
+    if splitBy is not None:
+        string_List = string_Title.split(splitBy) # Creates list
+    else:
+        string_List = string_Title.split()
+        
+    if len(string_List) > 1:
+        camelCase = "".join(string_List) # Merge list into string
+        return camelCase
+    else:
+        return string_Title
+    
