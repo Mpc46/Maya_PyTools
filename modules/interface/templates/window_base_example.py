@@ -15,6 +15,10 @@
 >> NOTES >> 
 	Update 14/08/2023 : The script was created.
 
+>> CONTACT >>
+    luisf.carranza@outlook.com ←or→ https://mpc46.carrd.co
+    Copyright (C) 2023 Luis Carranza. All rights reserved.
+    
 /*****************************************************************************/
 '''
 # -----------------------------------------------------------------------------

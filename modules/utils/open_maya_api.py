@@ -22,9 +22,13 @@
     Update 03/08/2023 : Added the "toMDagPath" function
 
 >> THANKS >> 
-Nick Hughes [02/08/2023]:
-    For his awesome course that led me to create this file. 
- 
+    Nick Hughes [02/08/2023]:
+        For his awesome course that led me to create this file. 
+        
+>> CONTACT >>
+    luisf.carranza@outlook.com ←or→ https://mpc46.carrd.co
+    Copyright (C) 2023 Luis Carranza. All rights reserved.
+
 /*****************************************************************************/
 '''
 

@@ -15,6 +15,10 @@
 >> CONTENTS >> 
     + test_open_maya [Test Class]
     + test_path [Test Class]
+
+>> CONTACT >>
+    luisf.carranza@outlook.com ←or→ https://mpc46.carrd.co
+    Copyright (C) 2023 Luis Carranza. All rights reserved.
  
 /*****************************************************************************/
 '''

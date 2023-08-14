@@ -11,14 +11,19 @@
 >> NOTES >> 
 	Update 13/05/2023 : Se comenzo a trabajar en el script
     Update 31/07/2023 : Improve functions and format PEP8
+    Update 14/08/2023 : Deprecated, working on class oriented modules.
 
 >> HOW TO USE >>
-	Input instructions on how to use
+	Standalone module with built-in functionalit
 
 >> THANKS >> 
-alexandrewillc (Twitter @oamoros0) [16/06/2023]
-    for his contribution in optimizing the Match Transform modules 
- 
+    alexandrewillc (Twitter @oamoros0) [16/06/2023]
+        for his contribution in optimizing the Match Transform modules 
+
+>> CONTACT >>
+    luisf.carranza@outlook.com ←or→ https://mpc46.carrd.co
+    Copyright (C) 2023 Luis Carranza. All rights reserved.
+
 ******************************************************************************/
 '''
 

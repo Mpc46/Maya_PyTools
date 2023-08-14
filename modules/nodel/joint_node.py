@@ -20,6 +20,10 @@
 	Update 11/08/2023 : Started to work on the script.
     Update 12/08/2023 : Added joint label functionality.
 
+>> CONTACT >>
+    luisf.carranza@outlook.com ←or→ https://mpc46.carrd.co
+    Copyright (C) 2023 Luis Carranza. All rights reserved.
+
 /*****************************************************************************/
 '''
 

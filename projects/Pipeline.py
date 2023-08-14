@@ -8,7 +8,11 @@
     The buttons are in the same order that need to be pressed for the script to work. 
     The script will find animations, copy them to the controls, bake them into the joints and export the resulting animation to
     a file or multiple files, depending on the number of individual objects found on scene.
-
+    
+>> CONTACT >>
+    luisf.carranza@outlook.com ←or→ https://mpc46.carrd.co
+    Copyright (C) 2023 Luis Carranza. All rights reserved.
+    
 **************************************************************************************************************************************/
 '''
 # Libraries

@@ -18,5 +18,9 @@
         + nodel
         + utils
 
+>> CONTACT >>
+    luisf.carranza@outlook.com ←or→ https://mpc46.carrd.co
+    Copyright (C) 2023 Luis Carranza. All rights reserved.
+
 /*****************************************************************************/
 '''

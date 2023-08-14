@@ -16,6 +16,10 @@ Update 20/06/2023: Mirror guides working!
 >> THANKS >> 
 Michael Clavan (Twitter @MichaelClavan) for his contribution in helping me connecting the slider control [17/06/2023]
 
+>> CONTACT >>
+    luisf.carranza@outlook.com ←or→ https://mpc46.carrd.co
+    Copyright (C) 2023 Luis Carranza. All rights reserved.
+
 **************************************************************************************************************************************/
 '''
 
