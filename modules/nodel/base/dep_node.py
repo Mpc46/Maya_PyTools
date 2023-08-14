@@ -271,7 +271,7 @@ class Dep_Node(object):
         """
         create [Method]
 
-        Creates an object if it doensn't already exists.
+        Creates an object if it doesn't already exists.
 
         Args:
             nodeType (str): The node type, example "multiplyDivide"

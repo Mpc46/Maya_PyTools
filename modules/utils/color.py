@@ -86,7 +86,7 @@ def getColor(item):
     """
     getColor [Function]
 
-    Gets the color of the object shapee item passed.
+    Gets the color of the object shape item passed.
 
     Args:
         item (str): The object to get the color from.

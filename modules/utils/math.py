@@ -7,7 +7,7 @@
                     |________________________________________|
 
 >> DESCRIPTION >>
-    Math calculations and funcionality
+    Math calculations and functionality.
 
 >> HOW TO USE >>
 	This module contents are intended to be imported, referenced or

@@ -721,7 +721,7 @@ class Attribute(object):
         Args:
             nodeName (str): The full node name to use.
             nodeType (str): The node to use.
-            operationType (int): The index of thje node type to use.
+            operationType (int): The index of the node type to use.
             value (int/float/str/attributeObject): The value to use.
         
         Returns:
