@@ -51,10 +51,6 @@ class Window_Base(object):
     - BASIC UI FUNCTIONALITY:
         + open (opens the window) [Method]
         + close (closes the window) [Method]
-
-    - BASIC UI PROPERTIES:
-        + _exitLayout [Returns m.setParent('..')] {Property}
-        + _initialLayout [Returns m.columnLayout(adj=1)] {Property}
     """
 
     # -------------------------------------------------------------------------
