@@ -77,10 +77,12 @@ class Window_Base(object):
 
     @property
     def _exitLayout(self):
+        """ Return to parent Layout """
         return m.setParent('..')
 
     @property
     def _initialLayout(self):
+        """ Simple column Layout. """
         return m.columnLayout(adj=1)
 
     # -------------------------------------------------------------------------
