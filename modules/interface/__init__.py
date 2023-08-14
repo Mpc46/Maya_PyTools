@@ -23,6 +23,9 @@
 # LIBRARIES AND MODULES - Importing here to trimmed down imports
 # -----------------------------------------------------------------------------
 
+# -----------------------------------------------------------------------------
+# BASE WINDOW
+
 from modules.interface.base.window_base import Window_Base
 
 # -----------------------------------------------------------------------------
