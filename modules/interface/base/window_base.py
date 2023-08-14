@@ -45,7 +45,7 @@ class Window_Base(object):
     Base Maya window UI class
 
     Args:
-        title (str): _description_
+        title (str): The window title
 
     Contents:
     - BASIC UI FUNCTIONALITY:
