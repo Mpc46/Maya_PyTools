@@ -80,7 +80,7 @@ def matchMove(selection, point=0, orient=0):
             print(">>> matchMove Error: {0}: {1}".format(type(e).__name__, e))
 
 
-def createOffset(selection, grpName="_OFF_GRP"):
+def createOffset(selection, grpName = "_OFF_GRP"):
     """
     createOffset [Function]
 
