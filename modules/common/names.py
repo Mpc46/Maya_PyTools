@@ -99,53 +99,53 @@ ROTATE_ORDER_DICT = {
 
 JOINT_LABEL_DICT = {
     "side": {
-        "Center": 0,
-        "Left": 1,
-        "Right": 2,
-        "None": 3,
+        "center": 0,
+        "left": 1,
+        "right": 2,
+        "none": 3,
 
-        "C": 0,
-        "L": 1,
-        "R": 2,
+        "c": 0,
+        "l": 1,
+        "r": 2,
         "": 3
     },
     "type": {
-        "None": 0,
+        "none": 0,
 
-        "Root": 1,
-        "Hip": 2,
-        "Knee": 3,
-        "Foot": 4,
-        "Toe": 5,
+        "root": 1,
+        "hip": 2,
+        "knee": 3,
+        "foot": 4,
+        "toe": 5,
 
-        "Spine": 6,
-        "Neck": 7,
-        "Head": 8,
+        "spine": 6,
+        "neck": 7,
+        "head": 8,
 
-        "Collar": 9,
-        "Shoulder": 10,
-        "Elbow": 11,
+        "collar": 9,
+        "shoulder": 10,
+        "elbow": 11,
 
-        "Hand": 12,
-        "Finger": 13,
-        "Thumb": 14,
+        "hand": 12,
+        "finger": 13,
+        "thumb": 14,
 
-        "PropA": 15,
-        "PropB": 16,
-        "PropC": 17,
-        "Other": 18,
+        "propa": 15,
+        "propb": 16,
+        "propc": 17,
+        "other": 18,
 
-        "Index Finger": 19,
-        "Middle Finger": 20,
-        "Ring Finger": 21,
-        "Pinky Finger": 22,
-        "Extra Finger": 23,
+        "index finger": 19,
+        "middle finger": 20,
+        "ring finger": 21,
+        "pinky finger": 22,
+        "extra finger": 23,
 
-        "Big Toe": 24,
-        "Index Toe": 25,
-        "Middle Toe": 26,
-        "Ring Toe": 27,
-        "Pinky Toe": 28,
-        "Foot Thumb": 29
+        "big toe": 24,
+        "index toe": 25,
+        "middle toe": 26,
+        "ring toe": 27,
+        "pinky toe": 28,
+        "foot thumb": 29
     }
 }

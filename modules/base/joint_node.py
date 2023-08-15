@@ -246,7 +246,7 @@ class Joint(Dag_Node):
         if isinstance(side, int) and side in range(0, 4):
             side = side
         elif isinstance(side, str):
-            side = side.title()
+            side = side.lower()
             if side in JOINT_LABEL_DICT["side"]:
                 side = JOINT_LABEL_DICT["side"][side]
         else:
@@ -272,9 +272,9 @@ class Joint(Dag_Node):
                 raise ValueError(
                     ">>> You did not entered a valid type number")
         elif isinstance(type, str):
-            type = type.title()
-            if type in JOINT_LABEL_DICT["type"]:
-                type = JOINT_LABEL_DICT["type"][type]
+            type = type
+            if type.lower() in JOINT_LABEL_DICT["type"]:
+                type = JOINT_LABEL_DICT["type"][type.lower()]
                 self.a.type.set(type)
             else:
                 self.a.type.set(18)
