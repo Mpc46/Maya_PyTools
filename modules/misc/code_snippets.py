@@ -3,7 +3,7 @@
                             Code Snippets v 1.0
                      ________________________________________
                     |                                        |
-                    |  Author: Luis Felipe Carranza          |
+                    |  Author: Nick Hughes                   |
                     |________________________________________|
 
 >> DESCRIPTION >>
