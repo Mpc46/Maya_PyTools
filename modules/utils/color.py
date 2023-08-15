@@ -37,7 +37,7 @@
 # -----------------------------------------------------------------------------
 import six # Need to install module trough pip
 from maya import cmds
-from modules.utils.common_names import COLORS_DICT
+from modules.common.names import COLORS_DICT
 
 # -----------------------------------------------------------------------------
 # SCRIPT FUNCTIONS

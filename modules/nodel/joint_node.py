@@ -33,8 +33,8 @@
 
 from maya import cmds as m
 from modules.nodel import Dag_Node
-from modules.utils.common_functions import getKeyFromValue
-from modules.utils.common_names import JOINT_LABEL_DICT, ROTATE_ORDER_DICT
+from modules.common.functions import getKeyFromValue
+from modules.common.names import JOINT_LABEL_DICT, ROTATE_ORDER_DICT
 
 # -----------------------------------------------------------------------------
 # CLASSES

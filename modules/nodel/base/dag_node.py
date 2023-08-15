@@ -39,7 +39,7 @@
 from maya import cmds as m
 from modules.nodel import Dep_Node
 from modules.utils import color, open_maya_api
-from modules.utils.common_functions import matchMove, createOffset
+from modules.common.functions import matchMove, createOffset
 
 # -----------------------------------------------------------------------------
 # CLASSES
