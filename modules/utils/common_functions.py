@@ -196,5 +196,5 @@ def ToCamelCase(string, splitBy=None):
         camelCase = "".join(string_List) # Merge list into string
         return camelCase
     else:
-        return string_Title
+        return string_Title # Nothing to Split just return title string
     
