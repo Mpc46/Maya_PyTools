@@ -13,9 +13,6 @@
 >> HOW TO USE >>
 	This library is meant to be imported into larger scripts and/or
     hold those scripts and modules for later use or implementation.
-
->> CONTENTS >> 
-    + none [Functions]
     
 >> CONTACT >>
     luisf.carranza@outlook.com

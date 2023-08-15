@@ -14,10 +14,6 @@
 	When running "testing.py" it will automatically discover and run the
     tests allocated in this library.
 
->> CONTENTS >> 
-    + test_open_maya [Test Class]
-    + test_path [Test Class]
-
 >> CONTACT >>
     luisf.carranza@outlook.com
     Copyright (C) 2023. All rights reserved.

@@ -14,11 +14,6 @@
 	This library is meant to be imported into larger scripts and/or
     hold those scripts and modules for later use or implementation.
 
->> CONTENTS >> 
-    Libraries:
-        + core
-        + tests
-        
 >> CONTACT >>
     luisf.carranza@outlook.com
     Copyright (C) 2023. All rights reserved.

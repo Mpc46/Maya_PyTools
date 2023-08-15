@@ -47,11 +47,6 @@ class Window_Base(object):
 
     Args:
         title (str): The window title
-
-    Contents:
-    - BASIC UI FUNCTIONALITY:
-        + open (opens the window) [Method]
-        + close (closes the window) [Method]
     """
 
     # -------------------------------------------------------------------------
