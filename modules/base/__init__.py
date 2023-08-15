@@ -16,7 +16,7 @@
 
 >> CONTENTS >> 
     Libraries:
-        + base
+        + core
         + tests
         
 >> CONTACT >>

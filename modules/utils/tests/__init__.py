@@ -7,10 +7,12 @@
                     |________________________________________|
 
 >> DESCRIPTION >>
-    Small description of what does this script or module does.
+    This module includes a variety of unit test for the parent library 
+    and sub-libraries.
 
 >> HOW TO USE >>
-	Input instructions on how to use
+	When running "testing.py" it will automatically discover and run the
+    tests allocated in this library.
 
 >> CONTENTS >> 
     + test_open_maya [Test Class]

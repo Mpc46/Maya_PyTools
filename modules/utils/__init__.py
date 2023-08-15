@@ -18,7 +18,7 @@
     + path [Functions]
     + testing [Testing Functions (unittest)]
     + color [Functions]
-    + common_names [Dictionary]
+    + math [Functions]
 
 >> CONTACT >>
     luisf.carranza@outlook.com

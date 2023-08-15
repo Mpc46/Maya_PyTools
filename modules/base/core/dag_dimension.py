@@ -14,7 +14,7 @@
     inheritance to another class.
 
 >> CONTENTS >> 
-    + Dag_Node [Class]
+    + Object_Dimension [Class]
 
 >> NOTES >> 
 	Update 08/08/2023 : Start working on the script
