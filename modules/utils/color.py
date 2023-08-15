@@ -35,13 +35,15 @@
 # -----------------------------------------------------------------------------
 # LIBRARIES AND MODULES
 # -----------------------------------------------------------------------------
-import six # Need to install module trough pip
+
+import six
 from maya import cmds
 from modules.common.names import COLORS_DICT
 
 # -----------------------------------------------------------------------------
 # SCRIPT FUNCTIONS
 # -----------------------------------------------------------------------------
+
 
 def getColorFromInteger(color):
     """
@@ -51,18 +53,19 @@ def getColorFromInteger(color):
     the string(name) representation of that color. 
 
     Maya color index range is 0 to 31
-    
+
     Args:
         color (int): The color string to get.
 
     Returns:
         Str: The color index name if found.
-    
+
     Example:
         getColorFromInteger(24)
         # Output: "dark orange"
     """
     return [i for i in COLORS_DICT if COLORS_DICT[i] == color][0]
+
 
 def getColorFromString(color):
     """
@@ -70,21 +73,22 @@ def getColorFromString(color):
 
     Takes a string of a color and returns Maya's color index
     ovverideColor attribute.
-    
+
     Args:
         color (str): The color index to get.
 
     Returns:
         Int: The color index if found.
-    
+
     Example:
         getColorFromString("Blue")
         # Output: 6
     """
     if color.lower() in COLORS_DICT:
         return COLORS_DICT[color.lower().replace("_", " ")]
-    
+
     raise ValueError("Sorry but the color name you entered was not found")
+
 
 def getColor(item):
     """
@@ -94,24 +98,26 @@ def getColor(item):
 
     Args:
         item (str): The object to get the color from.
-    
+
     Returns:
         int : The color index name if found.
-        
+
     Example:
         getColor("hand_CTRL")
         # Output : 26
     """
     # Extend objects with it's shapes and filter the selection by Types
-    
+
     objectRelatives = cmds.listRelatives(item, shapes=1, f=1, ni=1) or []
     objectRelatives.append(item)
-    
-    allObjects = cmds.ls(objectRelatives, type=['nurbsCurve', 'locator', 'joint'])
-    
+
+    allObjects = cmds.ls(objectRelatives, type=[
+                         'nurbsCurve', 'locator', 'joint'])
+
     for obj in allObjects:
         if cmds.getAttr("{0}.overrideEnabled".format(obj)):
             return cmds.getAttr("{0}.overrideColor".format(obj))
+
 
 def setColor(objects, color=None):
     """
@@ -122,21 +128,23 @@ def setColor(objects, color=None):
     Args:
         objects (list): The object to change the color of.
         color (int/str): The objects color to set.
-        
+
     Example:
         setColor(24)
         # Output: Item color changed.
     """
 
     if not color:
-        raise ValueError("Please pass either the color number or name: '%s' not understood." % str(color))
+        raise ValueError(
+            "Please pass either the color number or name: '%s' not understood." % str(color))
 
     # Then we have the information to set the color with so passing
     if isinstance(color, six.string_types):
         color = getColorFromString(color)
 
     elif type(color) != int:
-        raise TypeError("Format not understood: Please pass either the color number or name.")
+        raise TypeError(
+            "Format not understood: Please pass either the color number or name.")
 
     # Force objects to be a list
     objectsList = objects if type(objects) == list else [objects]
@@ -148,7 +156,8 @@ def setColor(objects, color=None):
     extendedSelection.extend(cmds.ls(objectsList, l=1))
     extendedSelection.extend(shapes)
 
-    allObjects = cmds.ls(extendedSelection, type=['nurbsCurve', 'locator', 'joint'])
+    allObjects = cmds.ls(extendedSelection, type=[
+                         'nurbsCurve', 'locator', 'joint'])
 
     # Change Color Override
     for obj in allObjects:
