@@ -32,7 +32,7 @@
 
 import unittest
 from maya import cmds as m
-from modules.nodel import Mesh, Dag_Node, Dep_Node
+from modules.base import Mesh, Dag_Node, Dep_Node
 
 # -----------------------------------------------------------------------------
 # CLASSES

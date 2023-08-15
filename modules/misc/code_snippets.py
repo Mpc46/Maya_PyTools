@@ -28,7 +28,7 @@
 from maya import cmds
 
 def dag_snippets():
-    from modules.nodel import Dag_Node
+    from modules.base import Dag_Node
 
     CTRL_GRP = Dag_Node("CTRL_GRP")
     MODEL_GRP = Dag_Node("MODEL_GRP")
@@ -53,7 +53,7 @@ def attribute_snippets():
     #######
 
 
-    from modules.nodel import Dag_Node as Dag
+    from modules.base import Dag_Node as Dag
 
     main = Dag("teapot_CTRL")
     main.a.add(ln="hide_on_playback", nn="Hide on Playback", at="long", min=0, max=1, dv=1, k=1)
@@ -80,7 +80,7 @@ def mesh_snippets():
     ####### Update mesh
     #######
 
-    from modules.nodel import Mesh, Dag_Node as Dag
+    from modules.base import Mesh, Dag_Node as Dag
 
     meshes = [Mesh(i) for i in m.ls(sl=1)]
 

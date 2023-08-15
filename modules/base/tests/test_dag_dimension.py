@@ -32,7 +32,7 @@
 
 import unittest
 from maya import cmds as m
-from modules.nodel import Dag_Node as Dag
+from modules.base import Dag_Node as Dag
 
 # -----------------------------------------------------------------------------
 # CLASSES

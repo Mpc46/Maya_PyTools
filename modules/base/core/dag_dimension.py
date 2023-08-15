@@ -98,7 +98,7 @@ class Object_Dimension(object):
     @property
     def position(self):
         """ Position will return the world space translate and rotate pivot of the object """
-        from modules.nodel import Dag_Node as Dag
+        from modules.base import Dag_Node as Dag
         tempDag = Dag(m.group(em=1, w=1)); tempDag.moveTo(self._node);
 
         position = [float(format(i, "f")) for i in m.xform(tempDag, ws=1, t=1, q=1) + m.xform(tempDag, ws=1, ro=1, q=1)]

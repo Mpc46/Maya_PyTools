@@ -36,7 +36,7 @@
 
 from maya import cmds as m
 from maya import mel
-from modules.nodel import Dag_Node, Dep_Node
+from modules.base import Dag_Node, Dep_Node
 
 # -----------------------------------------------------------------------------
 # CLASSES

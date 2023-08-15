@@ -277,7 +277,7 @@ class Attribute(object):
             node1.a.sx == node2.a.sx
         """
         # Importing here to avoid circular dependency
-        from modules.nodel.base.attribute_condition import Condition
+        from modules.base.core.attribute_condition import Condition
 
         name = self._conditionNodeName(value)
         nodeName = "{0}_{1}_eq_CD".format(name, self.attr)
@@ -295,7 +295,7 @@ class Attribute(object):
             node1.a.sx != node2.a.sx
         """
         # Importing here to avoid circular dependency
-        from modules.nodel.base.attribute_condition import Condition
+        from modules.base.core.attribute_condition import Condition
 
         name = self._conditionNodeName(value)
         nodeName = "{0}_{1}_ne_CD".format(name, self.attr)
@@ -313,7 +313,7 @@ class Attribute(object):
             node1.a.sx > node2.a.sx
         """
         # Importing here to avoid circular dependency
-        from modules.nodel.base.attribute_condition import Condition
+        from modules.base.core.attribute_condition import Condition
 
         name = self._conditionNodeName(value)
         nodeName = "{0}_{1}_gt_CD".format(name, self.attr)
@@ -331,7 +331,7 @@ class Attribute(object):
             node1.a.sx >= node2.a.sx
         """
         # Importing here to avoid circular dependency
-        from modules.nodel.base.attribute_condition import Condition
+        from modules.base.core.attribute_condition import Condition
 
         name = self._conditionNodeName(value)
         nodeName = "{0}_{1}_ge_CD".format(name, self.attr)
@@ -349,7 +349,7 @@ class Attribute(object):
             node1.a.sx < node2.a.sx
         """
         # Importing here to avoid circular dependency
-        from modules.nodel.base.attribute_condition import Condition
+        from modules.base.core.attribute_condition import Condition
 
         name = self._conditionNodeName(value)
         nodeName = "{0}_{1}_lt_CD".format(name, self.attr)
@@ -367,7 +367,7 @@ class Attribute(object):
             node1.a.sx <= node2.a.sx
         """
         # Importing here to avoid circular dependency
-        from modules.nodel.base.attribute_condition import Condition
+        from modules.base.core.attribute_condition import Condition
 
         name = self._conditionNodeName(value)
         nodeName = "{0}_{1}_le_CD".format(name, self.attr)
@@ -377,7 +377,7 @@ class Attribute(object):
 
     def setCondition(self, **kwargs):
         # Importing here to avoid circular dependency
-        from modules.nodel.base.attribute_condition import Condition
+        from modules.base.core.attribute_condition import Condition
         return Condition(self.node).setCondition(**kwargs)
 
     # -------------------------------------------------------------------------
@@ -500,7 +500,7 @@ class Attribute(object):
             class: The attribute nodal name and class.
         """
         # Importing here to avoid circular dependency
-        from modules.nodel import Dep_Node
+        from modules.base import Dep_Node
         
         # Creating the PMA node
         pma = Dep_Node(nodeName, nodeType)
@@ -645,7 +645,7 @@ class Attribute(object):
             class: The attribute nodal class.
         """
         # Importing here to avoid circular dependency
-        from modules.nodel import Dep_Node
+        from modules.base import Dep_Node
 
         md = Dep_Node(nodeName, suffix)
         md.a.operation.set(operationType)
@@ -669,7 +669,7 @@ class Attribute(object):
             class: The attribute nodal class.
         """
         # Importing here to avoid circular dependency
-        from modules.nodel import Dep_Node
+        from modules.base import Dep_Node
 
         mdl = Dep_Node(nodeName[:-2] + "MDL", "multDoubleLinear")
 
@@ -700,7 +700,7 @@ class Attribute(object):
             class: The attribute object output.
         """
         # Importing here to avoid circular dependency
-        from modules.nodel import Dep_Node
+        from modules.base import Dep_Node
 
         multiply = Dep_Node(nodeName, nodeType)
         multiply.a.operation.set(operationType)
@@ -732,7 +732,7 @@ class Attribute(object):
             class: The attribute object output.
         """
         # Importing here to avoid circular dependency
-        from modules.nodel import Dep_Node
+        from modules.base import Dep_Node
 
         multiply = Dep_Node(nodeName, nodeType)
         multiply.a.operation.set(operationType)
@@ -918,7 +918,7 @@ class Attribute(object):
             Output: Attribute('cube_GEO.rotateX')
         """
         # Import here to avoid dependency issues when using Dep_Node
-        from modules.nodel import Dag_Node
+        from modules.base import Dag_Node
         # Needs to be outside main herarchy to avoid cyclic dependency
 
         attrs = m.listConnections(self.fullPath, p=1, d=0) or []
@@ -951,7 +951,7 @@ class Attribute(object):
             Output: [Attribute('sphere_GEO.rotateX'), etc...]
         """
         # Import here to avoid dependency issues when using Dep_Node
-        from modules.nodel import Dag_Node
+        from modules.base import Dag_Node
 
         attrs = m.listConnections(self.fullPath, p=1) or []
 

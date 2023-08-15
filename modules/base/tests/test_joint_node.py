@@ -28,7 +28,7 @@
 
 import unittest
 from maya import cmds as m
-from modules.nodel import Mesh, Joint
+from modules.base import Mesh, Joint
 
 # -----------------------------------------------------------------------------
 # CLASSES

@@ -32,7 +32,7 @@
 # -----------------------------------------------------------------------------
 
 from maya import cmds as m
-from modules.nodel import Dag_Node
+from modules.base import Dag_Node
 from modules.common.functions import getKeyFromValue
 from modules.common.names import JOINT_LABEL_DICT, ROTATE_ORDER_DICT
 

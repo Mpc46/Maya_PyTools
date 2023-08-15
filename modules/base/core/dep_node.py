@@ -38,8 +38,8 @@
 
 from maya import cmds as m
 from modules.utils import open_maya_api, path
-from modules.nodel.base.attribute_base import Attributes
-from modules.nodel.base.dag_dimension import Object_Dimension
+from modules.base.core.attribute_base import Attributes
+from modules.base.core.dag_dimension import Object_Dimension
 
 # -----------------------------------------------------------------------------
 # CLASSES
