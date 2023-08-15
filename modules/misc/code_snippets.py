@@ -25,7 +25,7 @@
  
 /*****************************************************************************/
 '''
-from maya import cmds
+from maya import cmds as m
 
 def dag_snippets():
     from modules.base import Dag_Node
@@ -37,7 +37,7 @@ def dag_snippets():
     rocks = [i for i in MODEL_GRP.children]
 
     for num, rock in enumerate(rocks):
-        ctrl = Dag_Node(cmds.circle(n="rock_CTRL"+str(num+1), r=1.5)[0])
+        ctrl = Dag_Node(m.circle(n="rock_CTRL"+str(num+1), r=1.5)[0])
         ctrl.parentTo(CTRL_GRP)
         ctrl.moveTo(rock)
 
