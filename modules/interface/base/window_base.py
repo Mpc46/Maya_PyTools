@@ -31,7 +31,8 @@
 # -----------------------------------------------------------------------------
 
 from maya import cmds as m
-from modules.utils import path, common_functions
+from modules.common import functions
+from modules.utils import path
 
 # -----------------------------------------------------------------------------
 # CLASSES
@@ -45,12 +46,7 @@ class Window_Base(object):
     Base Maya window UI class
 
     Args:
-        title (str): _description_
-
-    Contents:
-    - BASIC UI FUNCTIONALITY:
-        + open (opens the window) [Method]
-        + close (closes the window) [Method]
+        title (str): The window title
     """
 
     # -------------------------------------------------------------------------
@@ -63,7 +59,7 @@ class Window_Base(object):
         if window_name:
             self.name = window_name
         else:
-            self.name = common_functions.ToCamelCase(window_title)
+            self.name = functions.ToCamelCase(window_title)
 
         # self.open()
 

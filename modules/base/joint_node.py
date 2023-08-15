@@ -32,9 +32,9 @@
 # -----------------------------------------------------------------------------
 
 from maya import cmds as m
-from modules.nodel import Dag_Node
-from modules.utils.common_functions import getKeyFromValue
-from modules.utils.common_names import JOINT_LABEL_DICT, ROTATE_ORDER_DICT
+from modules.base import Dag_Node
+from modules.common.functions import getKeyFromValue
+from modules.common.names import JOINT_LABEL_DICT, ROTATE_ORDER_DICT
 
 # -----------------------------------------------------------------------------
 # CLASSES
@@ -46,53 +46,22 @@ class Joint(Dag_Node):
     Joint [Class] (Inherits from: Dag_Node)
 
     Class based way of calling the information that we need to deal 
-    with Maya joints in a clean Python way
-
-    Contents:
-    - ROTATE ORDER:
-        + rotateOrder [Returns the rotate order] {Property}
-        + setRotateOrder (Set the rotation order) {Method}
-
-    - DRAW STYLE:
-        + drawStyle [Returns the drawStyle index] {Property}
-        + setDrawStyle (Set the drawStyle of joint) {Method}
-
-    - RADIUS:
-        + radius [Returns the joint radius] {Property}
-        + setRadius (Set the joint radius) {Method}
-
-    - JOINT ORIENTATION:
-        + jointOrient [Returns list of orient values] {Property}
-        + setJointOrient (Set joint orient values) {Method}
-
-    - JOINT LABEL:
-        + label [Returns a list of all label properties human names] {Property}
-        - setLabel (Set the label: side, type and visibility) {Method}
-        + labelSide [Returns the label side Name] {Property}
-        - setLabelSide (Set the label side) {Method}
-        + labelType [Returns label type/part] {Property}
-        - setLabelType (Set the label type) {Method}
-        + labelVis [Returns boolean of label visibility] {Property}
-        - setLabelVis (Set label visibility) {Method}
-
-    - DISPLAY HANDLE:
-        + handle [Returns handle visibility] {Property}
-        + showHandle (Set handle visibility to 1) {Method}
-        + hideHandle (Set handle visibility to 0) {Method}
-
-    - DISPLAY LOCAL AXIS:
-        + localAxis [Returns localAxis visibility] {Property}
-        + showLocalAxis (Set localAxis visibility to 1) {Method}
-        + hideLocalAxis (Set localAxis visibility to 0) {Method}
+    with Maya joints in a clean Python way.
     """
     # -------------------------------------------------------------------------
     # SPECIAL/MAGIC/DUNDER METHODS
 
-    def __init__(self, node):
+    def __init__(self, node, **kwargs):
         self._joint = None
 
         # Initializing Dag_Node
-        Dag_Node.__init__(self, node, nodeType="joint")
+        Dag_Node.__init__(self, node)
+
+        if node and kwargs:
+            self.create(**kwargs)
+
+        elif not kwargs and not self.exists(): # If only name given.
+            self.create("joint")
 
     # -------------------------------------------------------------------------
     # ROTATE ORDER
@@ -129,6 +98,7 @@ class Joint(Dag_Node):
         drawStyle [Property]
         """
         drawStyle = self.a.drawStyle.get()
+
         return drawStyle
 
     def setDrawStyle(self, value):
@@ -160,6 +130,7 @@ class Joint(Dag_Node):
     @property
     def radius(self):
         radius = m.getAttr(self.node + ".radius")
+
         return radius
 
     def setRadius(self, value):
@@ -188,6 +159,7 @@ class Joint(Dag_Node):
 
         # If I don't unpack them, it will be a tuple inside a list.
         orient = [orientX, orientY, orientZ]
+
         return orient
 
     def setJointOrient(self, *args):
@@ -235,10 +207,12 @@ class Joint(Dag_Node):
         if type == 18:
             type = self.a.otherType.get()
             typeName = type
+
         drawLabel = self.a.drawLabel.get()
 
         sideName = getKeyFromValue(JOINT_LABEL_DICT["side"], side)
         typeName = getKeyFromValue(JOINT_LABEL_DICT["type"], type)
+
         if typeName == None:  # If key not in dictionary
             typeName = self.a.otherType.get()  # Get the custom labelType
 
@@ -272,7 +246,7 @@ class Joint(Dag_Node):
         if isinstance(side, int) and side in range(0, 4):
             side = side
         elif isinstance(side, str):
-            side = side.title()
+            side = side.lower()
             if side in JOINT_LABEL_DICT["side"]:
                 side = JOINT_LABEL_DICT["side"][side]
         else:
@@ -298,9 +272,9 @@ class Joint(Dag_Node):
                 raise ValueError(
                     ">>> You did not entered a valid type number")
         elif isinstance(type, str):
-            type = type.title()
-            if type in JOINT_LABEL_DICT["type"]:
-                type = JOINT_LABEL_DICT["type"][type]
+            type = type
+            if type.lower() in JOINT_LABEL_DICT["type"]:
+                type = JOINT_LABEL_DICT["type"][type.lower()]
                 self.a.type.set(type)
             else:
                 self.a.type.set(18)
@@ -319,7 +293,7 @@ class Joint(Dag_Node):
     def labelVis(self):
         return self.label[2]
 
-    def setLabelVis(self, value=1):
+    def setLabelVis(self, value = 1):
         if type(value) == bool:
             value = value
         elif type(value) == int and value in range(0, 2):
@@ -328,6 +302,7 @@ class Joint(Dag_Node):
             raise ValueError(">>> You did not enter a valid value.")
 
         self.a.drawLabel.set(value)
+
         return self.labelVis
 
     # -------------------------------------------------------------------------
@@ -336,6 +311,7 @@ class Joint(Dag_Node):
     @property
     def handle(self):
         handle = self.a.displayHandle.get()
+
         return handle
 
     def showHandle(self):
@@ -347,6 +323,7 @@ class Joint(Dag_Node):
         else:
             raise ValueError(
                 ">>> Object doesn't exist!")
+        
         return self.handle
 
     def hideHandle(self):
@@ -358,6 +335,7 @@ class Joint(Dag_Node):
         else:
             raise ValueError(
                 ">>> Object doesn't exist!")
+        
         return self.handle
 
     # -------------------------------------------------------------------------
@@ -377,6 +355,7 @@ class Joint(Dag_Node):
         else:
             raise ValueError(
                 ">>> Object doesn't exist!")
+        
         return self.localAxis
 
     def hideLocalAxis(self):
@@ -388,4 +367,5 @@ class Joint(Dag_Node):
         else:
             raise ValueError(
                 ">>> Object doesn't exist!")
+        
         return self.localAxis

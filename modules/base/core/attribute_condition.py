@@ -33,7 +33,7 @@
 # LIBRARIES AND MODULES
 # -----------------------------------------------------------------------------
 
-from modules.nodel import Dep_Node
+from modules.base import Dep_Node
 
 # -----------------------------------------------------------------------------
 # CLASSES

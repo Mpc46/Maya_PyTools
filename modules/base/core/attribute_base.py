@@ -61,17 +61,6 @@ class Attributes(object):
 
     Returns:
         Object: The attribute object of our object.
-
-    Contents:
-    - SPECIAL METHODS:
-        + __repr__ [Returns a string representation of our obj]
-        + __getitem__ [Returns string representation of our attr]
-        + __getattr__ [Returns string representation of our attr]
-
-    - METHODS:
-        + list [Returns a list of all attributes]
-        + add [Adds an attribute to the current node]
-        + zeroAttributes [Zero out all transform attributes]
     """
     # -------------------------------------------------------------------------
     # SPECIAL/MAGIC/DUNDER METHODS
@@ -191,36 +180,7 @@ class Attribute(object):
 
     Returns:
         Object: The attribute object of our object.
-
-    Contents:
-    - SPECIAL METHODS:
-        + __str__ [Return fullPath of our obj] (str(obj))
-        + __repr__ [Returns string representation of our obj] (obj)
-        + __lshift__ [Connects Attr from A to B] ( A >> B)
-        + __rshift__ [Connects Attr from B to A] ( A << B)
-
-    - PROPERTIES:
-        + attr [Returns obj attribute string]
-        + attribute [Returns obj attribute string]
-        + path [Returns obj attribute string path with node name and attr]
-        + fullPath [Returns obj attribute string fullPath with node name and attr]
-        + children [Returns a list of the children attributes if any]
-        + parent [Returns a list of the parent attributes if any]
-        + outputs [Returns all the outputs of an attribute]
-        + connectionInput [Returns the input connection of an attribute]
-        + connectionOutputs [Returns all output connections of an attribute]
-
-    - METHODS:
-        + exists [Checks wether our attribute exists]
-        + set [Sets our attribute using functionality from maya.m]
-        + get [Gets our attribute value using functionality from maya.m]
-        + query [Query's our attribute value using functionality from maya.m]
-        + connect [Connects this attribute to the passed item.] (>> and <<)
-        + disconnect [Disconnects the attribute if connected]
-        + delete [Deletes the attribute]
     """
-    # -------------------------------------------------------------------------
-    # SPECIAL/MAGIC/DUNDER METHODS
 
     def __init__(self, node, attr):
         self.node = node
@@ -230,6 +190,7 @@ class Attribute(object):
         fullPath = self.fullPath
         if not fullPath:
             return ">>> INVALID OBJECT"
+        
         return fullPath
 
     def __repr__(self):
@@ -238,6 +199,9 @@ class Attribute(object):
             self.fullPath,
         )
 
+    # -------------------------------------------------------------------------
+    # SPECIAL/MAGIC/DUNDER METHODS
+    
     def __lshift__(self, attr):
         """
         __lshift__ [Special Method]
@@ -264,8 +228,8 @@ class Attribute(object):
     # CONDITION NODES
 
     def _conditionNodeName(self, value):
-        return value.node.name if isinstance(value, type(self)
-                                             ) else self.node.name + "_" + str(value)
+        return value.node.name if isinstance(
+            value, type(self)) else self.node.name + "_" + str(value)
 
     def __eq__(self, value):  # ==
         """
@@ -277,7 +241,7 @@ class Attribute(object):
             node1.a.sx == node2.a.sx
         """
         # Importing here to avoid circular dependency
-        from modules.nodel.base.attribute_condition import Condition
+        from modules.base.core.attribute_condition import Condition
 
         name = self._conditionNodeName(value)
         nodeName = "{0}_{1}_eq_CD".format(name, self.attr)
@@ -295,7 +259,7 @@ class Attribute(object):
             node1.a.sx != node2.a.sx
         """
         # Importing here to avoid circular dependency
-        from modules.nodel.base.attribute_condition import Condition
+        from modules.base.core.attribute_condition import Condition
 
         name = self._conditionNodeName(value)
         nodeName = "{0}_{1}_ne_CD".format(name, self.attr)
@@ -313,7 +277,7 @@ class Attribute(object):
             node1.a.sx > node2.a.sx
         """
         # Importing here to avoid circular dependency
-        from modules.nodel.base.attribute_condition import Condition
+        from modules.base.core.attribute_condition import Condition
 
         name = self._conditionNodeName(value)
         nodeName = "{0}_{1}_gt_CD".format(name, self.attr)
@@ -331,7 +295,7 @@ class Attribute(object):
             node1.a.sx >= node2.a.sx
         """
         # Importing here to avoid circular dependency
-        from modules.nodel.base.attribute_condition import Condition
+        from modules.base.core.attribute_condition import Condition
 
         name = self._conditionNodeName(value)
         nodeName = "{0}_{1}_ge_CD".format(name, self.attr)
@@ -349,7 +313,7 @@ class Attribute(object):
             node1.a.sx < node2.a.sx
         """
         # Importing here to avoid circular dependency
-        from modules.nodel.base.attribute_condition import Condition
+        from modules.base.core.attribute_condition import Condition
 
         name = self._conditionNodeName(value)
         nodeName = "{0}_{1}_lt_CD".format(name, self.attr)
@@ -367,7 +331,7 @@ class Attribute(object):
             node1.a.sx <= node2.a.sx
         """
         # Importing here to avoid circular dependency
-        from modules.nodel.base.attribute_condition import Condition
+        from modules.base.core.attribute_condition import Condition
 
         name = self._conditionNodeName(value)
         nodeName = "{0}_{1}_le_CD".format(name, self.attr)
@@ -377,7 +341,7 @@ class Attribute(object):
 
     def setCondition(self, **kwargs):
         # Importing here to avoid circular dependency
-        from modules.nodel.base.attribute_condition import Condition
+        from modules.base.core.attribute_condition import Condition
         return Condition(self.node).setCondition(**kwargs)
 
     # -------------------------------------------------------------------------
@@ -403,7 +367,7 @@ class Attribute(object):
         Example:
             calc = node.a.sx - node.a.sy
         """
-        return self.plusMinusAverageNode(value, operationType=2)
+        return self.plusMinusAverageNode(value, operationType = 2)
 
     def __mul__(self, value):
         """
@@ -414,7 +378,7 @@ class Attribute(object):
         Example:
             calc = node.a.sx * node.a.sy
         """
-        return self.multiplyDivideNode(value, operationType=1)
+        return self.multiplyDivideNode(value, operationType = 1)
 
     def __div__(self, value):
         """
@@ -425,7 +389,7 @@ class Attribute(object):
         Example:
             calc = node.a.sx / node.a.sy
         """
-        return self.multiplyDivideNode(value, operationType=2)
+        return self.multiplyDivideNode(value, operationType = 2)
 
     def __truediv__(self, value):
         """
@@ -436,7 +400,7 @@ class Attribute(object):
         Example:
             calc = node.a.sx / node.a.sy
         """
-        return self.multiplyDivideNode(value, operationType=2)
+        return self.multiplyDivideNode(value, operationType = 2)
 
     def __pow__(self, value):
         """
@@ -447,7 +411,7 @@ class Attribute(object):
         Example:
             calc = node.a.sx ** node.a.sy
         """
-        return self.multiplyDivideNode(value, operationType=3)
+        return self.multiplyDivideNode(value, operationType = 3)
     
      # -------------------------------------------------------------------------
      # ARITHMETRIC NODES - NODE HANDLING / ATTRIBUTES
@@ -474,8 +438,8 @@ class Attribute(object):
 
         Check whether the connections are parents (True) or child (False) plugs.
         """
-        inputIsParent = True if (isinstance(
-            inputValue, Attribute) and inputValue.isParent) else False
+        inputIsParent = True if (isinstance(inputValue, Attribute) 
+                        and inputValue.isParent) else False
 
         return True if (self.isParent and inputIsParent) else False
     
@@ -500,7 +464,7 @@ class Attribute(object):
             class: The attribute nodal name and class.
         """
         # Importing here to avoid circular dependency
-        from modules.nodel import Dep_Node
+        from modules.base import Dep_Node
         
         # Creating the PMA node
         pma = Dep_Node(nodeName, nodeType)
@@ -570,7 +534,7 @@ class Attribute(object):
             attribute (int/float/str/attributeObject): The maya node.
             value (int/float/str/attributeObject): The maya node.
         """
-        connectionIndex = m.getAttr(self.node.a[attribute], s=1)
+        connectionIndex = m.getAttr(self.node.a[attribute], s = 1)
 
         if isinstance(value, (float, int)):
             self.node.a["%s[%s]" % (attribute, connectionIndex)].set(value)
@@ -614,8 +578,7 @@ class Attribute(object):
             if self.checkConnectionAttribute(value):
                 return self.createMultiDivide(nodeName, nodeType, operationType, value)
             
-            # If scaleX (child)
-            else:
+            else: # If scaleX (child)
                 return self.createMultiDoubleLinear(nodeName, value)
     
         # ---- Divide / power
@@ -645,7 +608,7 @@ class Attribute(object):
             class: The attribute nodal class.
         """
         # Importing here to avoid circular dependency
-        from modules.nodel import Dep_Node
+        from modules.base import Dep_Node
 
         md = Dep_Node(nodeName, suffix)
         md.a.operation.set(operationType)
@@ -669,7 +632,7 @@ class Attribute(object):
             class: The attribute nodal class.
         """
         # Importing here to avoid circular dependency
-        from modules.nodel import Dep_Node
+        from modules.base import Dep_Node
 
         mdl = Dep_Node(nodeName[:-2] + "MDL", "multDoubleLinear")
 
@@ -700,7 +663,7 @@ class Attribute(object):
             class: The attribute object output.
         """
         # Importing here to avoid circular dependency
-        from modules.nodel import Dep_Node
+        from modules.base import Dep_Node
 
         multiply = Dep_Node(nodeName, nodeType)
         multiply.a.operation.set(operationType)
@@ -732,7 +695,7 @@ class Attribute(object):
             class: The attribute object output.
         """
         # Importing here to avoid circular dependency
-        from modules.nodel import Dep_Node
+        from modules.base import Dep_Node
 
         multiply = Dep_Node(nodeName, nodeType)
         multiply.a.operation.set(operationType)
@@ -854,10 +817,11 @@ class Attribute(object):
             print(sphere.a.rx.children)
             Output: []
         """
-        if self.query(indexMatters=True, multi=True):
-            multiIndices = m.getAttr(self, multiIndices=True)
+        if self.query(indexMatters = True, multi = True):
+            multiIndices = m.getAttr(self, multiIndices = True)
             index = len(multiIndices) if multiIndices else 0
-            lc = self.query(listChildren=True)
+
+            lc = self.query(listChildren = True)
 
             # If children return all the multi indices attrs
             if lc:
@@ -865,12 +829,11 @@ class Attribute(object):
             
             # Return the single multi index item
             else:
-                return [self.node.a["%s[%s]" % (self.attr, index)]]
+                return [self.node.a["%s[%s]" % (self.attr, index)] ]
 
         return [
             self.node.a[attr]
-            for attr in self.query(listChildren=True) or []
-        ]
+            for attr in self.query(listChildren = True) or [] ]
 
     @property
     def parent(self):
@@ -886,7 +849,7 @@ class Attribute(object):
             print(sphere.a.rotate.parent)
             Output: []
         """
-        a = self.query(listParent=True)
+        a = self.query(listParent = True)
         if a:
             return Attribute(self.node, a[0]) or []
         return []
@@ -918,23 +881,25 @@ class Attribute(object):
             Output: Attribute('cube_GEO.rotateX')
         """
         # Import here to avoid dependency issues when using Dep_Node
-        from modules.nodel import Dag_Node
+        from modules.base import Dag_Node
         # Needs to be outside main herarchy to avoid cyclic dependency
 
-        attrs = m.listConnections(self.fullPath, p=1, d=0) or []
+        attrs = m.listConnections(self.fullPath, p = 1, d = 0) or []
 
         if self.children:
             for child in self.children:
-                childAttrs = m.listConnections(child.fullPath, p=1, d=0)
+                childAttrs = m.listConnections(child.fullPath, p = 1, d = 0)
                 if childAttrs:
                     attrs += childAttrs
 
         inputs = []
+        
         if attrs:
             for attr in attrs:
                 nodeName = Dag_Node(attr.split(".")[0])
                 attrName = attr.split(".")[-1]
                 inputs.append(Attribute(nodeName, attrName))
+
             return inputs[0] if len(attrs) == 1 else inputs
 
         return None
@@ -951,7 +916,7 @@ class Attribute(object):
             Output: [Attribute('sphere_GEO.rotateX'), etc...]
         """
         # Import here to avoid dependency issues when using Dep_Node
-        from modules.nodel import Dag_Node
+        from modules.base import Dag_Node
 
         attrs = m.listConnections(self.fullPath, p=1) or []
 
@@ -1038,7 +1003,7 @@ class Attribute(object):
         """
         if not m.isConnected(self, attr):
 
-            if (self.query(lc=1) != None) and (attr.query(lc=1) == None):
+            if (self.query(lc=1) != None) and (attr.query(lc = 1) == None):
                 raise ValueError(
                     """The driving of these values might be a parent value such as scale 
                     and the driven cannot then be a child such as scaleX, 
@@ -1050,10 +1015,10 @@ class Attribute(object):
                 drivenAttrs = attr.children or [attr]
 
                 for driver, driven in zip(drivingAttrs, drivenAttrs):
-                    m.connectAttr(driver, driven, force=True)
+                    m.connectAttr(driver, driven, force = True)
 
             except (RuntimeError, AttributeError):
-                m.connectAttr(self, attr, force=True)
+                m.connectAttr(self, attr, force = True)
 
             return self
 
@@ -1067,14 +1032,14 @@ class Attribute(object):
             cube.a.r.disconnect()
         """
         allAttrs = self.children if self.children else self
-        connections = m.listConnections(allAttrs, s=1, p=1)
+        connections = m.listConnections(allAttrs, s = 1, p = 1)
 
         if not connections:
             return None
 
         if self.children:
             for child_attr in self.children:
-                conn_attr = m.listConnections(child_attr, s=1, p=1)
+                conn_attr = m.listConnections(child_attr, s = 1, p = 1)
                 if not conn_attr:
                     continue
 

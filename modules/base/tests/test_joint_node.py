@@ -28,7 +28,7 @@
 
 import unittest
 from maya import cmds as m
-from modules.nodel import Mesh, Joint
+from modules.base import Mesh, Joint
 
 # -----------------------------------------------------------------------------
 # CLASSES
@@ -95,17 +95,17 @@ class Test_Joint(unittest.TestCase):
     # JOINT LABEL
 
     def test_joint_label(self):
-        expectedResult = ['Center', 'None', False]
+        expectedResult = ['center', 'none', False]
         result = self.body_j1.label
         self.assertCountEqual(result, expectedResult)
 
         self.body_j2.setLabel("l", "shoulder", 1)
-        expectedResult = ['Left', 'Shoulder', True]
+        expectedResult = ['left', 'shoulder', True]
         result = self.body_j2.label
         self.assertCountEqual(result, expectedResult)
 
         self.body_j1.setLabelSide("r")
-        self.assertTrue(self.body_j1.labelSide == "Right")
+        self.assertTrue(self.body_j1.labelSide == "right")
 
         self.body_j1.setLabelType("Test")
         expectedResult = 18

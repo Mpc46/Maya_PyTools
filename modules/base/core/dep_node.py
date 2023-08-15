@@ -38,8 +38,8 @@
 
 from maya import cmds as m
 from modules.utils import open_maya_api, path
-from modules.nodel.base.attribute_base import Attributes
-from modules.nodel.base.dag_dimension import Object_Dimension
+from modules.base.core.attribute_base import Attributes
+from modules.base.core.dag_dimension import Object_Dimension
 
 # -----------------------------------------------------------------------------
 # CLASSES
@@ -66,34 +66,7 @@ class Dep_Node(object):
         dep = Dep_Node("node_001")
         dep.rename("footbar_001")
         dep.delete()
-
-    Contents:
-    - SPECIAL METHODS:
-        + __str__ [Returns the fullPath of the object]
-        + __repr__ [Returns the class of the object and it's full Path]
-        + __eq__ [Compares TWO class objects to see if they are the same Obj]
-
-    - PROPERTIES:
-        + dep [Returns the Object]
-        + path [Returns the obj path]
-        + fullPath [Returns the obj fullPath]
-        + type [Returns the obj type]
-        + name [Returns the obj name]
-        + namespace [If any, returns obj namespace]
-        + isLocked [Returns the state of the obj]
-
-    - METHODS:
-        + isReferenced [Checks if obj is reference, returns Bool]
-        + exists [Checks if obj exists, returns Bool]
-        + rename [Renames the object, returns self]
-        + lock [Locks or Unlocks a node, protecting it]
-        + delete [Deletes the objects from scene, not the class.obj itself]
-        + create [Creates a node object if it doesn't exist]
-
     """
-
-    # -------------------------------------------------------------------------
-    # SPECIAL/MAGIC/DUNDER METHODS
 
     def __init__(self, node, nodeType=None):
         self._dep = None
@@ -112,10 +85,13 @@ class Dep_Node(object):
     def __repr__(self):
         return path.generateReprString(
             self.__class__.__name__,
-            self.fullPath,
-        )
+            self.fullPath )
+
+    # -------------------------------------------------------------------------
+    # SPECIAL/MAGIC/DUNDER METHODS
 
     def __eq__(self, other):
+        """ Compares TWO class objects to see if they are the same Object. """
         if isinstance(other, self.__class__):
             return self.fullPath == other.fullPath
         elif self.fullPath == other:
@@ -141,6 +117,7 @@ class Dep_Node(object):
             return False
 
         self._dep = open_maya_api.toDpendencyNode(self.node)
+        
         return True
 
     # -------------------------------------------------------------------------
@@ -152,23 +129,28 @@ class Dep_Node(object):
 
     @property
     def path(self):
+        """ Returns object name. """
         if self.dep:
             return self.dep.name()
 
     @property
     def fullPath(self):
+        """ Returns object name. """
         return self.path
 
     @property
     def type(self):
+        """ Returns object typeName, example: "joint" """
         return self.dep.typeName()
 
     @property
     def typ(self):
+        """ Returns object type. """
         return self.type
 
     @property
     def name(self):
+        """ Returns object name. """
         return path.baseName(self.fullPath)
 
     @property
@@ -177,12 +159,13 @@ class Dep_Node(object):
 
     @property
     def isLocked(self):
+        """ Returns state of the object. """
         return m.lockNode(self.fullPath, query=True, lock=True)[0]
-    
+
     # -------------------------------------------------------------------------
 
     @property
-    def a(self): # For us to call atributes with "a"
+    def a(self):  # For us to call atributes with "a"
         """
         a [Property]
 

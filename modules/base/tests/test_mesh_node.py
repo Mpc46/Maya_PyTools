@@ -32,7 +32,7 @@
 
 import unittest
 from maya import cmds as m
-from modules.nodel import Mesh, Dag_Node, Dep_Node
+from modules.base import Mesh, Dag_Node, Dep_Node
 
 # -----------------------------------------------------------------------------
 # CLASSES
@@ -109,7 +109,7 @@ class Test_Mesh(unittest.TestCase):
 
     def test_mesh_hardtWeightTo(self):
         joints = [self.body_j1, self.body_j2] 
-        self.cube.hardtWeightTo(joints)
+        self.cube.hardWeightTo(joints)
         self.assertTrue(self.cube.skinCluster.exists())
 
     def test_mesh_copyWeightsTo(self): 

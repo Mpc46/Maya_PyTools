@@ -1,20 +1,19 @@
 '''
 /*****************************************************************************/
-                                Base Library
+                                Core Library
                      ________________________________________
                     |                                        |
                     |  Author: Luis Felipe Carranza          |
                     |________________________________________|
 
 >> DESCRIPTION >>
-    Small description of what does this script or module does.
+    Core modules, functions and classes go here, the are very important and
+    should not be deleted, most of the other files depend directly or 
+    indirectly on this library.
 
 >> HOW TO USE >>
-	Input instructions on how to use
-
->> CONTENTS >> 
-    + dep_node [Super Class]
-    + dag_node [Class - Inherits (Dep_Node)]
+	This library is meant to be imported into larger scripts and/or
+    hold those scripts and modules for later use or implementation.
 
 >> CONTACT >>
     luisf.carranza@outlook.com
