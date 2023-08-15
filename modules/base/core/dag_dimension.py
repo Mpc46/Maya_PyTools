@@ -42,6 +42,15 @@ from modules.utils.math import getDistanceBetween
 # -----------------------------------------------------------------------------
 
 class Object_Dimension(object):
+    """
+    Object_Dimension [Class]
+
+    Class based way of calling the information regarding, objects, their
+    dimensions and pivots.
+
+    Args:
+        object (_type_): _description_
+    """
     def __init__(self, node):
         self._node = node
 
@@ -101,7 +110,9 @@ class Object_Dimension(object):
         from modules.base import Dag_Node as Dag
         tempDag = Dag(m.group(em=1, w=1)); tempDag.moveTo(self._node);
 
-        position = [float(format(i, "f")) for i in m.xform(tempDag, ws=1, t=1, q=1) + m.xform(tempDag, ws=1, ro=1, q=1)]
+        position = [float(format(i, "f")) for i in m.xform(tempDag, ws=1, t=1, q=1) 
+                    + m.xform(tempDag, ws=1, ro=1, q=1)]
+        
         tempDag.delete()
 
         return position
@@ -145,5 +156,6 @@ class Object_Dimension(object):
                 3.434342
         """
         distance = getDistanceBetween(str(self._node), str(item))
+
         return distance
     

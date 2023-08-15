@@ -169,6 +169,7 @@ def getKeyFromValue(dictionary, target_value):
     for key, value in dictionary.items():
         if value == target_value:
             return key
+        
     return None  # >>> No key was found for the value
 
 

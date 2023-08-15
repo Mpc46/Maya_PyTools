@@ -66,51 +66,6 @@ class Dag_Node(Dep_Node):
         dag = Dag_Node("node_001")
         dag.rename("footbar_001")
         print(dag.fullPath)
-
-    Contents:
-    - PROPERTIES:
-        + dag [Returns the Dag object]
-        + path [Returns the obj path]
-        + fullPath [Returns the obj fullPath]
-        + shape [Returns the obj shape node]
-        + shapes [Returns all obj shapes]
-        + children [Returns inmediate children of obj]
-        + allChildren [Returns all descendants of obj]
-        + parent [Returns inmediate parent obj]
-        + allParents [Returns all ascendants of obj]
-        + order [Returns obj order index number within brother nodes]
-        + offset [Returns parent obj]
-        + getGeometryConstraint [Returns the constraint of the obj if any]
-        + getAimConstraint [Returns the constraint of the obj if any]
-        + getOrientConstraint [Returns the constraint of the obj if any]
-        + getPointConstraint [Returns the constraint of the obj if any]
-        + getParentConstraint [Returns the constraint of the obj if any]
-        + getScaleConstraint [Returns the constraint of the obj if any]
-        + color [Returns the obj color override index number]
-        + colorAsString [Returns the obj color override name]
-        + history [Returns obj construction history]
-
-    - METHODS:
-        + reorder [Change order index number of obj]
-        + parentTo [Set the parent of the obj]
-        + parentToWorld [Parent obj to world]
-        + moveTo [Match obj transformation of another obj]
-        + moveHere [Match transformations of obj to list of objs]
-        + createOffset [Creates a parent group]
-        + constraintWeightingAttributes [Gets the obj constraint weight list]
-        + geometryConstraint [Creates a constraint]
-        + aimConstraint [Creates a constraint]
-        + orientConstraint [Creates a constraint]
-        + pointConstraint [Creates a constraint]
-        + parentConstraint [Creates a constraint]
-        + scaleConstraint [Creates a constraint]
-        + parentScaleConstraint [Creates two constraints]
-        + setColor [Set the obj color override]
-        + setVisibility [Set the obj visibility attribute]
-        + show [Set obj visibility to 1]
-        + hide [Set obj visibility to 0]
-        + deleteHistory [Deletes obj construction history]
-        + duplicate [Duplicates the obj]
     """
     # -------------------------------------------------------------------------
     # SPECIAL/MAGIC/DUNDER METHODS
@@ -139,6 +94,7 @@ class Dag_Node(Dep_Node):
             return False
 
         self._dag = open_maya_api.toMDagPath(self.node)
+
         return True
 
     # ----------------------------------------------------------------
@@ -168,8 +124,7 @@ class Dag_Node(Dep_Node):
     @property
     def shapes(self):
         shapes = []
-        for shape in m.listRelatives(self.fullPath, s=True,
-                                     f=True, ni=True) or []:
+        for shape in m.listRelatives(self.fullPath, s=True, f=True, ni=True) or []:
             shapes.append(Dag_Node(shape))
 
         return shapes
@@ -177,6 +132,7 @@ class Dag_Node(Dep_Node):
     @property
     def shape(self):
         shapes = self.shapes
+
         return shapes[0] if len(shapes) else Dag_Node(None)
 
     # ----------------------------------------------------------------
@@ -185,23 +141,25 @@ class Dag_Node(Dep_Node):
     def children(self):
         children = []
         shapes = self.shapes
-        for child in m.listRelatives(self.fullPath, c=True,
-                                     f=True, ni=True) or []:
+
+        for child in m.listRelatives(self.fullPath, c=True, f=True, ni=True) or []:
             if child not in shapes:
                 children.append(Dag_Node(child))
+
         return children
 
     @property
     def allChildren(self):
         children = []
-        for child in m.listRelatives(self.fullPath, ad=True,
-                                     f=True, ni=True) or []:
+        for child in m.listRelatives(self.fullPath, ad=True, f=True, ni=True) or []:
             children.append(Dag_Node(child))
+
         return children
 
     @property
     def parent(self):
         parent = m.listRelatives(self.fullPath, p=True, f=True)
+
         if parent:
             return Dag_Node(parent[0])
 
@@ -209,6 +167,7 @@ class Dag_Node(Dep_Node):
     def allParents(self):
         parents = []
         parent = self.parent
+
         while parent:  # Cycle until no parent is found
             parents.append(parent)
             parent = parent.parent  # Get the parent of the parent
@@ -306,6 +265,7 @@ class Dag_Node(Dep_Node):
         if self.exists():
             for i in range(count):
                 offsetName = createOffset([self.name])
+
             return Dag_Node(offsetName)
 
     # ----------------------------------------------------------------
@@ -324,6 +284,7 @@ class Dag_Node(Dep_Node):
         """
         constraints = m.listConnections(
             self.fullPath, s=True, d=False, t=constraintType)
+
         return Dag_Node(constraints[0] if constraints else Dag_Node(None))
 
     @property
@@ -364,7 +325,9 @@ class Dag_Node(Dep_Node):
             Obj List: The list of weights of the constraints connected to our object.
         """
         constraint = self._getConstraint(constraintType)
-        return [constraint.fullPath + "." + i for i in m.listAttr(constraint, k=1, c=1) if "W" in (i[-2] or i[-3])]
+
+        return [constraint.fullPath + "." + i for i in
+                m.listAttr(constraint, k=1, c=1) if "W" in (i[-2] or i[-3])]
 
     def geometryConstraint(self, *args, **kwargs):
         """
@@ -505,6 +468,7 @@ class Dag_Node(Dep_Node):
             sphere.parentScaleConstraint("pCube1", mo=True)
         """
         m.scaleConstraint(self.fullPath, *args, **kwargs)
+
         return Dag_Node(m.parentConstraint(self.fullPath, *args, **kwargs)[0])
 
     # ----------------------------------------------------------------
@@ -517,6 +481,7 @@ class Dag_Node(Dep_Node):
     def colorAsString(self):
         if self.color is None:
             return None
+        
         return color.getColorFromInteger(self.color)
 
     def setColor(self, value):
@@ -532,6 +497,7 @@ class Dag_Node(Dep_Node):
             self: The DAG object
         """
         color.setColor(self.fullPath, value)
+
         return self
 
     # ----------------------------------------------------------------
@@ -568,9 +534,15 @@ class Dag_Node(Dep_Node):
 
     @property
     def history(self):
+        """
+        history [Property]
+
+        Returns obj construction history.
+        """
         if self.exists():
             history = [Dag_Node(i) for i in m.listHistory(self.fullPath)]
             return history
+        
         return []
 
     def deleteHistory(self):
