@@ -51,11 +51,17 @@ class Joint(Dag_Node):
     # -------------------------------------------------------------------------
     # SPECIAL/MAGIC/DUNDER METHODS
 
-    def __init__(self, node):
+    def __init__(self, node, **kwargs):
         self._joint = None
 
         # Initializing Dag_Node
-        Dag_Node.__init__(self, node, nodeType = "joint")
+        Dag_Node.__init__(self, node)
+
+        if node and kwargs:
+            self.create(**kwargs)
+
+        elif not kwargs and not self.exists(): # Testing
+            self.create("joint")
 
     # -------------------------------------------------------------------------
     # ROTATE ORDER

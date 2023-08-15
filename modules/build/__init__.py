@@ -7,7 +7,7 @@
                     |________________________________________|
 
 >> DESCRIPTION >>
-    This library contains modules for building rigging systems, setups,
+    This library contains modules for building: rigging systems, setups,
     scenes, etc.
 
 >> HOW TO USE >>
