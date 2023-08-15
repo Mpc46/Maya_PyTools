@@ -13,10 +13,10 @@
 	This module is meant to be imported into larger scripts.
 
 >> CONTENTS >>
-    + generateReprString (Func);
-    + rootName (Func);
-    + baseName (Func); 
-    + namespace (Func); 
+    + generateReprString (Func)
+    + rootName (Func)
+    + baseName (Func)
+    + namespace (Func)
 
 >> NOTES >> 
 	Update 02/08/2023 : Start working on the script
