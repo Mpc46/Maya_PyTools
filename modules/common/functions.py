@@ -37,8 +37,7 @@
 # LIBRARIES AND MODULES
 # -----------------------------------------------------------------------------
 
-from maya import cmds
-
+from maya import cmds as m
 
 # -----------------------------------------------------------------------------
 # SCRIPT FUNCTIONS
@@ -68,15 +67,15 @@ def matchMove(selection, point=0, orient=0):
         try:
             if point or orient:
                 if point:
-                    constraint = cmds.pointConstraint(parentObj, obj, mo=False)
+                    constraint = m.pointConstraint(parentObj, obj, mo=False)
                 if orient:
-                    constraint = cmds.orientConstraint(
+                    constraint = m.orientConstraint(
                         parentObj, obj, mo=False)
             else:
-                constraint = cmds.parentConstraint(parentObj, obj, mo=False)
+                constraint = m.parentConstraint(parentObj, obj, mo=False)
 
             # Remove the constraint
-            cmds.delete(constraint)
+            m.delete(constraint)
 
         except Exception as e:
             print(">>> matchMove Error: {0}: {1}".format(type(e).__name__, e))
@@ -108,12 +107,12 @@ def createOffset(selection, grpName="_OFF_GRP"):
     ]
 
     for num, item in enumerate(selection):
-        if not cmds.objExists(item):
+        if not m.objExists(item):
             print(
                 ">>> Could not create Offset group as item does not exist: {}".format(item))
             continue
 
-        offGrpParent = cmds.pickWalk(item, d="Up")[0]
+        offGrpParent = m.pickWalk(item, d="Up")[0]
 
         # If the current item ends with the group name, we remove the first name from the
         # offsetGrpNames list, we also remove the group name from the current item name.
@@ -127,17 +126,17 @@ def createOffset(selection, grpName="_OFF_GRP"):
         # Here we're creating a new group name by appending the first available
         # name from the name List
         groupName = next((newItemName + suffix for suffix in offsetGrpNames
-                          if not cmds.objExists(newItemName + suffix)), None)
+                          if not m.objExists(newItemName + suffix)), None)
 
         # If a group name was created successfully we create a new group
         if groupName:
-            offGrp = cmds.group(em=1, w=1, n=groupName)
+            offGrp = m.group(em=1, w=1, n=groupName)
             matchMove([item, offGrp])
 
-            cmds.parent(item, offGrp)
+            m.parent(item, offGrp)
 
             if str(offGrpParent) != str(item):
-                cmds.parent(offGrp, offGrpParent)
+                m.parent(offGrp, offGrpParent)
 
             newlyCreatedGroups.append(offGrp)
 
