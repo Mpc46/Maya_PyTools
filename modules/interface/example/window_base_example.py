@@ -97,5 +97,5 @@ def func2():
 # ----------------------------------------------------------------------------
 
 
-window = win("Window Tittle")
-window.open()
+window = win("Window Tittle").open()
+# window.open()
