@@ -60,7 +60,7 @@ class Joint(Dag_Node):
         if node and kwargs:
             self.create(**kwargs)
 
-        elif not kwargs and not self.exists(): # Testing
+        elif not kwargs and not self.exists(): # If only name given.
             self.create("joint")
 
     # -------------------------------------------------------------------------
