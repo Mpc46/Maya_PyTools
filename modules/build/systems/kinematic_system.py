@@ -96,7 +96,7 @@ def fk_system(joints=[]):
     ctrls = []
 
     for jnt in joints:
-        ctlName = "{}_Ctl".format(jnt)
+        ctlName = "{}_Ctl".format(jnt.name)
         ctl = Curve(m.circle(n=ctlName, normal = (1,0,0))[0])
         ctl.moveTo(jnt)
         ctl.parentConstraint(jnt, mo=True)
@@ -105,8 +105,8 @@ def fk_system(joints=[]):
 
         ctl_index = ctrls.index(ctl.name)
 
-        if ctl_index > 1:
-            ctl.parentTo(ctrls[-2])
+        if ctl_index > 0:
+            ctl.parentTo(ctrls[ctl_index -1 ])
         
         ctl.createOffset(1)
 
