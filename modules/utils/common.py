@@ -44,8 +44,6 @@ from maya import cmds as m
 
 def matchMove(selection, point=0, orient=0):
     """
-    matchMove [Function]
-
     Takes a driver location object and a list of driven items to move in that 
     order. The default option is to use a parentConstrain to move both translate 
     and rotate unless point or orient are set to True.  
@@ -82,8 +80,6 @@ def matchMove(selection, point=0, orient=0):
 
 def createOffset(selection, grpName = "_OFF_GRP"):
     """
-    createOffset [Function]
-
     Takes the selection passed in the scene or the selection passed and
     creates the offset groups in their locations.
 
