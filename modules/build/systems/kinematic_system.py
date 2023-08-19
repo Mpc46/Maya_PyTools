@@ -40,7 +40,7 @@ def switch(joints=[], switch_ctl=None):
 
     joints = [Joint(i) for i in joints]
 
-    if not switch_ctl:
+    if switch_ctl is None:
         switchName = (joints[-1].name) + "_switch_CTL"
         switch_ctl = Dag_Node(m.circle(n=switchName)[0])
 
@@ -51,7 +51,7 @@ def switch(joints=[], switch_ctl=None):
 
     ik_joints = duplicateChain(joints, "_IK")
     fk_joints = duplicateChain(joints, "_FK")
-
+    
     for jnt in joints:
         jnt.setColor("green")
 
@@ -67,7 +67,7 @@ def switch(joints=[], switch_ctl=None):
 
         for ik in ik_joints:
             ik.setColor("red")
-
+            
             if ik.name.split("_")[0:2] == blendTra.name.split("_")[0:2]:
                 if not blendTra.a.color1.connectionInput:
                     ik.a.t >> blendTra.a.color1
@@ -105,8 +105,8 @@ def fk_system(joints=[]):
 
         ctl_index = ctrls.index(ctl.name)
 
-        if ctl_index != 0:
-            ctl.parentTo(ctrls[ctl_index - 1])
+        if ctl_index > 1:
+            ctl.parentTo(ctrls[-2])
         
         ctl.createOffset(1)
 
@@ -119,12 +119,4 @@ def ik_system(joints=[]):
 
     
     pass
-
-# -----------------------------------------------------------------------------
-# EXECUTE SCRIPT
-# -----------------------------------------------------------------------------
-
-
-
-
 
