@@ -147,8 +147,6 @@ def createOffset(selection, grpName = "_OFF_GRP"):
 
 def duplicateChain(chain=None, suffix="_new"):
     """
-    duplicate_chain [Function]
-
     Takes a list of objects and duplicates them with a new suffix.
 
     Args:
