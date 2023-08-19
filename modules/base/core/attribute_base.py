@@ -79,8 +79,6 @@ class Attributes(object):
 
     def __getitem__(self, attr):
         """
-        __getitem__ [Special Method]
-
         Getting the attribute with a string input.
 
         Args:
@@ -97,8 +95,6 @@ class Attributes(object):
 
     def __getattr__(self, attr):
         """
-        __getattr__ [Special Method]
-
         Getting the attribute with a string input.
 
         Args:
@@ -118,8 +114,6 @@ class Attributes(object):
 
     def list(self, **kwargs):
         """
-        list [Method]
-
         Using maya.m functionality to list all attributes.
 
         Example:
@@ -133,8 +127,6 @@ class Attributes(object):
 
     def add(self, **kwargs):
         """
-        add [Method]
-
         Using functionality from maya.m addAttr to add
         an attribute to the current node.
 
@@ -158,8 +150,6 @@ class Attributes(object):
 
     def zeroAttributes(self, **kwargs):
         """
-        zeroAttributes [Method]
-
         Zero's out the transform attributes of the node
 
         Example:
@@ -204,8 +194,6 @@ class Attribute(object):
     
     def __lshift__(self, attr):
         """
-        __lshift__ [Special Method]
-
         Connecting from the last item to the first.
 
         Example:
@@ -215,8 +203,6 @@ class Attribute(object):
 
     def __rshift__(self, attr):
         """
-        __lshift__ [Special Method]
-
         Connecting from the first item to the last.
 
         Example:
@@ -233,8 +219,6 @@ class Attribute(object):
 
     def __eq__(self, value):  # ==
         """
-        __eq__ [Special Method] (Equal, ==)
-
         Making a condition node and setting the first & second terms and operation.
 
         Example:
@@ -251,8 +235,6 @@ class Attribute(object):
 
     def __ne__(self, value):  # !=
         """
-        __ne__ [Special Method] (NotEqual, !=)
-
         Making a condition node and setting the first & second terms and operation.
 
         Example:
@@ -269,8 +251,6 @@ class Attribute(object):
 
     def __gt__(self, value):  # >
         """
-        __gt__ [Special Method] (Greater Than, >)
-
         Making a condition node and setting the first & second terms and operation.
 
         Example:
@@ -287,8 +267,6 @@ class Attribute(object):
 
     def __ge__(self, value):  # >=
         """
-        __ge__ [Special Method] (Greater Than or equal, >=)
-
         Making a condition node and setting the first & second terms and operation.
 
         Example:
@@ -305,8 +283,6 @@ class Attribute(object):
 
     def __lt__(self, value):  # <
         """
-        __lt__ [Special Method] (Less than, <)
-
         Making a condition node and setting the first & second terms and operation.
 
         Example:
@@ -323,8 +299,6 @@ class Attribute(object):
 
     def __le__(self, value):  # <=
         """
-        __le__ [Special Method] (Less or Equal, <=)
-
         Making a condition node and setting the first & second terms and operation.
 
         Example:
@@ -349,8 +323,6 @@ class Attribute(object):
 
     def __add__(self, value):
         """
-        __add__ [Special Method] (+)
-
         Using the plusMinus node for the connections
 
         Example:
@@ -360,8 +332,6 @@ class Attribute(object):
 
     def __sub__(self, value): ###123 (makes it easier to search within our code)
         """
-        __sub__ [Special Method] (-)
-
         Substracting the value passed or attribute
 
         Example:
@@ -371,8 +341,6 @@ class Attribute(object):
 
     def __mul__(self, value):
         """
-        __mul__ [Special Method] (*)
-
         Multiplying the value passed or attribute
 
         Example:
@@ -382,8 +350,6 @@ class Attribute(object):
 
     def __div__(self, value):
         """
-        __div__ [Special Method] (/)
-
         Dividing the value passed or attribute
 
         Example:
@@ -393,8 +359,6 @@ class Attribute(object):
 
     def __truediv__(self, value):
         """
-        __truediv__ [Special Method] (/)
-
         Dividing the value passed or attribute
 
         Example:
@@ -404,8 +368,6 @@ class Attribute(object):
 
     def __pow__(self, value):
         """
-        __pow__ [Special Method] (**)
-
         Power the value passed or attribute
 
         Example:
@@ -417,11 +379,7 @@ class Attribute(object):
      # ARITHMETRIC NODES - NODE HANDLING / ATTRIBUTES
 
     def createNodeName(self, value, suffix):
-        """
-        createNodeName [Method]
-
-        Creates a new node name.
-        """
+        """ Creates a new node name. """
         suffixCut = (suffix[0] + "".join([i for i in suffix if i.isupper()])).upper()
         
         nodesAttached = "{0}_{1}_{2}_{3}".format(
@@ -434,8 +392,6 @@ class Attribute(object):
 
     def checkConnectionAttribute(self, inputValue):
         """
-        checkConnectionAttribute [Method]
-
         Check whether the connections are parents (True) or child (False) plugs.
         """
         inputIsParent = True if (isinstance(inputValue, Attribute) 
@@ -449,8 +405,6 @@ class Attribute(object):
     def createPlusMinusAverage(self, nodeName, nodeType, 
                                operationType, attribute, value):
         """
-        createPlusMinusAverage [Method]
-
         Creating the new plug and make the connections to the node.
 
         Args:
@@ -486,8 +440,6 @@ class Attribute(object):
     
     def plusMinusAverageNode(self, value, operationType=1):
         """
-        plusMinusAverageNode [Method]
-
         Adding or Substracting the value passed or attribute.
 
         Args:
@@ -526,8 +478,6 @@ class Attribute(object):
 
     def addToPlusMinusAverage(self, attribute, value):
         """
-        addToPlusMinusAverage [Method]
-
         Find the end attribute to add to.
 
         Args:
@@ -544,8 +494,6 @@ class Attribute(object):
     
     def multiplyDivideNode(self, value, operationType=1):
         """
-        multiplyDivideNode [Method]
-
         Multiplying or Dividing the valuse passed or attribute.
 
         Args:
@@ -594,8 +542,6 @@ class Attribute(object):
             
     def createMultiDivide(self, nodeName, suffix, operationType, value):
         """
-        createMultiDivide [Method]
-
         Create the multiplyDivide node that we need to work with.
 
         Args:
@@ -620,8 +566,6 @@ class Attribute(object):
 
     def createMultiDoubleLinear(self, nodeName, value):
         """
-        createMultiDoubleLinear [Method]
-
         Create the multi double linear node to work with.
 
         Args:
@@ -649,8 +593,6 @@ class Attribute(object):
 
     def createDivideParent(self, nodeName, nodeType, operationType, value):
         """
-        createDivideParent [Method]
-
         Create the multi divide node to work with parent attributes
 
         Args:
@@ -681,8 +623,6 @@ class Attribute(object):
 
     def createDivideChildren(self, nodeName, nodeType, operationType, value):
         """
-        createDivideChildren [Method]
-
         Create the multi divide node to work with child attributes
 
         Args:
@@ -718,8 +658,6 @@ class Attribute(object):
     @property
     def isParent(self):
         """
-        isParent [Property]
-
         Check whether the connection is a parent.
         """
         return bool(self.children)
@@ -727,8 +665,6 @@ class Attribute(object):
     @property
     def isChild(self):
         """
-        isChild [Property]
-
         Check whether the connection is a child.
         """
         return bool(self.parent)
@@ -739,8 +675,6 @@ class Attribute(object):
     @property
     def attr(self):
         """
-        attr [Property]
-
         Object attribute string.
 
         Example:
@@ -752,8 +686,6 @@ class Attribute(object):
     @property
     def attribute(self):
         """
-        attribute [Property]
-
         Object attribute string.
 
         Example:
@@ -765,8 +697,6 @@ class Attribute(object):
     @property
     def path(self):
         """
-        path [Property]
-
         Object attribute string path with node name and attr.
 
         Returns:
@@ -783,8 +713,6 @@ class Attribute(object):
     @property
     def fullPath(self):
         """
-        fullPath [Property]
-
         Object attribute string full path with node full path, 
         name and attr.
 
@@ -802,8 +730,6 @@ class Attribute(object):
     @property
     def children(self):
         """
-        children [Property]
-
         Returns a list of the children attributes if any.
 
         Example:
@@ -838,8 +764,6 @@ class Attribute(object):
     @property
     def parent(self):
         """
-        parent [Property]
-
         Returns a list of the parent attributes if any.
 
         Example:
@@ -857,8 +781,6 @@ class Attribute(object):
     @property
     def outputs(self):
         """
-        outputs [Property]
-
         Returns all the outputs of an attribute.
 
         Example:
@@ -872,8 +794,6 @@ class Attribute(object):
     @property
     def connectionInput(self):
         """
-        connectionInput [Property]
-
         Returns the input connection of an attribute.
 
         Example:
@@ -907,8 +827,6 @@ class Attribute(object):
     @property
     def connectionOutputs(self):
         """
-        connectionOutputs [Property]
-
         Returns all the output connections of an attribute.
 
         Example:
@@ -939,8 +857,6 @@ class Attribute(object):
 
     def exists(self):
         """
-        exists [Method]
-
         Checks wether our attribute exists
 
         Example:
@@ -954,8 +870,6 @@ class Attribute(object):
 
     def set(self, *args, **kwargs):
         """
-        set [Method]
-
         Sets our attribute using functionality from maya.cmds
 
         Example:
@@ -965,8 +879,6 @@ class Attribute(object):
 
     def get(self, **kwargs):
         """
-        get [Method]
-
         Gets our attribute value using functionality from maya.cmds
 
         Example:
@@ -978,8 +890,6 @@ class Attribute(object):
 
     def query(self, **kwargs):
         """
-        query [Method]
-
         Query's our attribute value using functionality from maya.cmds
 
         Example:
@@ -991,8 +901,6 @@ class Attribute(object):
 
     def connect(self, attr):
         """
-        connect [Method]
-
         Connects this attribute to the passed item.
 
         Args:
@@ -1024,8 +932,6 @@ class Attribute(object):
 
     def disconnect(self):
         """
-        disconnect [Method]
-
         Disconnects the attribute if connected
 
         Example:
@@ -1052,8 +958,6 @@ class Attribute(object):
 
     def delete(self):
         """
-        delete [Method]
-
         Deletes the attribute.
 
         Example:

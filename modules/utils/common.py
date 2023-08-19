@@ -103,7 +103,7 @@ def createOffset(selection, grpName = "_OFF_GRP"):
     offsetGrpNames = [
         grpName, "_PLACER_GRP", "_PLACER_OFF_GRP", "_SUB_GRP", "_SUB_OFF_GRP",
         "_ZERO_GRP", "_ZERO_OFF_GRP", "_BASE_GRP", "_BASE_OFF_GRP",
-    ]
+        ]
 
     for num, item in enumerate(selection):
         if not m.objExists(item):
@@ -144,7 +144,39 @@ def createOffset(selection, grpName = "_OFF_GRP"):
 
         return newlyCreatedGroups
 
-# -----------------------------------------------------------------------------
-# SCRIPT FUNCTIONS
-# -----------------------------------------------------------------------------
 
+def duplicateChain(chain=None, suffix="_new"):
+    """
+    duplicate_chain [Function]
+
+    Takes a list of objects and duplicates them with a new suffix.
+
+    Args:
+        chain (list): The chain to duplicate. Defaults to None.
+        suffix (str): The suffix of the new joints. Defaults to "_new".
+
+    Returns:
+        list: the list of the newly created objects.
+    """
+    from modules.base import Dag_Node as dag
+
+    if chain is None:
+        chain = []
+
+    if not isinstance(chain, list):
+        chain = [chain]
+
+    chain = [dag(i) for i in chain]
+    new_chain = []
+
+    for i in chain:
+        item = i.duplicate(n="{}{}".format(i.name, suffix), po=len(chain) > 1)
+        new_chain.append(item)
+        if len(new_chain) > 1:
+            item.parentTo(new_chain[-2])
+
+    for obj in new_chain:
+        if not obj.name.endswith(suffix):
+            obj.rename("{}{}".format(obj.name, suffix))
+
+    return new_chain
