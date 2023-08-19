@@ -48,8 +48,6 @@ class Joint(Dag_Node):
     Class based way of calling the information that we need to deal 
     with Maya joints in a clean Python way.
     """
-    # -------------------------------------------------------------------------
-    # SPECIAL/MAGIC/DUNDER METHODS
 
     def __init__(self, node, **kwargs):
 
@@ -66,16 +64,14 @@ class Joint(Dag_Node):
 
     @property
     def drawStyle(self):
-        """
-        drawStyle [Property]
-        """
+        """ Returns joint Draw Style. """
         drawStyle = self.a.drawStyle.get()
 
         return drawStyle
 
     def setDrawStyle(self, value):
         """
-        setDrawStyle [Method]
+        setDrawStyle of the joint
 
         0 = "Bone", 
         1 = "Multi-child as Box", 
@@ -120,7 +116,7 @@ class Joint(Dag_Node):
     @property
     def jointOrient(self):
         """
-        The joint orientation values [Property]
+        The joint orientation values
 
         Returns:
             list: The orient values [X, Y, Z]
