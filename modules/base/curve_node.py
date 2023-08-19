@@ -57,6 +57,13 @@ class Curve(Dag_Node):
             self.create(**kwargs)
     
     # -------------------------------------------------------------------------
+    # FORMATION
+
+    @property
+    def points(self):
+        return m.ls(self.fullPath + ".cv[*]", fl = 1)
+
+    # -------------------------------------------------------------------------
     # METHODS
 
 
