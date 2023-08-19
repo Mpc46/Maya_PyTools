@@ -49,8 +49,8 @@ def switch(joints=[], switch_ctl=None):
         switch_ctl.a.add(ln="blend", nn="FK/IK", at="float", 
                          min=0, max=1, dv=0, k=True)
 
-    ik_joints = duplicateChain(joints, "IK")
-    fk_joints = duplicateChain(joints, "FK")
+    ik_joints = duplicateChain(joints, "_IK")
+    fk_joints = duplicateChain(joints, "_FK")
 
     for jnt in joints:
         jnt.setColor("green")
@@ -94,15 +94,8 @@ def switch(joints=[], switch_ctl=None):
 def fk_system(joints=[]):
     joints = [Joint(i) for i in joints]
     ctrls = []
-    print("{} = Joints".format(joints))  # DELETE LATER
-    jnts = joints[0].fullPath.split("|")
-    
-    print("{} = jnts".format(jnts)) # DELETE LATER
-    print("{} = joints[0]".format(joints[0])) # DELETE LATER
-    print("{} = jnts[0]".format(jnts[0])) # DELETE LATER
-    jnts.pop(0)
-    print("{} = jnts".format(jnts)) # DELETE LATER
-    for jnt in jnts:
+
+    for jnt in joints:
         ctlName = "{}_Ctl".format(jnt)
         ctl = Curve(m.circle(n=ctlName, normal = (1,0,0))[0])
         ctl.moveTo(jnt)
