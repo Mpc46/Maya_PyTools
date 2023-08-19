@@ -167,8 +167,6 @@ class Dep_Node(object):
     @property
     def a(self):  # For us to call atributes with "a"
         """
-        a [Property]
-
         Stands for attributes!
 
         Returns:
@@ -179,8 +177,6 @@ class Dep_Node(object):
     @property
     def o(self):
         """
-        o [Property]
-
         Stands for Object dimension.
 
         Returns:
@@ -193,8 +189,6 @@ class Dep_Node(object):
 
     def isReferenced(self):
         """
-        isReferenced [Method]
-
         Checks if the object is Referenced
 
         Returns:
@@ -207,8 +201,6 @@ class Dep_Node(object):
 
     def exists(self):
         """
-        exists [Method]
-
         Checks if the object exists
 
         Returns:
@@ -220,8 +212,6 @@ class Dep_Node(object):
 
     def rename(self, name):
         """
-        rename [Method]
-
         Renames obj with given string.
 
         Args:
@@ -235,8 +225,6 @@ class Dep_Node(object):
 
     def lock(self, state=True):
         """
-        lock [Method] 
-
         Locks or unlocks a node Obj.
 
         Args:
@@ -244,20 +232,18 @@ class Dep_Node(object):
         """
         m.lockNode(self.fullPath, lock=state)
 
-    def delete(self):  # Deletes the obj in scene but not the class obj
-        """
-        delete [Method]
+    def unlock(self):
+        """ Unlocks the object. """
+        self.lock(0)
 
-        Deletes the obj in scene but not the class obj
-        """
+    def delete(self):  # Deletes the obj in scene but not the class obj
+        """ Deletes the obj in scene but not the class obj. """
         if self.fullPath and m.objExists(self.fullPath):
             m.delete(self.fullPath)
         self._dep = None
 
     def create(self, nodeType):
         """
-        create [Method]
-
         Creates an object if it doesn't already exists.
 
         Args:

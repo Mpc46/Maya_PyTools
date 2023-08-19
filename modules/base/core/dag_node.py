@@ -1,6 +1,6 @@
 '''
 /*****************************************************************************/
-                            DAG Node v 1.0
+                            DAG Base v 1.0
                      ________________________________________
                     |                                        |
                     |  Author: Luis Felipe Carranza          |
@@ -15,11 +15,11 @@
     inheritance to another class.
 
 >> CONTENTS >> 
-    + Dag_Node [Class]
+    + Dag_Base [Class]
 
 >> NOTES >> 
 	Update 03/08/2023 : Start working on the script
-    Update 11/08/2023 : Change Init to work with NodeTypes if given
+    Update 17/08/2023 : Created from Dag_Node (split into multiple modules)
  
 >> THANKS >> 
     Nick Hughes [03/08/2023]:
@@ -41,6 +41,8 @@ from modules.base import Dep_Node
 from modules.utils import color, open_maya_api
 from modules.utils.common import createOffset
 from modules.utils.common import matchMove
+from modules.common.functions import getKeyFromValue
+from modules.common.names import ROTATE_ORDER_DICT
 
 # -----------------------------------------------------------------------------
 # CLASSES
@@ -49,7 +51,7 @@ from modules.utils.common import matchMove
 
 class Dag_Node(Dep_Node):
     """
-    Dag_Node [Class] (Inherits from: Dep_Node)
+    Dag_Base [Class] (Inherits from: Dep_Node) [Previously Dag_Node]
 
     Class based way of calling the information that we need to deal 
     with Maya Base nodes with dependency in a clean Python way.
@@ -180,8 +182,6 @@ class Dag_Node(Dep_Node):
     @property
     def order(self):
         """
-        oder 
-
         Get your current index, by checking first your parent node
         then, get the children of that node, index all the children,
         and outputting your index number
@@ -193,8 +193,6 @@ class Dag_Node(Dep_Node):
 
     def reorder(self, index):
         """
-        reorder [Method]
-
         Set the index number of obj
 
         Args:
@@ -206,8 +204,6 @@ class Dag_Node(Dep_Node):
 
     def parentTo(self, item):
         """
-        parentTo [Method]
-
         Parents obj to another obj
 
         Args:
@@ -216,17 +212,11 @@ class Dag_Node(Dep_Node):
         m.parent(self.fullPath, item)
 
     def parentToWorld(self):
-        """
-        parentToWorld [Method]
-
-        Parent obj to world
-        """
+        """ Parent obj to world """
         m.parent(self.fullPath, w=True)
 
     def moveTo(self, item):
         """
-        moveTo [Method]
-
         Match transformations of our obj to another
 
         Args:
@@ -236,8 +226,6 @@ class Dag_Node(Dep_Node):
 
     def moveHere(self, items):
         """
-        moveHere [Method]
-
         Match transformations of our obj to other objs.
 
         Args:
@@ -253,8 +241,6 @@ class Dag_Node(Dep_Node):
 
     def createOffset(self, count=1):
         """
-        createOffset [Method]
-
         Create Offset groups for our obj
 
         Args:
@@ -271,10 +257,53 @@ class Dag_Node(Dep_Node):
 
     # ----------------------------------------------------------------
 
+    @property
+    def color(self):
+        return color.getColor(self.fullPath)
+
+    @property
+    def colorAsString(self):
+        if self.color is None:
+            return None
+        
+        return color.getColorFromInteger(self.color)
+
+    def setColor(self, value):
+        """ Set the override color of our object """
+        color.setColor(self.fullPath, value)
+
+        return self
+
+    # ----------------------------------------------------------------
+
+    @property
+    def history(self):
+        """ Returns obj construction history. """
+        if self.exists():
+            history = [Dag_Node(i) for i in m.listHistory(self.fullPath)]
+            return history
+        
+        return []
+
+    def deleteHistory(self):
+        """ Deletes obj construction history. """
+        if self.exists():
+            m.delete(self.fullPath, ch=1)
+
+    def duplicate(self, **kwargs):
+        """
+        Duplicates the obj, method accepts maya **kwargs
+        """
+        if not self.exists():
+            raise ValueError(">>> No maya node to duplicate")
+
+        return Dag_Node(m.duplicate(self.fullPath, **kwargs)[0])
+    
+    # -------------------------------------------------------------------------
+    # CONSTRAINTS
+
     def _getConstraint(self, constraintType):
         """
-        _getConstraint [Private Method]
-
         Gathers the requiered type of constraints
 
         Args:
@@ -314,8 +343,6 @@ class Dag_Node(Dep_Node):
 
     def constraintWeightingAttributes(self, constraintType):
         """
-        constraintWeightingAttributes [Method]
-
         Not using the maya parentConstraint python as it does not pick up
         name changes
 
@@ -332,181 +359,76 @@ class Dag_Node(Dep_Node):
 
     def geometryConstraint(self, *args, **kwargs):
         """
-        geometryConstraint [Method]
-
         Creates a constraint, you can parse Maya arguments to the method
 
-        Args:
-            Item to constraint
-            All maya.m arguments related to constraint
-
-        Returns:
-            constraint: Returns the constraint as a Dag Object
-
-        Example:
-            sphereName = "sphere_GEO"
-            sphere = Dag_Node(m.polySphere(n=sphereName)[0])
-            sphere.geometryConstraint("pCube1", mo=True)
+        Example
+            sphere.c.geometryConstraint("pCube1", mo=True)
         """
         return Dag_Node(m.geometryConstraint(self.fullPath, *args, **kwargs)[0])
 
     def aimConstraint(self, *args, **kwargs):
         """
-        aimConstraint [Method]
-
         Creates a constraint, you can parse Maya arguments to the method
 
-        Args:
-            Item to constraint
-            All maya.m arguments related to constraint
-
-        Returns:
-            constraint: Returns the constraint as a Dag Object
-
         Example:
-            sphereName = "sphere_GEO"
-            sphere = Dag_Node(m.polySphere(n=sphereName)[0])
-            sphere.aimConstraint("pCube1", mo=True)
+            sphere.c.aimConstraint("pCube1", mo=True)
         """
         return Dag_Node(m.aimConstraint(self.fullPath, *args, **kwargs)[0])
 
     def orientConstraint(self, *args, **kwargs):
         """
-        orientConstraint [Method]
-
         Creates a constraint, you can parse Maya arguments to the method
 
-        Args:
-            Item to constraint
-            All maya.m arguments related to constraint
-
-        Returns:
-            constraint: Returns the constraint as a Dag Object
-
         Example:
-            sphereName = "sphere_GEO"
-            sphere = Dag_Node(m.polySphere(n=sphereName)[0])
-            sphere.orientConstraint("pCube1", mo=True)
+            sphere.c.orientConstraint("pCube1", mo=True)
         """
         return Dag_Node(m.orientConstraint(self.fullPath, *args, **kwargs)[0])
 
     def pointConstraint(self, *args, **kwargs):
         """
-        pointConstraint [Method]
-
         Creates a constraint, you can parse Maya arguments to the method
 
-        Args:
-            Item to constraint
-            All maya.m arguments related to constraint
-
-        Returns:
-            constraint: Returns the constraint as a Dag Object
-
         Example:
-            sphereName = "sphere_GEO"
-            sphere = Dag_Node(m.polySphere(n=sphereName)[0])
-            sphere.pointConstraint("pCube1", mo=True)
+            sphere.c.pointConstraint("pCube1", mo=True)
         """
         return Dag_Node(m.pointConstraint(self.fullPath, *args, **kwargs)[0])
 
     def parentConstraint(self, *args, **kwargs):
         """
-        parentConstraint [Method]
-
         Creates a constraint, you can parse Maya arguments to the method
 
-        Args:
-            Item to constraint
-            All maya.m arguments related to constraint
-
-        Returns:
-            constraint: Returns the constraint as a Dag Object
-
         Example:
-            sphereName = "sphere_GEO"
-            sphere = Dag_Node(m.polySphere(n=sphereName)[0])
-            sphere.parentConstraint("pCube1", mo=True)
+            sphere.c.parentConstraint("pCube1", mo=True)
         """
         return Dag_Node(m.parentConstraint(self.fullPath, *args, **kwargs)[0])
 
     def scaleConstraint(self, *args, **kwargs):
         """
-        scaleConstraint [Method]
-
         Creates a constraint, you can parse Maya arguments to the method
 
-        Args:
-            Item to constraint
-            All maya.m arguments related to constraint
-
-        Returns:
-            constraint: Returns the constraint as a Dag Object
-
         Example:
-            sphereName = "sphere_GEO"
-            sphere = Dag_Node(m.polySphere(n=sphereName)[0])
-            sphere.scaleConstraint("pCube1", mo=True)
+            sphere.c.scaleConstraint("pCube1", mo=True)
         """
         return Dag_Node(m.scaleConstraint(self.fullPath, *args, **kwargs)[0])
 
     def parentScaleConstraint(self, *args, **kwargs):
         """
-        parentScaleConstraint [Method]
-
         Creates a constraint, you can parse Maya arguments to the method
 
-        Args:
-            Item to constraint
-            All maya.m arguments related to constraint
-
-        Returns:
-            constraint: Returns the constraint as a Dag Object
-
         Example:
-            sphereName = "sphere_GEO"
-            sphere = Dag_Node(m.polySphere(n=sphereName)[0])
-            sphere.parentScaleConstraint("pCube1", mo=True)
+            sphere.c.parentScaleConstraint("pCube1", mo=True)
         """
         m.scaleConstraint(self.fullPath, *args, **kwargs)
 
         return Dag_Node(m.parentConstraint(self.fullPath, *args, **kwargs)[0])
 
-    # ----------------------------------------------------------------
+    # -------------------------------------------------------------------------
+    # DISPLAY OPTIONS
 
-    @property
-    def color(self):
-        return color.getColor(self.fullPath)
-
-    @property
-    def colorAsString(self):
-        if self.color is None:
-            return None
-        
-        return color.getColorFromInteger(self.color)
-
-    def setColor(self, value):
-        """
-        setColor [Method]
-
-        Set the override color of our object
-
-        Args:
-            value (int, str): The color index or name
-
-        Returns:
-            self: The DAG object
-        """
-        color.setColor(self.fullPath, value)
-
-        return self
-
-    # ----------------------------------------------------------------
-
+    # ---- VISIBILITY ------
+    
     def setVisibility(self, value):
         """
-        setVisibility [Method]
-
         Set the visibility attribute of our object
 
         Args:
@@ -516,58 +438,94 @@ class Dag_Node(Dep_Node):
             m.setAttr("{item}.v".format(item=self.fullPath), value)
 
     def show(self):
-        """
-        show [Method]
-
-        Set obj visibility to 1
-        """
+        """ Set obj visibility to 1 """
         self.setVisibility(1)
 
     def hide(self):
-        """
-        show [Method]
-
-        Set obj visibility to 0
-        """
+        """ Set obj visibility to 0 """
         self.setVisibility(0)
 
-    # ----------------------------------------------------------------
+    # ---- HANDLE ------
 
     @property
-    def history(self):
-        """
-        history [Property]
+    def handle(self):
+        handle = self.a.displayHandle.get()
 
-        Returns obj construction history.
+        return handle
+
+    def setHandle(self, value):
+        """
+        Set the handle visibility of our object
+
+        Args:
+            value (bool): Visibility value
         """
         if self.exists():
-            history = [Dag_Node(i) for i in m.listHistory(self.fullPath)]
-            return history
+            self.a.displayHandle.set(value)
+
+    def showHandle(self):
+        self.setHandle(1)
+
+    def hideHandle(self):
+        self.setHandle(0)
+
+    # ---- LOCAL AXIS ------
+
+    @property
+    def localAxis(self):
+        localAxis = self.a.displayLocalAxis.get()
+        return localAxis
+
+    def setLocalAxis(self, value):
+        """
+        Set the local axis visibility of our object
         
-        return []
-
-    def deleteHistory(self):
-        """
-        deleteHistory [Method]
-
-        Deletes obj construction history
+        Args:
+            value (bool): Visibility value
         """
         if self.exists():
-            m.delete(self.fullPath, ch=1)
+            self.a.displayLocalAxis.set(value)
 
-    def duplicate(self, **kwargs):
+    def showLocalAxis(self):
+       self.setLocalAxis(1)
+
+    def hideLocalAxis(self):
+        self.setLocalAxis(0)
+
+    # -------------------------------------------------------------------------
+    # TRANSFORM OPTIONS
+
+    # ---- ROTATE ORDER ------
+
+    @property
+    def rotateOrder(self):
+        rotOrder = self.a.rotateOrder.get()
+        rotOrder = getKeyFromValue(ROTATE_ORDER_DICT, rotOrder)
+        return rotOrder
+
+    def setRotateOrder(self, value):
         """
-        duplicate [Method]
+        setRotateOrder of the object.
 
-        Duplicates the obj
-
-        Raises:
-            ValueError: _description_
-
-        Returns:
-            Dag: Returns the DAG object of our new object.
+        Args:
+            value (int/str): the rotation order
+            
+        Example:
+            setRotateOrder(1) / setRotateOrder('xyz')
         """
-        if not self.exists():
-            raise ValueError(">>> No maya node to duplicate")
+        if isinstance(value, str):
+            if value.lower() in ROTATE_ORDER_DICT:
+                order = ROTATE_ORDER_DICT[value]
+                self.a.rotateOrder.set(order)
+            else:
+                raise ValueError(
+                    ">>> Sorry but the rotateOrder name you entered was not found")
 
-        return Dag_Node(m.duplicate(self.fullPath, **kwargs)[0])
+        elif isinstance(value, int) and value in range(0, 6):
+            self.a.rotateOrder.set(value)
+
+        else:
+            raise TypeError(
+                ">>> Please pass either the number or name of the rotationOrder")
+
+        return self.rotateOrder

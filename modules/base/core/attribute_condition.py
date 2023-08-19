@@ -66,8 +66,6 @@ class Condition(Dep_Node):
 
     def setFirstTerm(self, firstTerm):
         """
-        setFirstTerm [Method]
-
         Set the first term that we'll use to drive the maya codition node.
 
         Args:
@@ -77,8 +75,6 @@ class Condition(Dep_Node):
 
     def setSecondTerm(self, secondTerm):
         """
-        setSecondTerm [Method]
-
         Set the second term that we'll use to drive the maya codition node.
 
         Args:
@@ -88,8 +84,6 @@ class Condition(Dep_Node):
 
     def setConditionTerm(self, value, term):
         """
-        setConditionTerm [Method]
-
         Set the terms and the value of the terms that will drive the  condition
 
         Args:
@@ -118,8 +112,6 @@ class Condition(Dep_Node):
 
     def setCondition(self, ifTrue=None, ifFalse=None, returnParent=False):
         """
-        setOperation [Method]
-
         Set the values of the True and the False in the condition node.
         Either use an int, float, list, tuple, or str ("scaleX" or "scale" or "sx")
 

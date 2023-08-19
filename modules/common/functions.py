@@ -33,8 +33,6 @@
 
 def getKeyFromValue(dictionary, target_value):
     """
-    getKeyFromValue [Function]
-
     Get a dictionary key from it's value
     key:value
 
@@ -59,8 +57,6 @@ def getKeyFromValue(dictionary, target_value):
 
 def ToCamelCase(string, splitBy=None):
     """
-    ToCamelCase [Function]
-
     Takes a string and returns a camel case version of it.
 
     Args:

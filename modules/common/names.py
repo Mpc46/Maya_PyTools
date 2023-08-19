@@ -86,6 +86,7 @@ NODES_DICT = {
     "multiplyDivide": "Md",
     "condition": "Cnd",
     "plusMinusAverage": "Pma",
+    "blendColors":  "blend"
 }
 
 ROTATE_ORDER_DICT = {

@@ -37,3 +37,4 @@ from modules.base.core.attribute_base import Attributes, Attribute
 
 from modules.base.mesh_node import Mesh
 from modules.base.joint_node import Joint
+from modules.base.curve_node import Curve

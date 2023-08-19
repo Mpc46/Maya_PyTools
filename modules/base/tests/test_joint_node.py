@@ -152,17 +152,17 @@ class Test_Joint(unittest.TestCase):
     # ROTATE ORDER
 
     def test_joint_rotateOrder(self): 
-        expectedResult = 0
+        expectedResult = 'xyz'
         result = self.body_j1.rotateOrder
         self.assertEqual(expectedResult, result)
 
         self.body_j1.setRotateOrder("zyx")
-        expectedResult = 5
+        expectedResult = 'zyx'
         result = self.body_j1.rotateOrder
         self.assertEqual(expectedResult, result)
 
         self.body_j1.setRotateOrder(3)
-        expectedResult = 3
+        expectedResult = 'xzy'
         result = self.body_j1.rotateOrder
         self.assertEqual(expectedResult, result)
 
@@ -170,7 +170,6 @@ class Test_Joint(unittest.TestCase):
 # -----------------------------------------------------------------------------
 # EXECUTE SCRIPT
 # -----------------------------------------------------------------------------
-
 
 if __name__ == "__main__":
     unittest.main()

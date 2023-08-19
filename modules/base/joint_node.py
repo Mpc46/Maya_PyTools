@@ -34,7 +34,7 @@
 from maya import cmds as m
 from modules.base import Dag_Node
 from modules.common.functions import getKeyFromValue
-from modules.common.names import JOINT_LABEL_DICT, ROTATE_ORDER_DICT
+from modules.common.names import JOINT_LABEL_DICT
 
 # -----------------------------------------------------------------------------
 # CLASSES
@@ -48,62 +48,30 @@ class Joint(Dag_Node):
     Class based way of calling the information that we need to deal 
     with Maya joints in a clean Python way.
     """
-    # -------------------------------------------------------------------------
-    # SPECIAL/MAGIC/DUNDER METHODS
 
     def __init__(self, node, **kwargs):
-        self._joint = None
 
-        # Initializing Dag_Node
         Dag_Node.__init__(self, node)
 
         if node and kwargs:
             self.create(**kwargs)
 
-        elif not kwargs and not self.exists(): # If only name given.
+        elif not kwargs and not self.exists():  # If only name given.
             self.create("joint")
-
-    # -------------------------------------------------------------------------
-    # ROTATE ORDER
-
-    @property
-    def rotateOrder(self):
-        rotOrder = self.a.rotateOrder.get()
-        return rotOrder
-
-    def setRotateOrder(self, value):
-        if isinstance(value, str):
-            if value.lower() in ROTATE_ORDER_DICT:
-                order = ROTATE_ORDER_DICT[value]
-                self.a.rotateOrder.set(order)
-            else:
-                raise ValueError(
-                    ">>> Sorry but the rotateOrder name you entered was not found")
-
-        elif isinstance(value, int) and value in range(0, 6):
-            self.a.rotateOrder.set(value)
-
-        else:
-            raise TypeError(
-                ">>> Please pass either the number or name of the rotationOrder")
-
-        return self.rotateOrder
 
     # -------------------------------------------------------------------------
     # DRAW STYLE
 
     @property
     def drawStyle(self):
-        """
-        drawStyle [Property]
-        """
+        """ Returns joint Draw Style. """
         drawStyle = self.a.drawStyle.get()
 
         return drawStyle
 
     def setDrawStyle(self, value):
         """
-        setDrawStyle [Method]
+        setDrawStyle of the joint
 
         0 = "Bone", 
         1 = "Multi-child as Box", 
@@ -148,7 +116,7 @@ class Joint(Dag_Node):
     @property
     def jointOrient(self):
         """
-        The joint orientation values [Property]
+        The joint orientation values
 
         Returns:
             list: The orient values [X, Y, Z]
@@ -164,8 +132,6 @@ class Joint(Dag_Node):
 
     def setJointOrient(self, *args):
         """
-        setJointOrient [Method]
-
         Set the joint orientation.
         If less tham 3 values passed, the rest will be 0.
 
@@ -197,8 +163,6 @@ class Joint(Dag_Node):
     @property
     def label(self):
         """
-        label [Property]
-
         Returns:
             list: [sideName, typeName, labelVisibility]
         """
@@ -220,7 +184,7 @@ class Joint(Dag_Node):
 
     def setLabel(self, side, type, vis):
         """
-        setLabel [Method]
+        set the Label of the joint
 
         Args:
             side (str/int): The label side (ex: Left)
@@ -293,7 +257,7 @@ class Joint(Dag_Node):
     def labelVis(self):
         return self.label[2]
 
-    def setLabelVis(self, value = 1):
+    def setLabelVis(self, value=1):
         if type(value) == bool:
             value = value
         elif type(value) == int and value in range(0, 2):
@@ -305,67 +269,4 @@ class Joint(Dag_Node):
 
         return self.labelVis
 
-    # -------------------------------------------------------------------------
-    # DISPLAY HANDLE
-
-    @property
-    def handle(self):
-        handle = self.a.displayHandle.get()
-
-        return handle
-
-    def showHandle(self):
-        if self.exists():
-            if not self.handle:
-                self.a.displayHandle.set(1)
-            else:
-                print(">>> Handle is already visible.")
-        else:
-            raise ValueError(
-                ">>> Object doesn't exist!")
-        
-        return self.handle
-
-    def hideHandle(self):
-        if self.exists():
-            if self.handle:
-                self.a.displayHandle.set(0)
-            else:
-                print(">>> Handle is already hidden.")
-        else:
-            raise ValueError(
-                ">>> Object doesn't exist!")
-        
-        return self.handle
-
-    # -------------------------------------------------------------------------
-    # DISPLAY LOCAL AXIS
-
-    @property
-    def localAxis(self):
-        localAxis = self.a.displayLocalAxis.get()
-        return localAxis
-
-    def showLocalAxis(self):
-        if self.exists():
-            if not self.localAxis:
-                self.a.displayLocalAxis.set(1)
-            else:
-                print(">>> Axis is already visible.")
-        else:
-            raise ValueError(
-                ">>> Object doesn't exist!")
-        
-        return self.localAxis
-
-    def hideLocalAxis(self):
-        if self.exists():
-            if self.localAxis:
-                self.a.displayLocalAxis.set(0)
-            else:
-                print(">>> Axis is already hidden.")
-        else:
-            raise ValueError(
-                ">>> Object doesn't exist!")
-        
-        return self.localAxis
+    
