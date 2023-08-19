@@ -173,6 +173,6 @@ def duplicateChain(chain=None, suffix="_new"):
         if not obj.name.endswith(suffix):
             obj.rename("{}{}".format(obj.name, suffix))
 
-    new_chain = (dag(i) for i in new_chain) # Making sureto return dag objects
+    new_chain = (dag(i) for i in new_chain) # Making sure to return dag objects
     
     return new_chain
