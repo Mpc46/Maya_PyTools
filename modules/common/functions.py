@@ -63,7 +63,6 @@ def ToCamelCase(string, splitBy=None):
         string (str): A string to camel case.
         splitBy (str/optional): the parameter to split with.
 
-
     Returns:
         str: AStringToCamelCase.
     """
