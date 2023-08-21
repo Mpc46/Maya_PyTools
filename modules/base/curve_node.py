@@ -1,24 +1,23 @@
 '''
 /*****************************************************************************/
-                            Joint Node v 1.0
+                            Curve Node v 1.0
                      ________________________________________
                     |                                        |
                     |  Author: Luis Felipe Carranza          |
                     |________________________________________|
 
 >> DESCRIPTION >>
-    Class based approach to work with joints and their properties.
+    Class based approach to work with curves and their properties.
 
 >> HOW TO USE >>
 	This module contents are intended to be imported, referenced or
     inheritance to another class.
 
 >> CONTENTS >> 
-    + Joint [Class] (Inherits from Dag_Node)
+    + Curve [Class] (Inherits from Dag_Node)
 
 >> NOTES >> 
-	Update 11/08/2023 : Started to work on the script.
-    Update 12/08/2023 : Added joint label functionality.
+	Update 21/08/2023 : Started to work on the script.
 
 >> CONTACT >>
     luisf.carranza@outlook.com
@@ -66,5 +65,29 @@ class Curve(Dag_Node):
     # -------------------------------------------------------------------------
     # METHODS
 
+    def splitShape(self):
+        newShapes = []
+        for shape in self.shapes:
+            newTrans = Dag_Node(m.createNode('transform', n=shape))
+            m.parent(shape, newTrans, s=1)
+            child = Dag_Node(newTrans.children[0])
+            child.rename(newTrans.name).parentToWorld()
+            newTrans.delete()
+            newShapes.append(shape)
 
+        self.delete()
+        print(newShapes) ### DEL LATER          
+        return newShapes
+
+    def mergeShapeTo():
+        pass
+    
     # -----------------
+    """
+    import maya.cmds as mc
+
+    for shape in mc.listRelatives(mc.ls(sl=1), c=1, type='shape'):
+    newTrans = mc.createNode('transform', n='cvshape')
+    mc.parent(shape, newTrans, s=1)
+    
+    """
