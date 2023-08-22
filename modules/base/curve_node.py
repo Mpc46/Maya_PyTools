@@ -37,7 +37,6 @@ from modules.base import Dag_Node
 # CLASSES
 # -----------------------------------------------------------------------------
 
-
 class Curve(Dag_Node):
     """
     Curve [Class] (Inherits from: Dag_Node)
@@ -61,33 +60,47 @@ class Curve(Dag_Node):
     @property
     def points(self):
         return m.ls(self.fullPath + ".cv[*]", fl = 1)
+    
+    @property
+    def cv(self):
+        return self.points
 
+    @property
+    def pointPosition(self):
+        epCoordinates = []
+        for i in self.points:
+            epPos = m.pointPosition( "{}".format(i), w=True )
+            epCoordinates.append(epPos)
+
+        return epCoordinates
+
+    @property
+    def cvPosition(self):
+        return self.pointPosition
+    
     # -------------------------------------------------------------------------
     # METHODS
 
-    def splitShape(self):
+    def splitCurve(self):
+        """
+        splitCurve into individual curves if curve has one or more shapes.
+
+        Returns:
+            list: The new curves created from self.
+        """
         newShapes = []
+
         for shape in self.shapes:
             newTrans = Dag_Node(m.createNode('transform', n=shape))
-            m.parent(shape, newTrans, s=1)
+            m.parent(shape, newTrans.path, s=1)
             child = Dag_Node(newTrans.children[0])
-            child.rename(newTrans.name).parentToWorld()
+            child.rename(newTrans.name).parentTo(self)
             newTrans.delete()
             newShapes.append(shape)
-
-        self.delete()
-        print(newShapes) ### DEL LATER          
+       
         return newShapes
 
-    def mergeShapeTo():
+    def mergeCurves(self, items):
         pass
     
     # -----------------
-    """
-    import maya.cmds as mc
-
-    for shape in mc.listRelatives(mc.ls(sl=1), c=1, type='shape'):
-    newTrans = mc.createNode('transform', n='cvshape')
-    mc.parent(shape, newTrans, s=1)
-    
-    """
