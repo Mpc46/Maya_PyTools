@@ -1,33 +1,49 @@
 '''
 /*****************************************************************************/
-                            Build Modules
+                                Base Guide v 1.0
                      ________________________________________
                     |                                        |
                     |  Author: Luis Felipe Carranza          |
                     |________________________________________|
 
 >> DESCRIPTION >>
-    This library contains modules for building: rigging systems, setups,
-    scenes, etc.
+    Base guide class to set global parameters that affect all guides.
 
 >> HOW TO USE >>
-	This library is meant to be imported into larger scripts and/or
-    hold those scripts and modules for later use or implementation.
-    
+	This module contents are intended to be imported, referenced or
+    inheritance to another class.
+
+>> CONTENTS >> 
+    + Window_Base [Class]
+
+>> NOTES >> 
+	Update 22/08/2023 : Start working on the script
+
 >> CONTACT >>
     luisf.carranza@outlook.com
     Copyright (C) 2023. All rights reserved.
-    
+ 
 /*****************************************************************************/
 '''
-# -----------------------------------------------------------------------------
-# LIBRARIES AND MODULES - Importing here to trimmed down imports
-# -----------------------------------------------------------------------------
 
 # -----------------------------------------------------------------------------
-# BASE NODES
-
-from modules.build.guides.base.base_guide import Base_Guide
-
+# LIBRARIES AND MODULES
 # -----------------------------------------------------------------------------
-# ENHANCED NODES
+
+from maya import cmds as m
+from modules.base import Joint
+# -----------------------------------------------------------------------------
+# CLASSES
+# -----------------------------------------------------------------------------
+
+
+class Base_Guide(Joint):
+    """
+    XD
+    """
+
+    # -------------------------------------------------------------------------
+    # SPECIAL/MAGIC/DUNDER METHODS
+
+    def __init__(self):
+        self._guide = self
