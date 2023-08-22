@@ -63,6 +63,7 @@ class Curve(Dag_Node):
     
     @property
     def cv(self):
+        """ Returns list of curve points on shape. """
         return self.points
 
     @property
@@ -76,6 +77,7 @@ class Curve(Dag_Node):
 
     @property
     def cvPosition(self):
+        """ Returns list of positions of curve points. """
         return self.pointPosition
     
     # -------------------------------------------------------------------------
