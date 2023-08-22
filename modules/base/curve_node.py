@@ -100,7 +100,19 @@ class Curve(Dag_Node):
        
         return newShapes
 
-    def mergeCurves(self, items):
-        pass
+    def mergeCurves(self, *items):
+        """
+        Merges curves shapes to self, and then deletes empty transforms.
+
+        Example:
+            curve1.mergeCurves(crv2, crv3)
+        """
+        items = [items] if len(items) < 1 else items
+        for crv in items:
+            cvShape = crv.shape
+            m.parent(cvShape, self.fullPath, r=True, s=True)
+            crv.delete()
+        
+        return self.fullPath
     
     # -----------------
