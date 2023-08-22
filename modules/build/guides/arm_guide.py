@@ -7,14 +7,14 @@
                     |________________________________________|
 
 >> DESCRIPTION >>
-    Base guide class to set global parameters that affect all guides.
+    Arm guide.
 
 >> HOW TO USE >>
 	This module contents are intended to be imported, referenced or
     inheritance to another class.
 
 >> CONTENTS >> 
-    + Window_Base [Class]
+    + Arm_Guide [Class]
 
 >> NOTES >> 
 	Update 22/08/2023 : Start working on the script
@@ -31,16 +31,51 @@
 # -----------------------------------------------------------------------------
 
 from maya import cmds as m
-from modules.build import Base_Guide
+from modules.base import Joint
+from modules.build import Base_Guide as Guide
 
 # -----------------------------------------------------------------------------
 # CLASSES
 # -----------------------------------------------------------------------------
 
-class Arm_Guide(Base_Guide):
+class Arm_Guide(Guide):
     def __init__(self):
         super().__init__()
+        #self.a.add(ln="AsuPtmMadre", nn="A", at="float")
+        self.build()
 
-class Hand_Guide(Base_Guide):
+    def build(self):
+        clavicle_guide = Joint(m.joint(
+                                    n = "L_clavicle", 
+                                    p = [0.12, 14.376, -0.102],
+                                    o = [0, 2, 0]
+                                       ))
+        clavicle_guide.setLabel("L", "collar", True)
+
+        shoulder_guide = Joint(m.joint(
+                                    n = "L_shoulder",
+                                    r = True, 
+                                    p = [1.584, 0, 0],
+                                    o = [0, 0, 0]
+                                       ))
+        shoulder_guide.setLabel("L", "shoulder", True)
+
+        elbow_guide = Joint(m.joint(
+                                    n = "L_elbow", 
+                                    r = True,
+                                    p = [2.646, 0, 0],
+                                    o = [0, -4, 0]
+                                       ))
+        elbow_guide.setLabel("L", "elbow", False)
+
+        wrist_guide = Joint(m.joint(
+                                    n = "L_wrist", 
+                                    r = True,
+                                    p = [2.259, 0, 0],
+                                    o = [0, 0, 0]
+                                       ))
+        wrist_guide.setLabel("L", "wrist", False)
+
+class Hand_Guide(Guide):
     def __init__(self):
         super().__init__()
