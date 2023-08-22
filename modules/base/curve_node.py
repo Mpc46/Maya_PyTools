@@ -85,7 +85,7 @@ class Curve(Dag_Node):
 
     def splitCurve(self):
         """
-        splitCurve into individual curves if curve has one or more shapes.
+        splitCurve into individual curves based on shapes.
 
         Returns:
             list: The new curves created from self.
