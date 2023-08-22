@@ -80,6 +80,8 @@ def arm_build_guide():
                                     ))
     wrist_guide.setLabel("L", "wrist", False)
 
+    hand_build_guide()
+    
 # -------------------------------------------------------------------------
 class Hand_Guide(Guide):
     def __init__(self, node=None):
