@@ -52,7 +52,19 @@ class Limbs_Guide(Biped_Guide):
     def __init__(self, node=None):
         super().__init__(node)
 
-        self.a.add(ln="Ground_2", nn="Arm", at="float", k=True)
+        self.a.add(ln="Ground_2", nn="Limb", at="float", k=True)
+
+class Hand_Guide(Guide):
+    def __init__(self, node=None):
+        super().__init__(node)
+
+    def build(self):
+        hand_build_guide()
+
+
+# -----------------------------------------------------------------------------
+# SCRIPT FUNCTIONS
+# -----------------------------------------------------------------------------
 
 
 # -------------------------------------------------------------------------
@@ -122,13 +134,6 @@ def arm_build_guide():
     hand_build_guide()
     m.select(cl=True) # Deselect last created object
 
-# -------------------------------------------------------------------------
-class Hand_Guide(Guide):
-    def __init__(self, node=None):
-        super().__init__(node)
-
-    def build(self):
-        hand_build_guide()
 
 # -------------------------------------------------------------------------
 # HAND CREATE GUIDE
