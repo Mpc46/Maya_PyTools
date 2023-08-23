@@ -104,9 +104,10 @@ def leg_build_guide():
 
 def foot_build_guide():
     foot_guide = Biped_Guide(m.joint(
-                                n = "L_foot", 
-                                p = [0.886, 0.857, -0.498],
-                                o = [-12.260, -54.377, -79.982]
+                                n = "L_foot",
+                                r = True, 
+                                p = [0, 0, 0],
+                                o = [-16.110, -63.941, 13.335]
                                     ))
     foot_guide.setLabel("L", "foot", True)
 
@@ -128,7 +129,7 @@ def foot_build_guide():
 
     # -------------------------------------------------------------------------
     # HEEL
-    m.select(foot_guide.name)
+    m.select(foot_guide)
 
     heel_guide = Biped_Guide(m.joint(
                                 n = "L_heel",
@@ -140,7 +141,7 @@ def foot_build_guide():
 
     # -------------------------------------------------------------------------
     # FOOT IN
-    m.select(toe_guide.name)
+    m.select(toe_guide)
 
     foot_in_guide = Biped_Guide(m.joint(
                                 n = "L_foot_in",
@@ -152,7 +153,7 @@ def foot_build_guide():
 
     # -------------------------------------------------------------------------
     # FOOT OUT
-    m.select(toe_guide.name)
+    m.select(toe_guide)
 
     foot_out_guide = Biped_Guide(m.joint(
                                 n = "L_foot_out",
@@ -248,7 +249,7 @@ def hand_build_guide():
                                     ))
     
     # -------------------------------------------------------------------------
-    m.select(hand_guide.name)
+    m.select(hand_guide)
     # -------------------------------------------------------------------------
     # MIDDLE FINGER
 
@@ -282,7 +283,7 @@ def hand_build_guide():
                                     ))
     
     # -------------------------------------------------------------------------
-    m.select(hand_guide.name)
+    m.select(hand_guide)
     # -------------------------------------------------------------------------
     # RING FINGER
 
@@ -316,7 +317,7 @@ def hand_build_guide():
                                     ))
     
     # -------------------------------------------------------------------------
-    m.select(hand_guide.name)
+    m.select(hand_guide)
     # -------------------------------------------------------------------------
     # PINKY FINGER
 
@@ -350,7 +351,7 @@ def hand_build_guide():
                                     ))
     
     # -------------------------------------------------------------------------
-    m.select(hand_guide.name)
+    m.select(hand_guide)
     # -------------------------------------------------------------------------
     # THUMB FINGER
 
