@@ -7,7 +7,7 @@
                     |________________________________________|
 
 >> DESCRIPTION >>
-    Biped guide.
+    Biped guide. Guides positions are based on Hippydrome scale 3x
 
 >> HOW TO USE >>
 	This module contents are intended to be imported, referenced or
@@ -96,7 +96,74 @@ def leg_build_guide():
                                     ))
     ankle_guide.setLabel("L", "ankle", False)
 
+    foot_build_guide()
     m.select(cl=True) # Deselect last created object
+
+# -------------------------------------------------------------------------
+# FOOT CREATE GUIDE
+
+def foot_build_guide():
+    foot_guide = Biped_Guide(m.joint(
+                                n = "L_foot", 
+                                p = [0.886, 0.857, -0.498],
+                                o = [-12.260, -54.377, -79.982]
+                                    ))
+    foot_guide.setLabel("L", "foot", True)
+
+    toe_guide = Biped_Guide(m.joint(
+                                n = "L_toe",
+                                r = True, 
+                                p = [1.084, 0, 0],
+                                o = [0, -22.867, 0]
+                                    ))
+    toe_guide.setLabel("L", "toe", True)
+
+    toeEnd_guide = Limbs_Guide(m.joint(
+                                n = "L_toeEnd", 
+                                r = True,
+                                p = [1.227, 0, 0],
+                                o = [0, 0, 0]
+                                    ))
+    toeEnd_guide.setLabel("L", "toeEnd", False)
+
+    # -------------------------------------------------------------------------
+    # HEEL
+    m.select(foot_guide.name)
+
+    heel_guide = Biped_Guide(m.joint(
+                                n = "L_heel",
+                                r = True, 
+                                p = [0, 0, -1.047],
+                                o = [0.182, -35, -0.317]
+                                    ))
+    heel_guide.setLabel("L", "heel", True)
+
+    # -------------------------------------------------------------------------
+    # FOOT IN
+    m.select(toe_guide.name)
+
+    foot_in_guide = Biped_Guide(m.joint(
+                                n = "L_foot_in",
+                                r = True, 
+                                p = [0, -0.532, -0.275],
+                                o = [0.949, -12.097, -4.521]
+                                    ))
+    foot_in_guide.setLabel("L", "Bank In", True)
+
+    # -------------------------------------------------------------------------
+    # FOOT OUT
+    m.select(toe_guide.name)
+
+    foot_out_guide = Biped_Guide(m.joint(
+                                n = "L_foot_out",
+                                r = True, 
+                                p = [0, 0.585, -0.268],
+                                o = [-2.553, -11.865, 12.236]
+                                    ))
+    foot_out_guide.setLabel("L", "Bank Out", True)
+
+    m.select(cl=True) # Deselect last created object
+
 
 # -------------------------------------------------------------------------
 # ARM CREATE GUIDE
