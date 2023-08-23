@@ -70,7 +70,7 @@ def arm_build_guide():
                                 p = [2.646, 0, 0],
                                 o = [0, -2, 0]
                                     ))
-    elbow_guide.setLabel("L", "elbow", False)
+    elbow_guide.setLabel("L", "elbow", True)
 
     wrist_guide = Arm_Guide(m.joint(
                                 n = "L_wrist", 
@@ -81,7 +81,8 @@ def arm_build_guide():
     wrist_guide.setLabel("L", "wrist", False)
 
     hand_build_guide()
-    
+    m.select(cl=True) # Deselect last created object
+
 # -------------------------------------------------------------------------
 class Hand_Guide(Guide):
     def __init__(self, node=None):
@@ -95,7 +96,7 @@ class Hand_Guide(Guide):
 def hand_build_guide():
     hand_guide = Hand_Guide(m.joint(
                                 n = "L_hand", 
-                                p = [6.603, 14.376, -0.25],
+                                p = [6.606, 14.376, -0.25],
                                 o = [0, 0, 0]
                                     ))
     hand_guide.setLabel("L", "hand", True)
@@ -233,3 +234,39 @@ def hand_build_guide():
                                 p = [0.235, 0, 0],
                                 o = [0, 0, 0]
                                     ))
+    
+    # -------------------------------------------------------------------------
+    m.select(hand_guide.name)
+    # -------------------------------------------------------------------------
+    # THUMB FINGER
+
+    thumb1_guide = Hand_Guide(m.joint(
+                                n = "L_thumbFinger_01",
+                                r = True, 
+                                p = [0.098, -0.155, 0.046],
+                                o = [-32.447, -44.969, -14.663]
+                                    ))
+    thumb1_guide.setLabel("L", "thumb", True)
+
+    thumb2_guide = Hand_Guide(m.joint(
+                                n = "L_thumbFinger_02",
+                                r = True, 
+                                p = [0.560, 0, 0],
+                                o = [3.695, 17.328, 0.981]
+                                    ))
+    
+    thumb3_guide = Hand_Guide(m.joint(
+                                n = "L_thumbFinger_03",
+                                r = True, 
+                                p = [0.321, 0, 0],
+                                o = [0, 0, 0]
+                                    ))
+    
+    thumb4_guide = Hand_Guide(m.joint(
+                                n = "L_thumbFinger_04",
+                                r = True, 
+                                p = [0.313, 0, 0],
+                                o = [0, 0, 0]
+                                    ))
+
+    m.select(cl=True) # Deselect last created object
