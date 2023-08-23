@@ -46,6 +46,8 @@ class Base_Guide(Joint):
     # SPECIAL/MAGIC/DUNDER METHODS
 
     def __init__(self, node=None, **kwargs):
+    
         super().__init__(node, **kwargs)
 
         self.a.add(ln="PtmMadre", nn="Base", at="float", k=True)
+

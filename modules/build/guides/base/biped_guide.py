@@ -14,7 +14,7 @@
     inheritance to another class.
 
 >> CONTENTS >> 
-    + Arm_Guide [Class]
+    + Biped_Guide [Class]
 
 >> NOTES >> 
 	Update 23/08/2023 : Start working on the script
@@ -41,6 +41,7 @@ class Biped_Guide(Guide):
     def __init__(self, node=None):
         super().__init__(node)
 
+        self.setColor("cyan")
         self.a.add(ln="Ground_1", nn="Biped", at="float", k=True)
 
     def build(self):
@@ -55,16 +56,17 @@ class Limbs_Guide(Biped_Guide):
 
 
 # -------------------------------------------------------------------------
+# LEG CREATE GUIDE
 
 def leg_build_guide():
-    hip_guide = Guide(m.joint(
+    hip_guide = Biped_Guide(m.joint(
                                 n = "L_leg", 
                                 p = [0.886, 9.199, 0.156],
                                 o = [0, -0.815, -90.000]
                                     ))
     hip_guide.setLabel("L", "hip", True)
 
-    knee_guide = Guide(m.joint(
+    knee_guide = Biped_Guide(m.joint(
                                 n = "L_knee",
                                 r = True, 
                                 p = [4.193, 0, 0],
@@ -82,16 +84,18 @@ def leg_build_guide():
 
     m.select(cl=True) # Deselect last created object
 
+# -------------------------------------------------------------------------
+# ARM CREATE GUIDE
 
 def arm_build_guide():
-    clavicle_guide = Guide(m.joint(
+    clavicle_guide = Biped_Guide(m.joint(
                                 n = "L_clavicle", 
                                 p = [0.12, 14.376, -0.102],
                                 o = [0, 2, 0]
                                     ))
     clavicle_guide.setLabel("L", "collar", True)
 
-    shoulder_guide = Guide(m.joint(
+    shoulder_guide = Biped_Guide(m.joint(
                                 n = "L_shoulder",
                                 r = True, 
                                 p = [1.584, 0, 0],
@@ -99,7 +103,7 @@ def arm_build_guide():
                                     ))
     shoulder_guide.setLabel("L", "shoulder", True)
 
-    elbow_guide = Arm_Guide(m.joint(
+    elbow_guide = Limbs_Guide(m.joint(
                                 n = "L_elbow", 
                                 r = True,
                                 p = [2.646, 0, 0],
@@ -107,7 +111,7 @@ def arm_build_guide():
                                     ))
     elbow_guide.setLabel("L", "elbow", True)
 
-    wrist_guide = Arm_Guide(m.joint(
+    wrist_guide = Limbs_Guide(m.joint(
                                 n = "L_wrist", 
                                 r = True,
                                 p = [2.259, 0, 0],
@@ -127,6 +131,7 @@ class Hand_Guide(Guide):
         hand_build_guide()
 
 # -------------------------------------------------------------------------
+# HAND CREATE GUIDE
 
 def hand_build_guide():
     hand_guide = Hand_Guide(m.joint(
