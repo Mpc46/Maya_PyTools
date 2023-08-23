@@ -1,13 +1,13 @@
 '''
 /*****************************************************************************/
-                                Arm Guide v 1.0
+                                Biped Guide v 1.0
                      ________________________________________
                     |                                        |
                     |  Author: Luis Felipe Carranza          |
                     |________________________________________|
 
 >> DESCRIPTION >>
-    Arm guide.
+    Biped guide.
 
 >> HOW TO USE >>
 	This module contents are intended to be imported, referenced or
@@ -17,7 +17,7 @@
     + Arm_Guide [Class]
 
 >> NOTES >> 
-	Update 22/08/2023 : Start working on the script
+	Update 23/08/2023 : Start working on the script
 
 >> CONTACT >>
     luisf.carranza@outlook.com
@@ -37,16 +37,51 @@ from modules.build import Base_Guide as Guide
 # CLASSES
 # -----------------------------------------------------------------------------
 
-class Arm_Guide(Guide):
+class Biped_Guide(Guide):
     def __init__(self, node=None):
         super().__init__(node)
 
-        self.a.add(ln="AsuPtmMadre", nn="Arm", at="float", k=True)
+        self.a.add(ln="Ground_1", nn="Biped", at="float", k=True)
 
     def build(self):
         arm_build_guide()
+        leg_build_guide()
+
+class Limbs_Guide(Biped_Guide):
+    def __init__(self, node=None):
+        super().__init__(node)
+
+        self.a.add(ln="Ground_2", nn="Arm", at="float", k=True)
+
 
 # -------------------------------------------------------------------------
+
+def leg_build_guide():
+    hip_guide = Guide(m.joint(
+                                n = "L_leg", 
+                                p = [0.886, 9.199, 0.156],
+                                o = [0, -0.815, -90.000]
+                                    ))
+    hip_guide.setLabel("L", "hip", True)
+
+    knee_guide = Guide(m.joint(
+                                n = "L_knee",
+                                r = True, 
+                                p = [4.193, 0, 0],
+                                o = [0, 10.577, 0]
+                                    ))
+    knee_guide.setLabel("L", "knee", True)
+
+    ankle_guide = Limbs_Guide(m.joint(
+                                n = "L_ankle", 
+                                r = True,
+                                p = [4.210, 0, 0],
+                                o = [0, 0, 0]
+                                    ))
+    ankle_guide.setLabel("L", "ankle", False)
+
+    m.select(cl=True) # Deselect last created object
+
 
 def arm_build_guide():
     clavicle_guide = Guide(m.joint(
