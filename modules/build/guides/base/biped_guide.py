@@ -167,31 +167,31 @@ def foot_build_guide():
 def arm_build_guide():
     clavicle_guide = Biped_Guide(m.joint(
                                 n = "L_clavicle", 
-                                p = [0.12, 14.376, -0.102],
-                                o = [0, 2, 0]
+                                p = [0.956, 82.173, -1.350],
+                                o = [0, 0, 0]
                                     ))
     clavicle_guide.setLabel("L", "collar", True)
 
     shoulder_guide = Biped_Guide(m.joint(
                                 n = "L_shoulder",
                                 r = True, 
-                                p = [1.584, 0, 0],
-                                o = [0, 0, 0]
+                                p = [9.566, 0, 0],
+                                o = [0, 0.5, 0]
                                     ))
     shoulder_guide.setLabel("L", "shoulder", True)
 
     elbow_guide = Limbs_Guide(m.joint(
                                 n = "L_elbow", 
                                 r = True,
-                                p = [2.646, 0, 0],
-                                o = [0, -2, 0]
+                                p = [13.595, 0, 0],
+                                o = [0, -1, 0]
                                     ))
     elbow_guide.setLabel("L", "elbow", True)
 
     wrist_guide = Limbs_Guide(m.joint(
                                 n = "L_wrist", 
                                 r = True,
-                                p = [2.259, 0, 0],
+                                p = [13.518, 0, 0],
                                 o = [0, 0, 0]
                                     ))
     wrist_guide.setLabel("L", "wrist", False)
@@ -206,7 +206,7 @@ def arm_build_guide():
 def hand_build_guide():
     hand_guide = Hand_Guide(m.joint(
                                 n = "L_hand", 
-                                p = [6.606, 14.376, -0.25],
+                                p = [37.634, 82.173, -1.350],
                                 o = [0, 0, 0]
                                     ))
     hand_guide.setLabel("L", "hand", True)
@@ -214,32 +214,40 @@ def hand_build_guide():
     # -------------------------------------------------------------------------
     # INDEX FINGER
 
+    index0_guide = Hand_Guide(m.joint(
+                                n = "L_indexFinger_00",
+                                r = True, 
+                                p = [1.309, 0.075, 0.726],
+                                o = [-0.623, -5.496, 3.016]
+                                    ))
+    index0_guide.setLabel("L", "index meta", False)
+
     index1_guide = Hand_Guide(m.joint(
                                 n = "L_indexFinger_01",
                                 r = True, 
-                                p = [0.908, 0.033, 0.21],
-                                o = [0, 2.233, 0]
+                                p = [4, 0, 0],
+                                o = [0.337, 7.605, -2.958]
                                     ))
     index1_guide.setLabel("L", "index finger", True)
 
     index2_guide = Hand_Guide(m.joint(
                                 n = "L_indexFinger_02",
                                 r = True, 
-                                p = [0.312, 0, 0],
+                                p = [1.981, 0, 0],
                                 o = [0, 0, 0]
                                     ))
     
     index3_guide = Hand_Guide(m.joint(
                                 n = "L_indexFinger_03",
                                 r = True, 
-                                p = [0.203, 0, 0],
+                                p = [1.171, 0, 0],
                                 o = [0, 0, 0]
                                     ))
     
     index4_guide = Hand_Guide(m.joint(
                                 n = "L_indexFinger_04",
                                 r = True, 
-                                p = [0.272, 0, 0],
+                                p = [1.399, 0, 0],
                                 o = [0, 0, 0]
                                     ))
     
@@ -248,32 +256,40 @@ def hand_build_guide():
     # -------------------------------------------------------------------------
     # MIDDLE FINGER
 
+    middle0_guide = Hand_Guide(m.joint(
+                                n = "L_middleFinger_00",
+                                r = True, 
+                                p = [1.267, 0.069, 0.084],
+                                o = [0.048, 2.361, 3.104]
+                                    ))
+    middle0_guide.setLabel("L", "middle meta", False)
+
     middle1_guide = Hand_Guide(m.joint(
                                 n = "L_middleFinger_01",
                                 r = True, 
-                                p = [0.863, 0.055, -0.002],
-                                o = [0, 0.901, 0]
+                                p = [4, 0, 0],
+                                o = [0.080, -0.229, -3.101]
                                     ))
     middle1_guide.setLabel("L", "middle finger", True)
 
     middle2_guide = Hand_Guide(m.joint(
                                 n = "L_middleFinger_02",
                                 r = True, 
-                                p = [0.406, 0, 0],
+                                p = [1.974, 0, 0],
                                 o = [0, 0, 0]
                                     ))
     
     middle3_guide = Hand_Guide(m.joint(
                                 n = "L_middleFinger_03",
                                 r = True, 
-                                p = [0.256, 0, 0],
+                                p = [1.476, 0, 0],
                                 o = [0, 0, 0]
                                     ))
     
     middle4_guide = Hand_Guide(m.joint(
                                 n = "L_middleFinger_04",
                                 r = True, 
-                                p = [0.307, 0, 0],
+                                p = [2, 0, 0],
                                 o = [0, 0, 0]
                                     ))
     
@@ -282,32 +298,40 @@ def hand_build_guide():
     # -------------------------------------------------------------------------
     # RING FINGER
 
+    ring0_guide = Hand_Guide(m.joint(
+                                n = "L_ringFinger_00",
+                                r = True, 
+                                p = [1.242, 0.072, -0.599],
+                                o = [0.700, 8.714, 3.089]
+                                    ))
+    ring0_guide.setLabel("L", "ring meta", False)
+
     ring1_guide = Hand_Guide(m.joint(
                                 n = "L_ringFinger_01",
                                 r = True, 
-                                p = [0.831, 0.039, -0.189],
-                                o = [0, 2.265, 0]
+                                p = [4, 0.039, -0.189],
+                                o = [-0.233, -6.259, -3.028]
                                     ))
     ring1_guide.setLabel("L", "ring finger", True)
 
     ring2_guide = Hand_Guide(m.joint(
                                 n = "L_ringFinger_02",
                                 r = True, 
-                                p = [0.233, 0, 0],
+                                p = [1.939, 0, 0],
                                 o = [0, 0, 0]
                                     ))
     
     ring3_guide = Hand_Guide(m.joint(
                                 n = "L_ringFinger_03",
                                 r = True, 
-                                p = [0.233, 0, 0],
+                                p = [1.397, 0, 0],
                                 o = [0, 0, 0]
                                     ))
     
     ring4_guide = Hand_Guide(m.joint(
                                 n = "L_ringFinger_04",
                                 r = True, 
-                                p = [0.266, 0, 0],
+                                p = [1.425, 0, 0],
                                 o = [0, 0, 0]
                                     ))
     
@@ -316,32 +340,40 @@ def hand_build_guide():
     # -------------------------------------------------------------------------
     # PINKY FINGER
 
+    pinky0_guide = Hand_Guide(m.joint(
+                                n = "L_pinkyFinger_00",
+                                r = True, 
+                                p = [1.125, 0.086, -1.244],
+                                o = [1.433, 15.996, 3.235]
+                                    ))
+    pinky0_guide.setLabel("L", "pinky meta", False)
+
     pinky1_guide = Hand_Guide(m.joint(
                                 n = "L_pinkyFinger_01",
                                 r = True, 
-                                p = [0.755, 0.032, -0.368],
-                                o = [0, 2.796, 0]
+                                p = [3.673, 0, 0],
+                                o = [-0.556, -14.015, -2.975]
                                     ))
     pinky1_guide.setLabel("L", "pinky finger", True)
 
     pinky2_guide = Hand_Guide(m.joint(
                                 n = "L_pinkyFinger_02",
                                 r = True, 
-                                p = [0.261, 0, 0],
+                                p = [1.476, 0, 0],
                                 o = [0, 0, 0]
                                     ))
     
     pinky3_guide = Hand_Guide(m.joint(
                                 n = "L_pinkyFinger_03",
                                 r = True, 
-                                p = [0.154, 0, 0],
+                                p = [0.905, 0, 0],
                                 o = [0, 0, 0]
                                     ))
     
     pinky4_guide = Hand_Guide(m.joint(
                                 n = "L_pinkyFinger_04",
                                 r = True, 
-                                p = [0.235, 0, 0],
+                                p = [1.293, 0, 0],
                                 o = [0, 0, 0]
                                     ))
     
@@ -350,33 +382,35 @@ def hand_build_guide():
     # -------------------------------------------------------------------------
     # THUMB FINGER
 
+    thumb0_guide = Hand_Guide(m.joint(
+                                n = "L_thumbFinger_01",
+                                r = True, 
+                                p = [1.466, -0.811, 1.164],
+                                o = [45.544, -32.643, -22.500]
+                                    ))
+    thumb0_guide.setLabel("L", "thumb meta", False)
+
     thumb1_guide = Hand_Guide(m.joint(
                                 n = "L_thumbFinger_01",
                                 r = True, 
-                                p = [0.098, -0.155, 0.046],
-                                o = [-32.447, -44.969, -14.663]
+                                p = [2.276, 0, 0],
+                                o = [0, 0, -1.957]
                                     ))
     thumb1_guide.setLabel("L", "thumb", True)
 
     thumb2_guide = Hand_Guide(m.joint(
                                 n = "L_thumbFinger_02",
                                 r = True, 
-                                p = [0.560, 0, 0],
-                                o = [3.695, 17.328, 0.981]
+                                p = [1.551, 0, 0],
+                                o = [0, 0, -2.389]
                                     ))
     
     thumb3_guide = Hand_Guide(m.joint(
                                 n = "L_thumbFinger_03",
                                 r = True, 
-                                p = [0.321, 0, 0],
+                                p = [1.730, 0, 0],
                                 o = [0, 0, 0]
                                     ))
     
-    thumb4_guide = Hand_Guide(m.joint(
-                                n = "L_thumbFinger_04",
-                                r = True, 
-                                p = [0.313, 0, 0],
-                                o = [0, 0, 0]
-                                    ))
 
     m.select(cl=True) # Deselect last created object
