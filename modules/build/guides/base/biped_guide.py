@@ -414,3 +414,5 @@ def hand_build_guide():
     
 
     m.select(cl=True) # Deselect last created object
+
+# :3
