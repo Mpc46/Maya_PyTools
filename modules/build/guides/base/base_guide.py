@@ -50,3 +50,6 @@ class Base_Guide(Joint):
 
         self.a.add(ln="PtmMadre", nn="Base", at="float", k=True)
 
+    def mirror(self):
+        # mirrorJoint -mirrorYZ -searchReplace "L_" "R_";
+        pass

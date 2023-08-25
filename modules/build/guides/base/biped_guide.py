@@ -45,7 +45,9 @@ class Biped_Guide(Guide):
         self.a.add(ln="Ground_1", nn="Biped", at="float", k=True)
 
     def build(self):
+        main_ctl = Guide(m.circle(n="Guide", r=20, nr=[0,1,0])[0])
         cog_build_guide()
+        self.delete()
 
 
 class Limbs_Guide(Biped_Guide):
