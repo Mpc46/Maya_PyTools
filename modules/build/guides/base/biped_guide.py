@@ -41,12 +41,13 @@ class Biped_Guide(Guide):
     def __init__(self, node=None):
         super().__init__(node)
 
-        self.setColor("cyan")
+        self.setColor("yellow")
         self.a.add(ln="Ground_1", nn="Biped", at="float", k=True)
 
     def build(self):
         arm_build_guide()
         leg_build_guide()
+        neck_build_guide()
 
 
 class Limbs_Guide(Biped_Guide):
@@ -65,13 +66,79 @@ class Hand_Guide(Guide):
 
 
 # -------------------------------------------------------------------------
+# NECK & HEAD CREATE GUIDES
+
+def neck_build_guide():
+    neck1_guide = Biped_Guide(m.joint(
+                                n = "neck_01", 
+                                p = [0, 83.666, 0.127],
+                                o = [0, -6.231, 90]
+                                    ))
+    neck1_guide.setLabel("C", "neck", True)
+    
+    neck2_guide = Biped_Guide(m.joint(
+                                n = "neck_02",
+                                r = True, 
+                                p = [4.242, 0, 0],
+                                o = [0, 0, 0]
+                                    ))
+    
+    neck3_guide = Biped_Guide(m.joint(
+                                n = "neck_03",
+                                r = True, 
+                                p = [4.242, 0, 0],
+                                o = [0, 0, 0]
+                                    ))
+    
+    head_guide = Biped_Guide(m.joint(
+                                n = "head",
+                                r = True, 
+                                p = [0, 0, 0],
+                                o = [0, 0, 0]
+                                    ))
+
+    jaw0_guide = Biped_Guide(m.joint(
+                                n = "jaw_00",
+                                r = True, 
+                                p = [1.090, 0, 0.378],
+                                o = [0, 216.241, 0]
+                                    ))
+    
+    jaw1_guide = Biped_Guide(m.joint(
+                                n = "jaw_01",
+                                r = True, 
+                                p = [2.501, 0, 0],
+                                o = [0, 48.909, 0]
+                                    ))
+    
+    chin_guide = Biped_Guide(m.joint(
+                                n = "chin",
+                                r = True, 
+                                p = [5.843, 0, 0],
+                                o = [0, 0, 0]
+                                    ))
+    
+    # -------------------------------------------------------------------------
+    m.select(head_guide)
+    # -------------------------------------------------------------------------
+
+    headEnd_guide = Biped_Guide(m.joint(
+                                n = "headEnd",
+                                r = True, 
+                                p = [13.052, 0, 0],
+                                o = [0, 0, 0]
+                                    ))
+
+
+
+# -------------------------------------------------------------------------
 # LEG CREATE GUIDE
 
 def leg_build_guide():
     hip_guide = Biped_Guide(m.joint(
                                 n = "L_leg", 
                                 p = [5.354, 54.665, 1.065],
-                                o = [0, 0, -90.000]
+                                o = [0, 0, -90]
                                     ))
     hip_guide.setLabel("L", "hip", True)
 
