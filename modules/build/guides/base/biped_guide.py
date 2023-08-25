@@ -41,6 +41,9 @@ class Biped_Guide(Guide):
     def __init__(self, node=None):
         super().__init__(node)
 
+        self.a.s.lockHide()
+        self.a.v.lockHide()
+
         self.setColor("yellow")
         self.a.add(ln="Ground_1", nn="Biped", at="float", k=True)
 
@@ -57,7 +60,7 @@ class Limbs_Guide(Biped_Guide):
         self.a.add(ln="Ground_2", nn="Limb", at="float", k=True)
 
 
-class Hand_Guide(Guide):
+class Hand_Guide(Biped_Guide):
     def __init__(self, node=None):
         super().__init__(node)
 
