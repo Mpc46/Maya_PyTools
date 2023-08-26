@@ -48,9 +48,19 @@ class Biped_Guide(Guide):
 
     def build(self):
         main_ctl = Guide(m.circle(n="Guide", r=20, nr=[0,1,0])[0])
+        main_ctl.setColor("cyan")
         cog_build_guide()
         self.delete()
 
+
+class Spine_Guide(Biped_Guide):
+    def __init__(self, node=None):
+        super().__init__(node)
+        
+        # Locking related Attributes
+        self.a.ty.lock()
+        self.a.r.lock()
+        self.a.ry.unlock()
 
 class Limbs_Guide(Biped_Guide):
     def __init__(self, node=None):
@@ -93,16 +103,19 @@ def spine_build_guide():
                                 o = [0, 0, 90]
                                     ))
     spine1_guide.setLabel("C", "spine", True)
+    spine1_guide.a.tx.lock()
+    spine1_guide.a.r.lock()
+    spine1_guide.a.ry.unlock()
 
-    spine2_guide = Biped_Guide(m.joint(
+    spine2_guide = Spine_Guide(m.joint(
                                 n = "spine_02",
                                 r = True, 
                                 p = [6.964, 0, 0],
                                 o = [0, 0, 0]
                                     ))
     spine2_guide.setLabel("C", "spine mid", False)
-
-    chest_guide = Biped_Guide(m.joint(
+   
+    chest_guide = Spine_Guide(m.joint(
                                 n = "chest", 
                                 r = True,
                                 p = [6.964, 0, 0],
@@ -121,30 +134,31 @@ def spine_build_guide():
 # NECK & HEAD CREATE GUIDES
 
 def neck_build_guide():
-    neck1_guide = Biped_Guide(m.joint(
+    neck1_guide = Spine_Guide(m.joint(
                                 n = "neck_01", 
                                 p = [0, 83.666, 0.127],
                                 o = [0, -6.231, 0]
                                     ))
     neck1_guide.setLabel("C", "neck", True)
     
-    neck2_guide = Biped_Guide(m.joint(
+    neck2_guide = Spine_Guide(m.joint(
                                 n = "neck_02",
                                 r = True, 
                                 p = [4.242, 0, 0],
                                 o = [0, 0, 0]
                                     ))
     neck2_guide.setLabel("C", "neck mid", False)
-    
-    neck3_guide = Biped_Guide(m.joint(
+
+    neck3_guide = Spine_Guide(m.joint(
                                 n = "neck_03",
                                 r = True, 
                                 p = [4.242, 0, 0],
                                 o = [0, 0, 0]
                                     ))
     neck3_guide.setLabel("C", "neck end", False)
+
     
-    head_guide = Biped_Guide(m.joint(
+    head_guide = Spine_Guide(m.joint(
                                 n = "head",
                                 r = True, 
                                 p = [0, 0, 0],
@@ -152,7 +166,7 @@ def neck_build_guide():
                                     ))
     head_guide.setLabel("C", "head", True)
 
-    jaw0_guide = Biped_Guide(m.joint(
+    jaw0_guide = Spine_Guide(m.joint(
                                 n = "jaw_00",
                                 r = True, 
                                 p = [1.090, 0, 0.378],
@@ -160,7 +174,7 @@ def neck_build_guide():
                                     ))
     jaw0_guide.setLabel("C", "Jaw Swing", False)
     
-    jaw1_guide = Biped_Guide(m.joint(
+    jaw1_guide = Spine_Guide(m.joint(
                                 n = "jaw_01",
                                 r = True, 
                                 p = [2.501, 0, 0],
@@ -168,19 +182,20 @@ def neck_build_guide():
                                     ))
     jaw1_guide.setLabel("C", "jaw", True)
     
-    chin_guide = Biped_Guide(m.joint(
+    chin_guide = Spine_Guide(m.joint(
                                 n = "chin",
                                 r = True, 
                                 p = [5.843, 0, 0],
                                 o = [0, 0, 0]
                                     ))
     chin_guide.setLabel("C", "jaw end", False)
+
     
     # -------------------------------------------------------------------------
     m.select(head_guide)
     # -------------------------------------------------------------------------
 
-    headEnd_guide = Biped_Guide(m.joint(
+    headEnd_guide = Spine_Guide(m.joint(
                                 n = "headEnd",
                                 r = True, 
                                 p = [13.052, 0, 0],
@@ -199,6 +214,7 @@ def neck_build_guide():
                                 o = [31.755, -76.850, -31.832]
                                     ))
     eye_guide.setLabel("L", "eye", True)
+    eye_guide.a.rx.lock()
 
     eyeEnd_guide = Biped_Guide(m.joint(
                                 n = "L_eyeEnd",
@@ -207,6 +223,7 @@ def neck_build_guide():
                                 o = [0, 0, 0]
                                     ))
     eyeEnd_guide.setLabel("L", "eye end", False)
+    eyeEnd_guide.a.rx.lock()
     
     m.select(cl=True) # Deselect last created object
 
