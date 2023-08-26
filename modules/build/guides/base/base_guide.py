@@ -37,7 +37,7 @@ from modules.base import Joint, Curve
 # CLASSES
 # -----------------------------------------------------------------------------
 
-class Ctl_Guide(Curve):
+class Guide_Main(Curve):
     """
     Ctl_Guide The main control and filter to identify guides.
     """

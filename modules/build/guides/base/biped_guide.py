@@ -32,7 +32,7 @@
 
 from maya import cmds as m
 from modules.build import Base_Guide as Guide
-from modules.build import Ctl_Guide
+from modules.build import Guide_Main as gMain
 
 # -----------------------------------------------------------------------------
 # CLASSES
@@ -48,7 +48,7 @@ class Biped_Guide(Guide):
         self.a.add(ln="Ground_1", nn="Biped", at="float", k=True)
 
     def build(self):
-        main_ctl = Ctl_Guide(m.circle(n="Guide", r=20, nr=[0,1,0])[0])
+        main_ctl = gMain(m.circle(n="Guide", r=20, nr=[0,1,0])[0])
         main_ctl.setColor("cyan")
         cog_build_guide()
         self.delete()
