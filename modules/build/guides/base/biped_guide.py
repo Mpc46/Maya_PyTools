@@ -67,6 +67,7 @@ class Spine_Guide(Biped_Guide):
         self.a.ty.unlockShow()
         self.a.tx.lockHide()
 
+
 class Limbs_Guide(Biped_Guide):
     def __init__(self, node=None):
         super().__init__(node)
@@ -80,6 +81,7 @@ class Hand_Guide(Biped_Guide):
 
     def build(self):
         hand_build_guide()
+
 
 # -------------------------------------------------------------------------
 # COG CREATE GUIDE
@@ -259,7 +261,7 @@ def hip_build_guide():
 # LEG CREATE GUIDE
 
 def leg_build_guide():
-    leg_guide = Biped_Guide(m.joint(
+    leg_guide = Limbs_Guide(m.joint(
                                 n = "L_leg", 
                                 r = True,
                                 p = [0, 5.354, 0],
@@ -267,7 +269,7 @@ def leg_build_guide():
                                     ))
     leg_guide.setLabel("L", "hip", True)
 
-    knee_guide = Biped_Guide(m.joint(
+    knee_guide = Limbs_Guide(m.joint(
                                 n = "L_knee",
                                 r = True, 
                                 p = [23.519, 0, 0],
@@ -357,14 +359,14 @@ def foot_build_guide():
 # ARM CREATE GUIDE
 
 def arm_build_guide():
-    clavicle_guide = Biped_Guide(m.joint(
+    clavicle_guide = Limbs_Guide(m.joint(
                                 n = "L_clavicle", 
                                 p = [0.956, 82.173, -1.350],
                                 o = [0, 0, -90]
                                     ))
     clavicle_guide.setLabel("L", "collar", True)
 
-    shoulder_guide = Biped_Guide(m.joint(
+    shoulder_guide = Limbs_Guide(m.joint(
                                 n = "L_shoulder",
                                 r = True, 
                                 p = [9.566, 0, 0],
