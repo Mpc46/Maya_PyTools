@@ -31,15 +31,25 @@
 # -----------------------------------------------------------------------------
 
 from maya import cmds as m
-from modules.base import Joint
+from modules.base import Joint, Curve
+
 # -----------------------------------------------------------------------------
 # CLASSES
 # -----------------------------------------------------------------------------
 
+class Ctl_Guide(Curve):
+    """
+    Ctl_Guide The main control and filter to identify guides.
+    """
+    def __init__(self, node, **kwargs):
+        super().__init__(node, **kwargs)
+
+    pass
+
 
 class Base_Guide(Joint):
     """
-    XD
+    Base guide for setting up common attributes and behaviour.
     """
 
     # -------------------------------------------------------------------------
@@ -53,3 +63,8 @@ class Base_Guide(Joint):
     def mirror(self):
         # mirrorJoint -mirrorYZ -searchReplace "L_" "R_";
         pass
+
+
+def mirror_guide():
+    
+    pass
