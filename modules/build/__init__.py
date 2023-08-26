@@ -27,8 +27,8 @@
 # -----------------------------------------------------------------------------
 # BASE NODES
 
-from modules.build.guides.base.base_guide import Base_Guide
-from modules.build.guides.base.base_guide import Guide_Main
+from modules.build.guides.base.guide_base import Base_Guide
+from modules.build.guides.base.guide_base import Guide_Main
 
 # -----------------------------------------------------------------------------
 # ENHANCED NODES

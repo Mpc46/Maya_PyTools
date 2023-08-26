@@ -27,7 +27,7 @@
 
 from maya import cmds as m
 from modules.interface import Window_Base as Window
-from modules.build.guides.base.biped_guide import Biped_Guide
+from modules.build.guides.base.guide_biped import Biped_Guide
 from modules.build.systems.kinematic_system import switch, fk_system, ik_system
 
 # -----------------------------------------------------------------------------
