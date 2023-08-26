@@ -31,7 +31,7 @@
 # -----------------------------------------------------------------------------
 
 from maya import cmds as m
-from modules.base import Joint, Curve
+from modules.base import Joint, Curve, Dag_Node
 
 # -----------------------------------------------------------------------------
 # CLASSES
@@ -64,7 +64,3 @@ class Base_Guide(Joint):
         # mirrorJoint -mirrorYZ -searchReplace "L_" "R_";
         pass
 
-
-def mirror_guide():
-    
-    pass
