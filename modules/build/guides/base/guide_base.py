@@ -67,18 +67,29 @@ class Base_Guide(Joint):
 # SCRIPT FUNCTIONS
 # -----------------------------------------------------------------------------
 
+def find_guide_main():
+    main_guide = m.ls("Guide")
+
+    gMain = Dag(main_guide[0])
+
+    return gMain
+
+def find_guide_joints():
+    gMain = find_guide_main()
+    guide_joints = gMain.allChildren[1:]
+    guide_joints = [Joint(i) for i in guide_joints]
+
+    return guide_joints
 
 def mirror_guide():
     """
     Find and mirror the guides on scene.
     """
-    main_guide = m.ls("Guide")
-
-    gMain = Dag(main_guide[0])
+    
+    guide_joints = find_guide_joints()
+    
     side = "L_"
-    guide_joints = gMain.allChildren[1:]
-    guide_joints = [Joint(i) for i in guide_joints]
-   
+    
     joints_to_mirror = []
     mirrored_joints = []
 
@@ -99,10 +110,31 @@ def mirror_guide():
     for jnt in mirrored_joints:
         jnt.setLabelSide("R")
         m.select(jnt)
-        mel.eval("joint -e  -oj xzy -secondaryAxisOrient zdown -ch -zso;")
+        if "eye"  in jnt.name or jnt.labelType:
+            mel.eval("joint -e  -oj xzy -secondaryAxisOrient ydown -ch -zso;")
+        else:
+            mel.eval("joint -e  -oj xzy -secondaryAxisOrient zdown -ch -zso;")
+        
+        if not jnt.children and "heel" not in jnt.name and jnt.labelType:
+            jnt.setJointOrient(0)
+    
+    m.select(cl = True) # Cleaning last selected object.
 
     return mirrored_joints
 
-#mirror_guide()
+def toggle_guide_name():
+    """
+    toggles guide joints label visibility
+    """
+    guide_joints = find_guide_joints()
 
-# joint -e  -oj xzy -secondaryAxisOrient zup -ch -zso;
+    for jnt in guide_joints:
+        if jnt.labelVis:
+            jnt.a.add(ln="LabelVis", nn="LabelVis", at="bool")
+            jnt.setLabelVis(False)
+            
+        elif jnt.a.LabelVis.exists():
+            jnt.setLabelVis(True)
+            jnt.a.LabelVis.delete()
+
+    pass

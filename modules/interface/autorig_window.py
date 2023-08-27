@@ -28,7 +28,8 @@
 from maya import cmds as m
 from modules.interface import Window_Base as Window
 from modules.build.guides.base.guide_biped import Biped_Guide
-from modules.build.guides.base.guide_base import mirror_guide
+from modules.build.guides.base.guide_base import (mirror_guide,
+                                                  toggle_guide_name)
 
 
 # -----------------------------------------------------------------------------
@@ -60,6 +61,7 @@ class AutoRig_Window(Window):
         m.button(l="Create Guides", c = lambda x: Biped_Guide("GuideJnt").build())
         m.button(l="Clean", c = lambda x: del_base())
         self.exitLayout
+        m.button(l="Toggle guide Names", c = lambda x: toggle_guide_name() ) 
         m.button(l="Mirror Guides", c = lambda x: mirror_guide() ) 
 
 # -----------------------------------------------------------------------------
