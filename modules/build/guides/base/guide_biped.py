@@ -44,7 +44,7 @@ class Biped_Guide(Guide):
 
         self.a.s.lockHide()
 
-        self.setColor("yellow")
+        #self.setColor("yellow")
         self.a.add(ln="Ground_1", nn="Biped", at="float", k=True)
 
     def build(self):
@@ -219,7 +219,7 @@ def neck_build_guide():
                                 n = "L_eye",
                                 r = True, 
                                 p = [5.049, -2.172, 3.784],
-                                o = [31.755, -76.850, -31.832]
+                                o = [-148.245, -76.850, -31.832]
                                     ))
     eye_guide.setLabel("L", "eye", True)
     eye_guide.a.rx.lock()
@@ -336,10 +336,18 @@ def foot_build_guide():
     foot_in_guide = Biped_Guide(m.joint(
                                 n = "L_foot_in",
                                 r = True, 
-                                p = [0, -2.495, -1.462],
-                                o = [1.817, -14.734, -7.112]
+                                p = [0.025, -2.495, -1.558],
+                                o = [1.310, -14.786, -5.124]
                                     ))
     foot_in_guide.setLabel("L", "Bank In", True)
+
+    toe_in_guide = Biped_Guide(m.joint(
+                                n = "L_bigToe",
+                                r = True, 
+                                p = [5.302, 0, 0],
+                                o = [0, 0, 0]
+                                    ))
+    toe_in_guide.setLabel("L", "big toe", True)
 
     # -------------------------------------------------------------------------
     # FOOT OUT
@@ -348,10 +356,18 @@ def foot_build_guide():
     foot_out_guide = Biped_Guide(m.joint(
                                 n = "L_foot_out",
                                 r = True, 
-                                p = [0, 2.832, -1.453],
+                                p = [0.028, 2.832, -1.558],
                                 o = [-2.377, -14.656, 9.316]
                                     ))
     foot_out_guide.setLabel("L", "Bank Out", True)
+
+    toe_out_guide = Biped_Guide(m.joint(
+                                n = "L_foot_out",
+                                r = True, 
+                                p = [3.241, 0, 0],
+                                o = [0, 0, 0]
+                                    ))
+    toe_out_guide.setLabel("L", "pinky toe", True)
 
     m.select(cl=True) # Deselect last created object
 
