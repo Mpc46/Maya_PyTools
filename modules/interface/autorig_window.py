@@ -29,7 +29,8 @@ from maya import cmds as m
 from modules.interface import Window_Base as Window
 from modules.build.guides.base.guide_biped import Biped_Guide
 from modules.build.guides.base.guide_base import (mirror_guide,
-                                                  toggle_guide_name)
+                                                  toggle_guide_name,
+                                                  toggle_guide_axis)
 
 
 # -----------------------------------------------------------------------------
@@ -48,10 +49,10 @@ class AutoRig_Window(Window):
 
     def _build(self):
         self.initialLayout
-        self.lay_test1()
-       
+        self.lay_create_guides()
+        self.lay_build_from_guides()
 
-    def lay_test1(self):
+    def lay_create_guides(self):
         m.separator(h=10)
         m.text("Build Base joints", h=20, fn="boldLabelFont", rs=True) # Just a tittle
         m.separator(h=10)
@@ -61,8 +62,24 @@ class AutoRig_Window(Window):
         m.button(l="Create Guides", c = lambda x: Biped_Guide("GuideJnt").build())
         m.button(l="Clean", c = lambda x: del_base())
         self.exitLayout
-        m.button(l="Toggle guide Names", c = lambda x: toggle_guide_name() ) 
+        m.separator(h=10)
         m.button(l="Mirror Guides", c = lambda x: mirror_guide() ) 
+        m.separator(h=10)
+        m.button(l="Toggle guide Names", c = lambda x: toggle_guide_name() ) 
+        m.button(l="Toggle guide Axis", c = lambda x: toggle_guide_axis() ) 
+
+    def lay_build_from_guides(self):
+        m.separator(h=10)
+        m.text("Build Base joints", h=20, fn="boldLabelFont", rs=True) # Just a tittle
+        m.separator(h=10)
+        # Layout
+        m.rowColumnLayout(nc=2, adj=1)
+        # Buttons
+        m.button(l="Build Rig", c = lambda x: print("Testing"))
+        m.button(l="Clean", c = lambda x: del_base())
+        self.exitLayout
+       
+
 
 # -----------------------------------------------------------------------------
 # EXECUTE SCRIPT

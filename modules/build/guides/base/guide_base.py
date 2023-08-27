@@ -132,9 +132,19 @@ def toggle_guide_name():
         if jnt.labelVis:
             jnt.a.add(ln="LabelVis", nn="LabelVis", at="bool")
             jnt.setLabelVis(False)
-            
+
         elif jnt.a.LabelVis.exists():
             jnt.setLabelVis(True)
             jnt.a.LabelVis.delete()
 
+    pass
+
+def toggle_guide_axis():
+    guide_joints = find_guide_joints()
+
+    for jnt in guide_joints:
+        if jnt.localAxis:
+            jnt.hideLocalAxis()
+        else:
+            jnt.showLocalAxis()
     pass
