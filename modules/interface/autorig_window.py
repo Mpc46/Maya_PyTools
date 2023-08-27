@@ -56,10 +56,10 @@ class AutoRig_Window(Window):
         # Layout
         m.rowColumnLayout(nc=2, adj=1)
         # Buttons
-        m.button(l="Test", c= lambda x: Biped_Guide("GuideJnt").build())
-        m.button(l="Clean", c= lambda x: del_base())
+        m.button(l="Create Guides", c = lambda x: Biped_Guide("GuideJnt").build())
+        m.button(l="Clean", c = lambda x: del_base())
         self.exitLayout
-        m.button(l="mirror", c = lambda x: mirror_guide() ) 
+        m.button(l="Mirror Guides", c = lambda x: mirror_guide() ) 
 
 # -----------------------------------------------------------------------------
 # EXECUTE SCRIPT
