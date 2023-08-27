@@ -28,7 +28,7 @@
 from maya import cmds as m
 from modules.interface import Window_Base as Window
 from modules.build.guides.base.guide_biped import Biped_Guide
-from modules.build.systems.kinematic_system import switch, fk_system, ik_system
+from modules.build.guides.mirror_guide import mirror_guide
 
 # -----------------------------------------------------------------------------
 # SETTING UI
@@ -59,8 +59,11 @@ class AutoRig_Window(Window):
         m.button(l="Test", c= lambda x: Biped_Guide("GuideJnt").build())
         m.button(l="Clean", c= lambda x: del_base())
         self.exitLayout
-        m.button(l="mirror", c = lambda x: Biped_Guide("Guide").mirror() ) 
+        m.button(l="mirror", c = lambda x: mirror_guide() ) 
 
 # -----------------------------------------------------------------------------
 # EXECUTE SCRIPT
 # ----------------------------------------------------------------------------
+
+def del_base():
+    m.delete("Guide")

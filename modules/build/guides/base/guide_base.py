@@ -33,6 +33,7 @@
 from maya import cmds as m
 from modules.base import Joint, Curve, Dag_Node
 
+
 # -----------------------------------------------------------------------------
 # CLASSES
 # -----------------------------------------------------------------------------
@@ -60,7 +61,4 @@ class Base_Guide(Joint):
 
         self.a.add(ln="PtmMadre", nn="Base", at="float", k=True)
 
-    def mirror(self):
-        # mirrorJoint -mirrorYZ -searchReplace "L_" "R_";
-        pass
-
+    pass
