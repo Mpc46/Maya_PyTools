@@ -128,7 +128,10 @@ def mirror_guide():
 
 def toggle_guide_name():
     """
-    toggles guide joints label visibility
+    toggles guide joints label visibility.
+
+    To keep track of guides with displayable names a temporary
+    attribute will be added.
     """
     guide_joints = find_guide_joints()
 
