@@ -109,15 +109,19 @@ def mirror_guide():
 
     for jnt in mirrored_joints:
         jnt.setLabelSide("R")
+        
+        # Setting the joint orientation
         m.select(jnt)
+
         if "eye"  in jnt.name or jnt.labelType:
             mel.eval("joint -e  -oj xzy -secondaryAxisOrient ydown -ch -zso;")
         else:
             mel.eval("joint -e  -oj xzy -secondaryAxisOrient zdown -ch -zso;")
-        
-        if not jnt.children and "heel" not in jnt.name and jnt.labelType:
+
+        if not jnt.children and "heel" not in jnt.name:
             jnt.setJointOrient(0)
-    
+
+
     m.select(cl = True) # Cleaning last selected object.
 
     return mirrored_joints
