@@ -28,9 +28,9 @@
 from maya import cmds as m
 from modules.interface import Window_Base as Window
 from modules.build.guides.base.guide_biped import Biped_Guide
-from modules.build.guides.base.guide_base import (mirror_guide,
-                                                  toggle_guide_name,
-                                                  toggle_guide_axis)
+from modules.build.guides import (mirror_guide, 
+                                  toggle_guide_name, 
+                                  toggle_guide_axis)
 
 
 # -----------------------------------------------------------------------------

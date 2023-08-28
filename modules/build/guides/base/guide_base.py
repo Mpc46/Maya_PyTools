@@ -98,8 +98,12 @@ def mirror_guide():
             if jnt.parent.name.startswith(side):
                 continue
             else:
-                joints_to_mirror.append(jnt)
+                if not m.objExists(jnt.name.replace(side, "R_")):
+                    joints_to_mirror.append(jnt)
     
+    if not joints_to_mirror:
+        m.error(">>> There's nothing left to mirror")
+
     for jnt in joints_to_mirror:
         mirrored =  m.mirrorJoint(jnt, mirrorYZ = True, sr=["L_", "R_"])
         for i in  mirrored:

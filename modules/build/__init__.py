@@ -21,14 +21,8 @@
 /*****************************************************************************/
 '''
 # -----------------------------------------------------------------------------
-# LIBRARIES AND MODULES - Importing here to trimmed down imports
+# LIBRARIES AND MODULES - Importing here cause otherwise things don't work
 # -----------------------------------------------------------------------------
 
-# -----------------------------------------------------------------------------
-# BASE NODES
-
-from modules.build.guides.base.guide_base import Base_Guide
-from modules.build.guides.base.guide_base import Guide_Main
-
-# -----------------------------------------------------------------------------
-# ENHANCED NODES
+from modules.build.guides import *
+from modules.build.systems import *
