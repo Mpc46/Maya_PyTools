@@ -36,6 +36,7 @@ from modules.build.guides import (mirror_guide,
 # -----------------------------------------------------------------------------
 # SCRIPT FUNCTIONS
 # -----------------------------------------------------------------------------
+
 def build_guide():
     mirror_guide()
     build_guide_structure()
@@ -68,8 +69,12 @@ def generate_skeleton():
     bind_joints = []
 
     for jnt in guide_joints:
+        # SETTING NEW JOINT 
         new_joint = Joint(m.joint(n=jnt.name, o = jnt.jointOrient))
         new_joint.setLabel(jnt.labelSide, jnt.labelType, False) # Setting Labels
+        #new_joint.a.segmentScaleCompensate.set(0)
+
+        # AVOIDING NAME COLLISIONS
         guide_suffix = "_guide"
         jnt.rename(jnt.name + guide_suffix) # Avoid same names
         if new_joint.parent != joint_grp:
@@ -91,6 +96,11 @@ def generate_skeleton():
             else:
                 m.parent(nJnt.name, parent)
 
+    for jnt in bind_joints:
+        labels = ["COG", "Root"]
+        for label in labels:
+            if label in jnt.labelType:
+                jnt.parentTo(joint_grp)
         
     
     return joint_grp
