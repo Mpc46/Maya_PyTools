@@ -30,7 +30,8 @@ from modules.interface import Window_Base as Window
 from modules.build.guides.base.guide_biped import Biped_Guide
 from modules.build.guides import (mirror_guide, 
                                   toggle_guide_name, 
-                                  toggle_guide_axis)
+                                  toggle_guide_axis,
+                                  build_guide)
 
 
 # -----------------------------------------------------------------------------
@@ -75,7 +76,7 @@ class AutoRig_Window(Window):
         # Layout
         m.rowColumnLayout(nc=2, adj=1)
         # Buttons
-        m.button(l="Build Rig", c = lambda x: print("Testing"))
+        m.button(l="Build Rig", c = lambda x: build_guide())
         m.button(l="Clean", c = lambda x: del_base())
         self.exitLayout
        
