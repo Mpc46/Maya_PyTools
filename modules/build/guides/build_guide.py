@@ -30,7 +30,8 @@ from maya import cmds as m
 from maya import mel
 from modules.base import Joint, Curve, Dag_Node as Dag
 from modules.build.guides import (mirror_guide, 
-                                  find_guide_main)
+                                  find_guide_main,
+                                  find_guide_joints)
 
 # -----------------------------------------------------------------------------
 # SCRIPT FUNCTIONS
@@ -46,14 +47,47 @@ def build_guide_structure():
 
     rig_main = Dag("Rig", "transform")
     guide_main.parentTo(rig_main)
-    geo_grp = Dag("Geometry", "transform")
-    geo_grp.parentTo(rig_main)
-    joint_grp = Dag("Skeleton", "transform")
+
+    joint_grp = generate_skeleton()
     joint_grp.parentTo(rig_main)
 
+    geo_grp = Dag("Geometry", "transform")
+    geo_grp.parentTo(rig_main)
     
-    pass
+    guide_main.hide()
+    
+    grps = [rig_main, joint_grp, geo_grp]
+    return grps
 
+
+def generate_skeleton():
+
+    joint_grp = Dag("Skeleton", "transform")
+    
+    guide_joints = find_guide_joints()[::-1]
+    bind_joints = []
+
+    for jnt in guide_joints:
+        new_joint = Joint(m.joint(n=jnt.name, o = jnt.jointOrient))
+        guide_suffix = "_guide"
+        jnt.rename(jnt.name + guide_suffix)
+        if new_joint.parent != joint_grp:
+            new_joint.parentTo(joint_grp)
+
+        new_joint.moveTo(jnt)
+        bind_joints.append(new_joint)
+
+    bind_joints = [Joint(i) for i in bind_joints]
+
+    # for nJnt, gJnt in zip(bind_joints,guide_joints):
+    #     if gJnt.parent:
+    #         parent = str(gJnt.parent)
+    #         # parent.replace(guide_suffix, "")
+    #         nJnt.parentTo(parent)
+
+        
+    
+    return joint_grp
 
 # -----------------------------------------------------------------------------
 # EXECUTE SCRIPT

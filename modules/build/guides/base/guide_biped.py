@@ -607,7 +607,7 @@ def hand_build_guide():
     # THUMB FINGER
 
     thumb0_guide = Hand_Guide(m.joint(
-                                n = "L_thumbFinger_01",
+                                n = "L_thumbFinger_00",
                                 r = True, 
                                 p = [1.466, -0.811, 1.164],
                                 o = [45.544, -32.643, -22.500]

@@ -29,7 +29,7 @@
 # -----------------------------------------------------------------------------
 # LIBRARIES AND MODULES
 # -----------------------------------------------------------------------------
-
+import sys
 from maya import cmds as m
 from maya import mel
 from modules.base import Joint, Curve, Dag_Node as Dag
@@ -102,7 +102,7 @@ def mirror_guide():
                     joints_to_mirror.append(jnt)
     
     if not joints_to_mirror:
-        m.error(">>> There's nothing left to mirror")
+        sys.stdout.write (">>> There's nothing left to mirror")
 
     for jnt in joints_to_mirror:
         mirrored =  m.mirrorJoint(jnt, mirrorYZ = True, sr=["L_", "R_"])
