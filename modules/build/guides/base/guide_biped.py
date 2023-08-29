@@ -362,7 +362,7 @@ def foot_build_guide():
     foot_out_guide.setLabel("L", "Bank Out", True)
 
     toe_out_guide = Biped_Guide(m.joint(
-                                n = "L_foot_out",
+                                n = "L_pinkyToe",
                                 r = True, 
                                 p = [3.241, 0, 0],
                                 o = [0, 0, 0]
