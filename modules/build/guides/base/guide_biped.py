@@ -92,6 +92,7 @@ def cog_build_guide():
                                 p = [0, 60.584, 1.065],
                                 o = [0, 0, 0]
                                     ))
+    cog_guide.setLabel("C", "COG", False)
     
     spine_build_guide()
 

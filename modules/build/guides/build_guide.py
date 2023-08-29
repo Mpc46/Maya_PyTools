@@ -69,8 +69,9 @@ def generate_skeleton():
 
     for jnt in guide_joints:
         new_joint = Joint(m.joint(n=jnt.name, o = jnt.jointOrient))
+        new_joint.setLabel(jnt.labelSide, jnt.labelType, False) # Setting Labels
         guide_suffix = "_guide"
-        jnt.rename(jnt.name + guide_suffix)
+        jnt.rename(jnt.name + guide_suffix) # Avoid same names
         if new_joint.parent != joint_grp:
             new_joint.parentTo(joint_grp)
 
@@ -79,11 +80,16 @@ def generate_skeleton():
 
     bind_joints = [Joint(i) for i in bind_joints]
 
-    # for nJnt, gJnt in zip(bind_joints,guide_joints):
-    #     if gJnt.parent:
-    #         parent = str(gJnt.parent)
-    #         # parent.replace(guide_suffix, "")
-    #         nJnt.parentTo(parent)
+    # Recreating hierarchy
+    for nJnt, gJnt in zip(bind_joints,guide_joints):
+        if gJnt.parent:
+            parent = str(gJnt.parent)[:-6]
+            parent = parent.split("|")[-1]
+
+            if parent == "Guide":
+                m.parent(nJnt.name, joint_grp)
+            else:
+                m.parent(nJnt.name, parent)
 
         
     
