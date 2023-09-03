@@ -7,7 +7,7 @@
                     |________________________________________|
 
 >> DESCRIPTION >>
-    Pre-made control curves to use.
+    Pre-made control curves to use in scripts and scenes.
 
 >> HOW TO USE >>
 	This module contents are intended to be imported, referenced or
@@ -15,8 +15,6 @@
 
 >> NOTES >> 
 	Update 02/09/2023 : Started to work on the script.
-
->> THANKS >> 
 
 >> CONTACT >>
     luisf.carranza@outlook.com
@@ -98,18 +96,35 @@ def gear(name = "gear"):
               [0.24492919267373053, 1.3791639334092862e-16, -0.7538145018005402], 
               [0.16479237354204632, 1.3791639334092862e-16, -0.7752870977708741]]
     
-    gearCtl = build_ctl_from_points(name, points)
+    gear_main = build_ctl_from_points(name, points)
     
-    pass
+    points = [[0.2578851244515095, 1.3791639334092862e-16, -0.44667011428043385], 
+              [1.3732738828323178e-08, 1.3791639334092862e-16, -0.5157702214375396], 
+              [-0.25788509698603024, 1.3791639334092862e-16, -0.4466701142804341], 
+              [-0.4466701005476951, 1.3791639334092862e-16, -0.2578851107187698], 
+              [-0.5157702077048, 1.3791639334092862e-16, -4.205638245074571e-16], 
+              [-0.4466701005476954, 1.3791639334092862e-16, 0.2578851107187694], 
+              [-0.2578850969860305, 1.3791639334092862e-16, 0.4466701142804343], 
+              [1.3732738828323178e-08, 1.3791639334092862e-16, 0.5157702214375388], 
+              [0.2578851244515087, 1.3791639334092862e-16, 0.4466701142804347], 
+              [0.4466701280131736, 1.3791639334092862e-16, 0.25788511071876963], 
+              [0.5157702351702783, 1.3791639334092862e-16, 2.353737342947316e-16], 
+              [0.44667012801317385, 1.3791639334092862e-16, -0.25788511071876946]]
+    
+    gear_inner = build_ctl_from_points(n = "gear_circle", cvs = points)
+    
+    gear_main.mergeCurves(gear_inner)
+
+    return gear_main
 
 
-def build_ctl_from_points(name = "ctl", points = None):
-    ctl = Curve(m.circle(n = name, s = len(points), normal = [0,1,0]) [0])
+def build_ctl_from_points(n = "ctl", cvs = None):
+    ctl = Curve(m.circle(n = n, s = len(cvs), normal = [0,1,0]) [0])
     
     pnt = 0
 
-    for i in points:
-        m.move(i[0], i[1], i[2], '{}.cv[{}]'.format(name, pnt))
+    for i in cvs:
+        m.move(i[0], i[1], i[2], '{}.cv[{}]'.format(n, pnt))
         pnt += 1
     
     return ctl
