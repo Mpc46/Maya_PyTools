@@ -19,3 +19,23 @@
     
 /*****************************************************************************/
 '''
+# -----------------------------------------------------------------------------
+# LIBRARIES AND MODULES - Importing here to trimmed down imports
+# -----------------------------------------------------------------------------
+
+# -----------------------------------------------------------------------------
+# BASE NODES
+
+from modules.build.guides.base.guide_base import (Base_Guide,
+                                                  find_guide_main,
+                                                  find_guide_joints,
+                                                  mirror_guide,
+                                                  toggle_guide_name,
+                                                  toggle_guide_axis)
+
+from modules.build.guides.base.guide_base import Guide_Main
+
+# -----------------------------------------------------------------------------
+# ENHANCED NODES
+
+from modules.build.guides.build_guide import build_guide

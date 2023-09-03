@@ -30,3 +30,5 @@ from modules.interface.base.window_base import Window_Base
 
 # -----------------------------------------------------------------------------
 # OTHER WINDOWS
+
+from modules.interface.autorig_window import AutoRig_Window

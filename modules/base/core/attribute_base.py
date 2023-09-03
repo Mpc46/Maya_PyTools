@@ -21,6 +21,7 @@
 >> NOTES >> 
 	Update 05/08/2023 : Start working on the script
     Update 06/08/2023 : Created Arithmetic methods for nodes
+    Update 25/08/2023 : Created methods to handle attributes on channel box.
  
 >> THANKS >> 
     Nick Hughes [5/08/2023]:
@@ -721,7 +722,7 @@ class Attribute(object):
 
         Example:
             print(sphere.a.rotateX.fullPath)
-            # Output: "|BASE_GRP|SUB_GRP|sphere_GEO.rotateX"
+            Output: "|BASE_GRP|SUB_GRP|sphere_GEO.rotateX"
         """
         nodePath = "{0}.{1}".format(self.node.fullPath, self.attribute)
         if self.node.fullPath and m.objExists(nodePath):
@@ -964,3 +965,40 @@ class Attribute(object):
             cube.a.geo_vis.delete()
         """
         m.deleteAttr(self.fullPath)
+    
+    # -------------------------------------------------------------------------
+    # LOCK(UNLOCK) AND HIDE(SHOW) 25/08/2023 12:20
+
+    def lock(self, value = True):
+        """ Locks current attribute """
+        if self.children:
+            for child in self.children:
+                m.setAttr(child, lock = value)
+        else:
+            m.setAttr(self.fullPath, lock = value)
+    
+    def unlock(self):
+        """ Unlocks current attribute """
+        self.lock(False)
+    
+    def show(self, value = True):
+        """ Show current attribute on channel box. """
+        if self.children:
+            for child in self.children:
+                m.setAttr(child, keyable = value)
+        else:
+           m.setAttr(self.fullPath, keyable = value)
+
+    def hide(self):
+        """ Hide current attribute on channel box. """
+        self.show(False)
+    
+    def lockHide(self):
+        """ Lock and hide current attribute on channel box. """
+        self.lock()
+        self.hide()
+
+    def unlockShow(self):
+        """ Unlock and show current attribute on channel box. """
+        self.unlock()
+        self.show()

@@ -20,3 +20,9 @@
     
 /*****************************************************************************/
 '''
+# -----------------------------------------------------------------------------
+# LIBRARIES AND MODULES - Importing here cause otherwise things don't work
+# -----------------------------------------------------------------------------
+
+from modules.build.guides import *
+from modules.build.systems import *
