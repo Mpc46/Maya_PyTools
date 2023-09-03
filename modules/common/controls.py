@@ -35,6 +35,8 @@ from modules.base import Curve
 # -----------------------------------------------------------------------------
 
 def gear(name = "gear"):
+    """ Gear control. """
+
     points = [[0.21603651945719954, 1.3791639334092862e-16, -0.9999999450684957], 
               [1.3732739104155965e-08, 1.3791639334092862e-16, -1.0], 
               [-0.21603649199172023, 1.3791639334092862e-16, -0.9999999450684957], 
@@ -115,10 +117,19 @@ def gear(name = "gear"):
     
     gear_main.mergeCurves(gear_inner)
 
+    m.select(cl=True)
+    
     return gear_main
 
 
 def build_ctl_from_points(n = "ctl", cvs = None):
+    """
+    Creates a circle curve from len of points and move them into position
+
+    Args:
+        n (str): name of curve. Defaults to "ctl".
+        cvs (list): The cvPosition. Defaults to None.
+    """
     ctl = Curve(m.circle(n = n, s = len(cvs), normal = [0,1,0]) [0])
     
     pnt = 0
