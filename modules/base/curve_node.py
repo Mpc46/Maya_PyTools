@@ -58,27 +58,28 @@ class Curve(Dag_Node):
     # FORMATION
 
     @property
-    def points(self):
-        return m.ls(self.fullPath + ".cv[*]", fl = 1)
-    
-    @property
-    def cv(self):
+    def cvs(self):
         """ Returns list of curve points on shape. """
-        return self.points
+        return m.ls(self.fullPath + ".cv[*]", fl = 1)
 
     @property
-    def pointPosition(self):
-        epCoordinates = []
-        for i in self.points:
-            epPos = m.pointPosition( "{}".format(i), w=True )
-            epCoordinates.append(epPos)
+    def cvPositions(self):
+        """ Returns dictionary of positions of curve points. """
+        epCoordinates = {}
+        for i in self.cvs:
+            epCoordinates[i] = m.pointPosition( "{}".format(i), w=True )
 
         return epCoordinates
-
+    
     @property
-    def cvPosition(self):
+    def cvPositionsList(self):
         """ Returns list of positions of curve points. """
-        return self.pointPosition
+        cv_position_list = []
+
+        for i in self.cvPositions.values():
+            cv_position_list.append(i)
+            
+        return cv_position_list
     
     # -------------------------------------------------------------------------
     # METHODS
