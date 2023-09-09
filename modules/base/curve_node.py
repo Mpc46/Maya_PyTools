@@ -18,6 +18,7 @@
 
 >> NOTES >> 
 	Update 21/08/2023 : Started to work on the script.
+    Update 09/09/2923 : Added custom curves [Needs improvement]
 
 >> CONTACT >>
     luisf.carranza@outlook.com
@@ -53,6 +54,23 @@ class Curve(Dag_Node):
 
         if node and kwargs:
             self.create(**kwargs)
+
+    # -------------------------------------------------------------------------
+    # CUSTOM CURVES
+
+    @staticmethod
+    def gear(name):
+        from modules.common.controls import gear
+        gear(name)
+
+        return Curve(name)
+    
+    @staticmethod
+    def sphere(name):
+        from modules.common.controls import sphere
+        sphere(name)
+
+        return Curve(name)
         
     # -------------------------------------------------------------------------
     # FORMATION
