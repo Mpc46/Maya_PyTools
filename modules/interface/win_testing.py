@@ -126,5 +126,5 @@ def del_switch():
     return None
 
 
-window = win("Testing kinematics").open()
+# window = win("Testing kinematics")
 # window.open()

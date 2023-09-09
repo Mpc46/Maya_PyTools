@@ -90,6 +90,9 @@ def switch(joints=[], switch_ctl=None):
     fk_joints = fk_system(fk_joints)
     m.select(clear=True)
 
+    ik_joints = ik_system(ik_joints)
+    m.select(clear=True)
+
 
 def fk_system(joints=[]):
     joints = [Joint(i) for i in joints]
@@ -116,7 +119,22 @@ def fk_system(joints=[]):
 def ik_system(joints=[]):
     joints = [Joint(i) for i in joints]
 
+    ikh = Dag_Node(m.ikHandle(sj= joints[0], ee=joints[-1], n=joints[-1].name + "_Ikh")[0])
+    ikh_ctl = Curve(m.circle(n="hello", normal = (1,0,0))[0])
 
+    ikh_ctl.moveTo(ikh)
+    ikh_ctl.createOffset(1)
+    ikh_ctl.setColor("red")
+
+    ikh.parentTo(ikh_ctl)
+    ikh.hide()
     
+    poleVecor_ctl = Curve(m.circle(n="polevector", normal = (0,0,1))[0])
+    poleVecor_ctl.moveTo(joints[1])
+    poleVecor_ctl.createOffset(1)
+
+    poleVecor_ctl.parent.a.tz.set(-5)
+    m.poleVectorConstraint(poleVecor_ctl, ikh)
+
     pass
 
