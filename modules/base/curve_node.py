@@ -53,7 +53,7 @@ class Curve(Dag_Node):
 
         if node and kwargs:
             self.create(**kwargs)
-    
+        
     # -------------------------------------------------------------------------
     # FORMATION
 
