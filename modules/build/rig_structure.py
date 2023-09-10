@@ -37,6 +37,10 @@ def create_rig_structure():
     """
     create_rig_structure _summary_
     """
+    if  m.objExists("Rig"):
+        return Dag_Node("Rig")
+    
+    # -----------------------------------------------------------------------------
     # MAIN HIERARCHY
 
     main_grp = Dag_Node("Rig", "transform")
@@ -44,26 +48,44 @@ def create_rig_structure():
     systems_grp = Dag_Node("Systems", "transform")
     systems_grp.parentTo(main_grp)
 
-    controls_grp = Dag_Node("Controls", "transform")
-    controls_grp.parentTo(main_grp)
-
     skeleton_grp = Dag_Node("Skeleton", "transform")
     skeleton_grp.parentTo(main_grp)
 
     geo_grp = Dag_Node("Geometry", "transform")
     geo_grp.parentTo(main_grp)
 
+    # -----------------------------------------------------------------------------
     # SUB-SYSTEMS HIERARCHY
+    
+    # ----- FK SYSTEM ----- 
+
     Fk_grp = Dag_Node("FkSystem", "transform")
     Fk_grp.parentTo(systems_grp)
 
+    fk_jnt_grp = Dag_Node("FkJoints", "transform")
+    fk_jnt_grp.parentTo(Fk_grp)
+
+    fk_ctl_grp = Dag_Node("FkControls", "transform")
+    fk_ctl_grp.parentTo(Fk_grp)
+
+    # ----- IK SYSTEM ----- 
+
     ik_grp = Dag_Node("IkSystem", "transform")
     ik_grp.parentTo(systems_grp)
-    pass
 
+    ik_jnt_grp = Dag_Node("IkJoints", "transform")
+    ik_jnt_grp.parentTo(ik_grp)
 
-# -----------------------------------------------------------------------------
-# EXECUTE SCRIPT
-# -----------------------------------------------------------------------------
+    ik_ctl_grp = Dag_Node("IkControls", "transform")
+    ik_ctl_grp.parentTo(ik_grp)
 
-create_rig_structure()
+    # -----------------------------------------------------------------------------
+    # SETS
+
+    m.select(clear=True)
+    
+    m.sets(n = "ControlSet")
+    m.sets(n = "SkeletonSet")
+    m.sets( "ControlSet", "SkeletonSet", n="RigSet" )
+    
+    return main_grp

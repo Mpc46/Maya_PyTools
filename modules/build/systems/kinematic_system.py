@@ -36,7 +36,7 @@ from modules.build.rig_structure import create_rig_structure
 
 
 def switch(joints=[], switch_ctl=None):
-    
+    create_rig_structure()
     blendColor = NODES_DICT["blendColors"]
 
     joints = [Joint(i) for i in joints]
@@ -96,6 +96,9 @@ def switch(joints=[], switch_ctl=None):
 
 
 def fk_system(joints=[]):
+
+    create_rig_structure()
+
     joints = [Joint(i) for i in joints]
     ctrls = []
 
@@ -113,11 +116,15 @@ def fk_system(joints=[]):
             ctl.parentTo(ctrls[ctl_index -1 ])
         
         ctl.createOffset(1)
-
+        
+    joints[0].parentTo("FkSystem")
+    ctrls[0].parentTo("Controls")
+    
     return [joints, ctrls]
 
 
 def ik_system(joints=[]):
+    create_rig_structure()
     joints = [Joint(i) for i in joints]
 
     ikh = Dag_Node(m.ikHandle(sj= joints[0], ee=joints[-1], n=joints[-1].name + "_Ikh")[0])
@@ -137,5 +144,6 @@ def ik_system(joints=[]):
     poleVecor_ctl.parent.a.tz.set(-5)
     m.poleVectorConstraint(poleVecor_ctl, ikh)
 
+    
     pass
 
