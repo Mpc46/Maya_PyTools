@@ -28,6 +28,7 @@ from maya import cmds as m
 from modules.base import Joint, Dep_Node, Dag_Node, Curve
 from modules.utils.common import duplicateChain
 from modules.common.names import NODES_DICT
+from modules.build.rig_structure import create_rig_structure
 
 # -----------------------------------------------------------------------------
 # SCRIPT FUNCTIONS
