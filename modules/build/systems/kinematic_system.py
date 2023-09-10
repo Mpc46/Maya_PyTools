@@ -94,6 +94,31 @@ def switch(joints=[], switch_ctl=None):
     ik_joints = ik_system(ik_joints)
     m.select(clear=True)
 
+    # -----------------------------------------------------------------------------
+    # Set visibility
+
+    # CREATE REVERSE NODE
+    reverse_name = switch_ctl.name.replace("CTL", "Rv")
+    reverse_node = Dag_Node(reverse_name, "reverse")
+    switch_ctl.a.blend >> reverse_node.a.inputX
+
+    # IK VISIBILITY
+    ik_controls_grp = Dag_Node("IkControls")
+    ik_joints_grp = Dag_Node("IkJoints")
+    switch_ctl.a.blend >> ik_controls_grp.a.v
+    switch_ctl.a.blend >> ik_joints_grp.a.v
+    
+    # FK VISIBILITY
+    fk_controls_grp = Dag_Node("FkControls")
+    fk_joints_grp = Dag_Node("FkJoints")
+    reverse_node.a.outputX >> fk_controls_grp.a.v
+    reverse_node.a.outputX >> fk_joints_grp.a.v 
+
+    # Add to main  hierarchy
+    joints[0].parentTo("Skeleton")
+    m.sets( (i for i in joints), add="SkeletonSet" ) # Add to set
+
+
 
 def fk_system(joints=[]):
 
@@ -107,8 +132,10 @@ def fk_system(joints=[]):
         ctl = Curve(m.circle(n=ctlName, normal = (1,0,0))[0])
         ctl.moveTo(jnt)
         ctl.parentConstraint(jnt, mo=True)
+        ctl.setColor("blue")
 
         ctrls.append(ctl)
+        m.sets( ctl.name, add="ControlSet" ) # Add to set
 
         ctl_index = ctrls.index(ctl.name)
 
@@ -116,16 +143,20 @@ def fk_system(joints=[]):
             ctl.parentTo(ctrls[ctl_index -1 ])
         
         ctl.createOffset(1)
-        
-    joints[0].parentTo("FkSystem")
-    ctrls[0].parentTo("Controls")
+    
+    # Add to main  hierarchy    
+    joints[0].parentTo("FkJoints")
+    ctrls[0].parent.parentTo("FkControls")
     
     return [joints, ctrls]
 
 
 def ik_system(joints=[]):
+
     create_rig_structure()
+
     joints = [Joint(i) for i in joints]
+    ctrls = []
 
     ikh = Dag_Node(m.ikHandle(sj= joints[0], ee=joints[-1], n=joints[-1].name + "_Ikh")[0])
     ikh_ctl = Curve(m.circle(n="hello", normal = (1,0,0))[0])
@@ -133,7 +164,6 @@ def ik_system(joints=[]):
     ikh_ctl.moveTo(ikh)
     ikh_ctl.createOffset(1)
     ikh_ctl.setColor("red")
-
     ikh.parentTo(ikh_ctl)
     ikh.hide()
     
@@ -144,6 +174,15 @@ def ik_system(joints=[]):
     poleVecor_ctl.parent.a.tz.set(-5)
     m.poleVectorConstraint(poleVecor_ctl, ikh)
 
+    ctrls.append(ikh_ctl)
+    ctrls.append(poleVecor_ctl)
+    m.sets( (i for i in ctrls), add="ControlSet" ) # Add to set
     
-    pass
+    # Add to main  hierarchy
+
+    joints[0].parentTo("IkJoints")
+    ikh_ctl.parent.parentTo("IkControls")
+    poleVecor_ctl.parent.parentTo("IkControls")
+    
+    return [joints, ctrls]
 
