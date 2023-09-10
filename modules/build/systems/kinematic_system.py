@@ -119,7 +119,6 @@ def switch(joints=[], switch_ctl=None):
     m.sets( (i for i in joints), add="SkeletonSet" ) # Add to set
 
 
-
 def fk_system(joints=[]):
 
     create_rig_structure()
