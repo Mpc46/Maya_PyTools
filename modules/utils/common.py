@@ -78,8 +78,8 @@ def matchMove(selection, point=0, orient=0):
             print(">>> matchMove Error: {0}: {1}".format(type(e).__name__, e))
 
 
-def createOffset(selection, grpName = "_OFF_GRP"):
-    """
+def createOffset(selection, grpName = "_Ofs_Grp"):
+    """s
     Takes the selection passed in the scene or the selection passed and
     creates the offset groups in their locations.
 
@@ -97,8 +97,8 @@ def createOffset(selection, grpName = "_OFF_GRP"):
     """
     newlyCreatedGroups = []
     offsetGrpNames = [
-        grpName, "_PLACER_GRP", "_PLACER_OFF_GRP", "_SUB_GRP", "_SUB_OFF_GRP",
-        "_ZERO_GRP", "_ZERO_OFF_GRP", "_BASE_GRP", "_BASE_OFF_GRP",
+        grpName, "_Placer_Grp", "_Placer_Ofs_Grp", "_Sub_Grp", "_Sub_Ofs_Grp",
+        "_Zero_Grp", "_Zero_Ofs_Grp", "_Base_Grp", "_Base_Ofs_Grp",
         ]
 
     for num, item in enumerate(selection):
