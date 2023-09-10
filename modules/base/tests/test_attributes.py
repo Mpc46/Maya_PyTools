@@ -100,10 +100,10 @@ class Test_Attributes(Test_Attributes_Base):
 class Test_Attribute(Test_Attributes_Base):
 
     def test_attribute__str__(self): 
-        expectedResult = "|{0}_OFF_GRP|{0}.rx".format(self.sphereName)
+        expectedResult = "|{0}_Ofs_Grp|{0}.rx".format(self.sphereName)
         self.assertEqual(str(self.sphere.a["rx"]), expectedResult)
 
-        expectedResult = "|{0}_OFF_GRP|{0}.rx".format(self.sphereName)
+        expectedResult = "|{0}_Ofs_Grp|{0}.rx".format(self.sphereName)
         self.assertEqual(str(self.sphere.a["rx"]), expectedResult) 
 
     def test_attribute__repr__(self):
@@ -259,8 +259,8 @@ class Test_Attribute(Test_Attributes_Base):
         self.assertEqual(self.sphere.a.rx.path, "sphere_GEO.rx")
 
     def test_attribute_fullPath(self): 
-        self.assertEqual(self.sphere.fullPath, "|sphere_GEO_OFF_GRP|sphere_GEO")
-        self.assertEqual(self.sphere.a.rx.fullPath, "|sphere_GEO_OFF_GRP|sphere_GEO.rx")
+        self.assertEqual(self.sphere.fullPath, "|sphere_GEO_Ofs_Grp|sphere_GEO")
+        self.assertEqual(self.sphere.a.rx.fullPath, "|sphere_GEO_Ofs_Grp|sphere_GEO.rx")
 
     def test_attribute_set(self): 
         self.assertEqual(self.sphere.a.rx.get(), 1)
