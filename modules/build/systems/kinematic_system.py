@@ -45,6 +45,8 @@ def switch(joints=[], switch_ctl=None):
         switchName = (joints[-1].name) + "_switch_Ctl"
         switch_ctl = Curve.gear(switchName)
         switch_ctl.switch(joints[-1].name)
+        switch_ctl.a.tz.set(-2)
+        switch_ctl.lockHideAll()
 
         switch_ctl.offset.parentTo("GearSystem")
         m.sets( switch_ctl.name, add="ControlSet" ) # Add to set
