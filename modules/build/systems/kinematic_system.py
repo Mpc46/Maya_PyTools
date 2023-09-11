@@ -43,12 +43,9 @@ def switch(joints=[], switch_ctl=None):
 
     if switch_ctl is None:
         switchName = (joints[-1].name) + "_switch_Ctl"
-        switch_ctl = Dag_Node(m.circle(n=switchName)[0])
+        switch_ctl = Curve.gear(switchName)
+        switch_ctl.switch(joints[-1].name)
 
-        switch_ctl.setColor("yellow").moveTo(joints[-1].name)
-        switch_ctl.createOffset(1)
-        switch_ctl.a.add(ln="blend", nn="FK/IK", at="float", 
-                         min=0, max=1, dv=0, k=True)
         switch_ctl.offset.parentTo("GearSystem")
         m.sets( switch_ctl.name, add="ControlSet" ) # Add to set
 
@@ -124,9 +121,7 @@ def switch(joints=[], switch_ctl=None):
 
 
 def fk_system(joints=[]):
-
     create_rig_structure()
-
     joints = [Joint(i) for i in joints]
     ctrls = []
 
@@ -165,9 +160,7 @@ def fk_system(joints=[]):
 
 
 def ik_system(joints=[]):
-
     create_rig_structure()
-
     joints = [Joint(i) for i in joints]
     ctrls = []
 

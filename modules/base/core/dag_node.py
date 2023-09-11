@@ -19,7 +19,7 @@
 
 >> NOTES >> 
 	Update 03/08/2023 : Start working on the script
-    Update 17/08/2023 : Created from Dag_Node (split into multiple modules)
+    Update 10/09/2023 : Added batch channel attributes manipulation  
  
 >> THANKS >> 
     Nick Hughes [03/08/2023]:
@@ -529,3 +529,42 @@ class Dag_Node(Dep_Node):
                 ">>> Please pass either the number or name of the rotationOrder")
 
         return self.rotateOrder
+    
+    # ---- ATTRIBUTE BATCH MANIPULATION ------
+
+    def lockAll(self):
+        self.a.t.lock()
+        self.a.r.lock()
+        self.a.s.lock()
+        self.a.v.lock()
+
+    def unlockAll(self):
+        self.a.t.unlock()
+        self.a.r.unlock()
+        self.a.s.unlock()
+        self.a.v.unlock()
+
+    def hideAll(self):
+        self.a.t.hide()
+        self.a.r.hide()
+        self.a.s.hide()
+        self.a.v.hide()
+
+    def showAll(self):
+        self.a.t.show()
+        self.a.r.show()
+        self.a.s.show()
+        self.a.v.show()
+
+    def lockHideAll(self):
+        self.a.t.lockHide()
+        self.a.r.lockHide()
+        self.a.s.lockHide()
+        self.a.v.lockHide()
+   
+    def unlockShowAll(self):
+        self.a.t.unlockShow()
+        self.a.r.unlockShow()
+        self.a.s.unlockShow()
+        self.a.v.unlockShow()
+    

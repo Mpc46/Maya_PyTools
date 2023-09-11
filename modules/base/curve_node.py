@@ -136,4 +136,23 @@ class Curve(Dag_Node):
         
         return self.fullPath
     
-    # -----------------
+    # -------------------------------------------------------------------------
+    # METHODS
+
+    def switch(self, jnt = None, ofs = None):
+        """
+        Makes a curve into an FK/IK swith control
+        """
+        self.setColor("yellow")
+        self.a.add(ln="blend", nn="FK/IK", at="float", 
+                    min=0, max=1, dv=0, k=True)
+        if jnt:
+            self.moveTo(jnt)
+            self.createOffset()
+            m.pointConstraint(jnt, self.offset, mo=False)
+            m.orientConstraint(jnt, self.offset, mo=False)
+
+        if ofs:
+            m.move(ofs, self.name, relative=True)
+
+        return self
