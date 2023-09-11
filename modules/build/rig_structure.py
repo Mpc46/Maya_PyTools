@@ -56,7 +56,7 @@ def create_rig_structure():
 
     # -----------------------------------------------------------------------------
     # SUB-SYSTEMS HIERARCHY
-    
+
     # ----- FK SYSTEM ----- 
 
     Fk_grp = Dag_Node("FkSystem", "transform")
@@ -79,6 +79,11 @@ def create_rig_structure():
     ik_ctl_grp = Dag_Node("IkControls", "transform")
     ik_ctl_grp.parentTo(ik_grp)
 
+    # ----- GEAR SYSTEM ----- 
+
+    gear_grp = Dag_Node("GearSystem", "transform")
+    gear_grp.parentTo(systems_grp)
+    
     # -----------------------------------------------------------------------------
     # SETS
 

@@ -42,13 +42,15 @@ def switch(joints=[], switch_ctl=None):
     joints = [Joint(i) for i in joints]
 
     if switch_ctl is None:
-        switchName = (joints[-1].name) + "_switch_CTL"
+        switchName = (joints[-1].name) + "_switch_Ctl"
         switch_ctl = Dag_Node(m.circle(n=switchName)[0])
 
         switch_ctl.setColor("yellow").moveTo(joints[-1].name)
         switch_ctl.createOffset(1)
         switch_ctl.a.add(ln="blend", nn="FK/IK", at="float", 
                          min=0, max=1, dv=0, k=True)
+        switch_ctl.offset.parentTo("GearSystem")
+        m.sets( switch_ctl.name, add="ControlSet" ) # Add to set
 
     ik_joints = duplicateChain(joints, "_IK")
     fk_joints = duplicateChain(joints, "_FK")
@@ -98,7 +100,7 @@ def switch(joints=[], switch_ctl=None):
     # Set visibility
 
     # CREATE REVERSE NODE
-    reverse_name = switch_ctl.name.replace("CTL", "Rv")
+    reverse_name = switch_ctl.name.replace("Ctl", "Rv")
     reverse_node = Dag_Node(reverse_name, "reverse")
     switch_ctl.a.blend >> reverse_node.a.inputX
 
@@ -133,6 +135,9 @@ def fk_system(joints=[]):
         ctl.parentConstraint(jnt, mo=True)
         ctl.setColor("blue")
 
+        jnt_rad = jnt.radius
+        jnt.setRadius(jnt_rad * .75)
+
         ctrls.append(ctl)
         m.sets( ctl.name, add="ControlSet" ) # Add to set
 
@@ -157,8 +162,12 @@ def ik_system(joints=[]):
     joints = [Joint(i) for i in joints]
     ctrls = []
 
+    for jnt in joints:
+        jnt_rad = jnt.radius
+        jnt.setRadius(jnt_rad * .5)
+
     ikh = Dag_Node(m.ikHandle(sj= joints[0], ee=joints[-1], n=joints[-1].name + "_Ikh")[0])
-    ikh_ctl = Curve(m.circle(n="hello", normal = (1,0,0))[0])
+    ikh_ctl = Curve(m.circle(n=joints[-1].name + "_Ctl", normal = (1,0,0))[0])
 
     ikh_ctl.moveTo(ikh)
     ikh_ctl.createOffset(1)
@@ -166,9 +175,10 @@ def ik_system(joints=[]):
     ikh.parentTo(ikh_ctl)
     ikh.hide()
     
-    poleVecor_ctl = Curve(m.circle(n="polevector", normal = (0,0,1))[0])
+    poleVecor_ctl = Curve(m.circle(n=joints[1].name + "_Ctl", normal = (0,0,1))[0])
     poleVecor_ctl.moveTo(joints[1])
     poleVecor_ctl.createOffset(1)
+    poleVecor_ctl.setColor("red")
 
     poleVecor_ctl.parent.a.tz.set(-5)
     m.poleVectorConstraint(poleVecor_ctl, ikh)
