@@ -105,20 +105,22 @@ def switch(joints=[], switch_ctl=None):
     switch_ctl.a.blend >> reverse_node.a.inputX
 
     # IK VISIBILITY
-    ik_controls_grp = Dag_Node("IkControls")
-    ik_joints_grp = Dag_Node("IkJoints")
-    switch_ctl.a.blend >> ik_controls_grp.a.v
+    ik_joints_grp = ik_joints[0]
+    ik_controls_grp = ik_joints[1]
     switch_ctl.a.blend >> ik_joints_grp.a.v
+    switch_ctl.a.blend >> ik_controls_grp.a.v
     
     # FK VISIBILITY
-    fk_controls_grp = Dag_Node("FkControls")
-    fk_joints_grp = Dag_Node("FkJoints")
-    reverse_node.a.outputX >> fk_controls_grp.a.v
+    fk_joints_grp = fk_joints[0]
+    fk_controls_grp = fk_joints[1]
     reverse_node.a.outputX >> fk_joints_grp.a.v 
+    reverse_node.a.outputX >> fk_controls_grp.a.v
 
     # Add to main  hierarchy
     joints[0].parentTo("Skeleton")
     m.sets( (i for i in joints), add="SkeletonSet" ) # Add to set
+
+    m.select(clear=True)
 
 
 def fk_system(joints=[]):
@@ -148,11 +150,18 @@ def fk_system(joints=[]):
         
         ctl.createOffset(1)
     
-    # Add to main  hierarchy    
-    joints[0].parentTo("FkJoints")
-    ctrls[0].parent.parentTo("FkControls")
+    # Add to main  hierarchy 
+    jnt_ofs_name = joints[0].name + "_Jnt_Grp"
+    jnt_ofs  = Dag_Node(jnt_ofs_name, "transform")
+    jnt_ofs.parentTo("FkJoints")
+    joints[0].parentTo(jnt_ofs)
+
+    ctl_ofs_name = joints[0].name + "_Ctl_Grp"
+    ctl_ofs = Dag_Node(ctl_ofs_name, "transform")
+    ctl_ofs.parentTo("FkControls")
+    ctrls[0].parent.parentTo(ctl_ofs)
     
-    return [joints, ctrls]
+    return [jnt_ofs, ctl_ofs]
 
 
 def ik_system(joints=[]):
@@ -188,10 +197,17 @@ def ik_system(joints=[]):
     m.sets( (i for i in ctrls), add="ControlSet" ) # Add to set
     
     # Add to main  hierarchy
+    jnt_ofs_name = joints[0].name + "_Jnt_Grp"
+    jnt_ofs  = Dag_Node(jnt_ofs_name, "transform")
+    jnt_ofs.parentTo("IkJoints")
+    joints[0].parentTo(jnt_ofs)
 
-    joints[0].parentTo("IkJoints")
-    ikh_ctl.parent.parentTo("IkControls")
-    poleVecor_ctl.parent.parentTo("IkControls")
+    ctl_ofs_name = joints[0].name + "_Ctl_Grp"
+    ctl_ofs = Dag_Node(ctl_ofs_name, "transform")
+    ctl_ofs.parentTo("IkControls")
+
+    ikh_ctl.parent.parentTo(ctl_ofs)
+    poleVecor_ctl.parent.parentTo(ctl_ofs)
     
-    return [joints, ctrls]
+    return [jnt_ofs, ctl_ofs]
 
