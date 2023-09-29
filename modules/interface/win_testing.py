@@ -104,8 +104,8 @@ class win(Window):
 
 def build_arm():
     m.joint(n="L_Shoulder", p=(0.568, 4.792, -0.052), o=(0, 2, 0))
-    m.joint(n="L_Elbow", r=True, p=(0.882, 0, 0), o=(0, -4, 0))
-    m.joint(n="L_Wrist", r=True, p=(0.753, 0, 0))
+    m.joint(n="L_Elbow", r=True, p=(4.41, 0, 0), o=(0, -4, 0))
+    m.joint(n="L_Wrist", r=True, p=(3.765, 0, 0))
     m.select(cl=True)
 
 # -----------------------------------------------------------------------------

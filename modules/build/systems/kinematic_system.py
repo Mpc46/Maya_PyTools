@@ -35,11 +35,19 @@ from modules.build.rig_structure import create_rig_structure
 # -----------------------------------------------------------------------------
 
 
-def switch(joints=[], switch_ctl=None):
+def switch(joints = None, switch_ctl = None):
+    """
+    Creates an IK/FK switch
+
+    Args:
+        joints (list): The list of bind joints to use.
+        switch_ctl (obj): If a switch control exists, specify it!
+    """
     create_rig_structure()
     blendColor = NODES_DICT["blendColors"]
 
-    joints = [Joint(i) for i in joints]
+    if joints:
+        joints = [Joint(i) for i in joints]
 
     if switch_ctl is None:
         switchName = (joints[-1].name) + "_switch_Ctl"
@@ -122,8 +130,14 @@ def switch(joints=[], switch_ctl=None):
     m.select(clear=True)
 
 
-def fk_system(joints=[]):
+def fk_system(joints = None):
+    """ Creates an FK system using parsed joints. """
+    
     create_rig_structure()
+    
+    if not joints:
+        joints = []
+
     joints = [Joint(i) for i in joints]
     ctrls = []
 
@@ -161,8 +175,14 @@ def fk_system(joints=[]):
     return [jnt_ofs, ctl_ofs]
 
 
-def ik_system(joints=[]):
+def ik_system(joints = None):
+    """ Creates an IK system using parsed joints. """
+    
     create_rig_structure()
+    
+    if not joints:
+        joints = []
+    
     joints = [Joint(i) for i in joints]
     ctrls = []
 
