@@ -130,7 +130,7 @@ def switch(joints = None, switch_ctl = None):
     m.select(clear=True)
 
 
-def fk_system(joints = None):
+def fk_system(joints = None, multi = 2):
     """ Creates an FK system using parsed joints. """
     
     create_rig_structure()
@@ -141,12 +141,16 @@ def fk_system(joints = None):
     joints = [Joint(i) for i in joints]
     ctrls = []
 
-    for jnt in joints:
+    for jnt in joints: ### Creating FK Controls
+
+        ctl_radius = float(jnt.radius * multi) # get control radius
+
         ctlName = "{}_Ctl".format(jnt.name)
-        ctl = Curve(m.circle(n=ctlName, normal = (1,0,0))[0])
+        ctl = Curve(m.circle(n=ctlName, r = ctl_radius, normal = (1,0,0))[0])
         ctl.moveTo(jnt)
         ctl.parentConstraint(jnt, mo=True)
         ctl.setColor("blue")
+        ctl.a.v.lockHide() # Hide Visibility on channelBox
 
         jnt_rad = jnt.radius
         jnt.setRadius(jnt_rad * .75)
@@ -175,7 +179,7 @@ def fk_system(joints = None):
     return [jnt_ofs, ctl_ofs]
 
 
-def ik_system(joints = None):
+def ik_system(joints = None, multi = 2):
     """ Creates an IK system using parsed joints. """
     
     create_rig_structure()
@@ -189,16 +193,22 @@ def ik_system(joints = None):
     for jnt in joints:
         jnt_rad = jnt.radius
         jnt.setRadius(jnt_rad * .5)
-
+    
+    # CREATING IKH AND IT'S RESPECIVE CONTROL!  
     ikh = Dag_Node(m.ikHandle(sj= joints[0], ee=joints[-1], n=joints[-1].name + "_Ikh")[0])
-    ikh_ctl = Curve(m.circle(n=joints[-1].name + "_Ctl", normal = (1,0,0))[0])
+
+    ikh_ctl_radius = float(joints[-1].radius * (multi * 2))
+    ikh_ctl_name = joints[-1].name + "_Ctl"
+
+    ikh_ctl = Curve(m.circle(n = ikh_ctl_name, r = ikh_ctl_radius, normal = (1,0,0))[0])
 
     ikh_ctl.moveTo(ikh)
     ikh_ctl.createOffset(1)
     ikh_ctl.setColor("red")
     ikh.parentTo(ikh_ctl)
     ikh.hide()
-    
+
+    # CREATING POLE VECTOR AND IT'S RESPECIVE CONTROL!  
     poleVecor_ctl = Curve(m.circle(n=joints[1].name + "_Ctl", normal = (0,0,1))[0])
     poleVecor_ctl.moveTo(joints[1])
     poleVecor_ctl.createOffset(1)
