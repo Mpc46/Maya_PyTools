@@ -262,3 +262,8 @@ class Dep_Node(object):
 
         self.node = m.createNode(nodeType, n=self.node)
         return self
+
+    def hideNode(self, value = 0):
+        """ Hides node from channelBox (isHistoricallyInteresting)"""
+        self.a.isHistoricallyInteresting.set(value)
+        return self
