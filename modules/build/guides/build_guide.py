@@ -32,6 +32,7 @@ from modules.base import Joint, Curve, Dag_Node as Dag
 from modules.build.guides import (mirror_guide, 
                                   find_guide_main,
                                   find_guide_joints)
+from modules.build.rig_structure import create_rig_structure
 
 # -----------------------------------------------------------------------------
 # SCRIPT FUNCTIONS

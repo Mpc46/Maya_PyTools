@@ -35,7 +35,7 @@ from modules.base import Dag_Node
 
 def create_rig_structure():
     """
-    create_rig_structure _summary_
+    creates the basic rig folder and component structure to use.
     """
     if  m.objExists("Rig"):
         return Dag_Node("Rig")
