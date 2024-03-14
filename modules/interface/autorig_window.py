@@ -88,3 +88,6 @@ class AutoRig_Window(Window):
 
 def del_base():
     m.delete("Guide")
+
+# Run window automatically
+window = AutoRig_Window("Testing kinematics").open()
